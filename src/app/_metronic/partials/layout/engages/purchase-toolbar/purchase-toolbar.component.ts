@@ -1,5 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {environment} from '../../../../../../environments/environment';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-purchase-toolbar',
@@ -7,11 +6,9 @@ import {environment} from '../../../../../../environments/environment';
   standalone: true,
 })
 export class PurchaseToolbarComponent implements OnInit {
-  appPurchaseUrl: string = environment.appPurchaseUrl;
+  appPurchaseUrl: string = 'app purchase url';
 
-  constructor() {
-  }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 }

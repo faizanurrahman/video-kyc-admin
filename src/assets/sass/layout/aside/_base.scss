@@ -3,16 +3,16 @@
 //
 
 $animation-speed: 0.8s;
-$animation-type: ease-in-out;
+$animation-type : ease-in-out;
 
 // General mode(all devices)
 .aside {
-  display: flex;
-  flex-direction: column;
-  box-shadow: var(--kt-aside-box-shadow);
+  display         : flex;
+  flex-direction  : column;
+  box-shadow      : var(--kt-aside-box-shadow);
   background-color: var(--kt-aside-bg-color);
-  padding: 0;
-  transition: all #{$animation-speed} ease-in-out;
+  padding         : 0;
+  transition      : all #{$animation-speed} ease-in-out;
 }
 
 // Desktop mode
@@ -24,18 +24,18 @@ $animation-type: ease-in-out;
 
     // Logo
     .aside-logo {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      display         : flex;
+      justify-content : center;
+      align-items     : center;
       background-color: var(--kt-aside-logo-bg-color);
-      height: get($aside-config, logo-height);
-      padding: 0 get($aside-config, padding-x);
-      flex-shrink: 0;
+      height          : get($aside-config, logo-height);
+      padding         : 0 get($aside-config, padding-x);
+      flex-shrink     : 0;
     }
 
     // Aside footer
     .aside-footer {
-      display: flex;
+      display           : flex;
       // justify-content: center;
       // align-items: center;
     }
@@ -43,16 +43,16 @@ $animation-type: ease-in-out;
     // Fixed aside mode
     .aside-fixed & {
       position: fixed;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      z-index: get($aside-config, z-index);
+      top     : 0;
+      bottom  : 0;
+      left    : 0;
+      z-index : get($aside-config, z-index);
     }
 
     // Static aside mode
     .aside-static & {
       position: relative;
-      z-index: 1;
+      z-index : 1;
     }
   }
 }
@@ -62,7 +62,7 @@ $animation-type: ease-in-out;
   .aside {
 
     transform: translateX(-100%);
-    // width: get($aside-config, width, mobile);
+    width    : get($aside-config, width, mobile);
 
 
     transition: transform #{$animation-speed} ease-in-out;

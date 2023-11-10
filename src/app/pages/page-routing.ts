@@ -6,6 +6,7 @@ const PagesRouting: Routes = [
   //   path: 'test',
   //   loadChildren: () => import('./test/test.module').then((m) => m.TestModule),
   // },
+
   {
     path: 'loan-application-create',
     redirectTo: 'dashboard',
@@ -15,6 +16,13 @@ const PagesRouting: Routes = [
     path: 'loan-application-view',
     redirectTo: 'dashboard',
     pathMatch: 'prefix',
+  },
+  {
+    path: 'video-calling',
+    loadComponent: () =>
+      import('./../features/video-calling/video-calling.component').then(
+        (c) => c.VideoCallingComponent,
+      ),
   },
   {
     path: 'dashboard',

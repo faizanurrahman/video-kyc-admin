@@ -1,0 +1,33 @@
+<div
+  *ngIf="incomingCallService.incomingCall$ | async"
+  class="position-fixed d-flex flex-column flex-center z-2 border shadow-lg border-2 bottom-0 me-10 mb-10 end-0 bg-white border-round-3xl h-200px w-300px"
+>
+  <div class="d-flex flex-center">
+    <img class="h-45px w-45px rounded-circle" src="./assets/media/misc/avatar.png" />
+  </div>
+  <h2>Madhuri</h2>
+  <p>is calling you ...</p>
+  <div class="d-flex flex-center gap-10">
+    <button
+      (click)="incomingCallService.setIncomingCalling(false)"
+      class="btn btn-white btn-icon"
+      [routerLink]="['/video-calling']"
+    >
+      <img class="h-50px" src="./assets/media/misc/video-call-icon.png" />
+    </button>
+    <button
+      (click)="incomingCallService.setIncomingCalling(false)"
+      class="btn btn-white btn-icon"
+      [routerLink]="['/video-calling']"
+    >
+      <img class="h-50px" src="./assets/media/misc/video-call-icon.png" />
+    </button>
+    <button
+      (click)="incomingCallService.setIncomingCalling(false)"
+      class="btn btn-white btn-icon"
+      [routerLink]="['/video-calling']"
+    >
+      <img class="h-50px" src="./assets/media/misc/video-call-icon.png" />
+    </button>
+  </div>
+</div>

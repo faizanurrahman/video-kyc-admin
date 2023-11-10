@@ -1,28 +1,20 @@
-import {Component, OnInit} from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { NgFor, NgIf, KeyValuePipe } from '@angular/common';
+import { KeyValuePipe, NgFor, NgIf } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { InlineSVGModule } from 'ng-inline-svg-2';
 
 @Component({
   selector: 'app-explore-main-drawer',
   templateUrl: './explore-main-drawer.component.html',
   standalone: true,
-  imports: [
-    InlineSVGModule,
-    NgFor,
-    NgIf,
-    KeyValuePipe,
-  ],
+  imports: [InlineSVGModule, NgFor, NgIf, KeyValuePipe],
 })
 export class ExploreMainDrawerComponent implements OnInit {
-  appThemeName: string = environment.appThemeName;
-  appPurchaseUrl: string = environment.appPurchaseUrl;
-  appPreviewUrl: string = environment.appPreviewUrl;
-  appDemos = environment.appDemos;
+  appThemeName: string = '';
+  appPurchaseUrl: string = '';
+  appPreviewUrl: string = '';
+  appDemos = '';
 
-  constructor() {
-  }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 }
