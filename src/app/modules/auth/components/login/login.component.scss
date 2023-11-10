@@ -1,0 +1,207 @@
+//@import "simple-keyboard/build/css/index.css";
+// import sass inbuilt function for darken and light
+@use "sass:math";
+@use "sass:color";
+
+$left-column-padding-top: 70px;
+$left-column-padding-left: 170px;
+
+$main-logo-mb: 30px;
+
+$logo-size: 70px;
+
+$right-column-padding-top: (2* $left-column-padding-top)+$logo-size+$main-logo-mb;
+
+$right-column-padding-left: 170px;
+
+$input-bg: #ffe5d9;
+$input-color: #852b00;
+
+
+:host {
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+
+  font-family: 'Poppins', Georgia, 'Times New Roman', Times, serif;
+
+}
+
+.login-page {
+  height: 100%;
+  width: 100%;
+
+  // layout
+  display: flex;
+  flex-direction: row;
+  // flex-wrap: wrap-reverse;
+  // flex-wrap: wrap;
+
+  // background image
+  background-image: url('/assets/media/illustrations/login-illust-1.svg');
+  background-size: 300px 350px;
+  background-repeat: no-repeat;
+  background-position: top 220px right 55%;
+  background-attachment: scroll;
+  backdrop-filter: blur(1.3px) brightness(1.0);
+
+  transition: all 0.8s ease-in-out;
+}
+
+.login-page[hideBackgroundImage="true"] {
+  background-size: 0 0;
+  background-position: top -100% right 50%;
+  background-attachment: scroll;
+  transition: all 0.8s ease-in-out;
+}
+
+.left-column {
+  height: 100%;
+  flex: 1 1 50%;
+  background-color: transparent;
+}
+
+.right-column {
+  height: 100%;
+  flex: 1 1 50%;
+  background-color: transparent;
+}
+
+
+.left-column {
+
+  padding-left: $left-column-padding-left;
+
+  overflow-x: visible;
+
+  background-color: transparent;
+
+  & .main-logo {
+    margin-bottom: $main-logo-mb;
+    padding-top: $left-column-padding-top;
+    transition: all 0.8s ease-in-out;
+  }
+
+  & .heading {
+    padding-top: $left-column-padding-top;
+    letter-spacing: 2px;
+
+    transition: all 0.8s ease-in-out;
+  }
+
+  & .subheading {}
+
+  & .virtual-keyboard {}
+
+
+
+}
+
+.right-column {
+  padding-top: $right-column-padding-top - 20px;
+  background-color: transparent;
+  justify-content: start;
+  align-items: center;
+
+  transition: all 0.8s ease-in-out;
+
+
+
+
+  & .login-form-wrapper {
+    max-width: 400px;
+    min-width: 300px;
+    height: max-content;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    // box-shadow: 0 0 3px 0 #afaea6, inset 0 0 2px 0 #a6a496;
+    border-radius: 15px;
+    backdrop-filter: blur(0px);
+
+    transition: all 0.8s ease-in-out;
+
+
+
+    & .login-form {
+      width: 400px;
+      transition: all 0.8s ease-in-out;
+
+      // .forgot-password {
+      //   & a {
+      //     color: #000;
+      //     text-decoration: none;
+      //     font-weight: 600;
+      //   }
+      // }
+    }
+  }
+
+
+}
+
+.custom-toast {
+
+  & .success-toast {
+    background: #d4edda;
+    ;
+  }
+}
+
+
+
+// form group and form control
+.form-group {
+  margin-bottom: 10px;
+}
+
+.form-control {
+
+  background-color: #{$input-bg};
+  color: #{$input-color};
+  border: none;
+
+  &::placeholder {
+    color: #{$input-color};
+  }
+
+  &:focus {
+    color: #{darken($input-color, 10%)};
+    background-color: #{darken($input-bg, 10%)};
+    box-shadow: var(--kt-box-shadow-xs) !important;
+
+    &+.input-group-text {
+      background-color: #{darken($input-bg, 10%)};
+      color: #{darken($input-color, 10%)};
+      box-shadow: var(--kt-box-shadow-xs) !important;
+      border: none;
+    }
+  }
+}
+
+.input-group-text {
+  background-color: #{$input-bg};
+  color: #{$input-color};
+  border: none;
+}
+
+.form-check-input {
+  background-color: #{$input-bg};
+  // border: 0.5px solid #{$input-color};
+  border: none;
+  outline: none;
+  width: 25px;
+  box-shadow: var(--kt-box-shadow-sm);
+
+  &:checked {
+    background-color: #{$input-color};
+    border: #{darken($input-color, 10%)};
+  }
+}
+
+.forgot-password {
+  color: #{darken($input-color, 10%)};
+}

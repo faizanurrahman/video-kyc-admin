@@ -1,0 +1,233 @@
+<app-horizontal-wizard
+  [steps]="steps"
+  [stepCount]="steps.length"
+  [currentStep$]="currentStep$"
+  [loanApplicationComment]="this.loanApplicationComment"
+  [loanApplicationId]="currentApplicationId"
+  [loanApplicationSector]="loanApplicationSector"
+  [loanApplicationProductType]="loanApplicationProductType"
+  [loanApplicationType]="loanType"
+  [loanApplicationStatus]="loanApplicationStatus"
+  [loanApplicationSapAppStatus]="loanApplicationSapAppStatus"
+  [toggleApplicationMetadata]="toggleLoanApplicationMetadata"
+  [clickableStepCount]="clickableStepCount"
+  (currentClickedItem)="currentClickedItem()"
+  (stepChangesTo)="onStepChangesTo($event)"
+>
+  <!--begin::Wizard Body-->
+  <app-wizard-content class="row justify-content-center my-10 px-1 px-md-8 my-lg-15 px-lg-10">
+    <div
+      class="col-xl-12 col-xxl-10 d-flex flex-column gap-5 position-relative multistep-body-loading"
+    >
+      <!-- Individual Loan Application -->
+      <ng-container *ngIf="loanType === individualLoanApplicationType || loanType === 'Individual'">
+        <!-- Step 1 -->
+        <app-individual-form
+          *ngIf="currentStep$.value === 1"
+          [individualDetails]="individualLoanApplicationDetails"
+          (nextStepMove)="nextStep()"
+          (previousStepMove)="previousStep()"
+          (individualFormValidityAndProgress)="stepValidityChanged($event, currentStep$.value - 1)"
+        ></app-individual-form>
+
+        <!-- Step 2 -->
+        <app-application-detail-form
+          *ngIf="currentStep$.value === 2"
+          (applicationServiceFormValidityAndProgress)="
+            stepValidityChanged($event, currentStep$.value - 1)
+          "
+          [applicationServiceDetails]="loanApplicationServiceDetails"
+          (nextStepMove)="nextStep()"
+          (previousStepMove)="previousStep()"
+        ></app-application-detail-form>
+
+        <!-- Step 3 -->
+        <app-document-details-form-updated
+          *ngIf="currentStep$.value === 3"
+          [currentLoanDocumentResponse]="loanApplicationDocumentDetails"
+          (documentFormValidityAndProgress)="stepValidityChanged($event, currentStep$.value - 1)"
+          (nextStepMove)="nextStep()"
+          (previousStepMove)="previousStep()"
+        ></app-document-details-form-updated>
+
+        <!-- Step 4 -->
+        <app-loan-application-review
+          (reviewDetailsValidityAndProgress)="stepValidityChanged($event, currentStep$.value - 1)"
+          *ngIf="currentStep$.value === 4"
+          [loanApplicationId]="currentApplicationId"
+          (previousStepMove)="previousStep()"
+          [loanApplicationSector]="loanApplicationSector!"
+          [loanApplicationProductType]="loanApplicationProductType"
+          [loanApplicationStatus]="loanApplicationStatus"
+        ></app-loan-application-review>
+      </ng-container>
+
+      <!-- Company Loan Application -->
+      <ng-container *ngIf="loanType === legalPersonaLoanApplicationType || loanType === 'Company'">
+        <!-- Step 1 -->
+        <app-company-or-group-details
+          *ngIf="currentStep$.value === 1"
+          [legalPersonaDetails]="legalPersonaLoanApplicationDetails"
+          (nextStepMove)="nextStep()"
+          (previousStepMove)="previousStep()"
+          (legalPersonaFormValidityAndProgress)="
+            stepValidityChanged($event, currentStep$.value - 1)
+          "
+        ></app-company-or-group-details>
+
+        <!-- Step 2 -->
+        <app-individual-form
+          *ngIf="currentStep$.value === 2"
+          [individualDetails]="individualLoanApplicationDetails"
+          (nextStepMove)="nextStep()"
+          (previousStepMove)="previousStep()"
+          (individualFormValidityAndProgress)="stepValidityChanged($event, currentStep$.value - 1)"
+        ></app-individual-form>
+
+        <!-- Step 3 -->
+        <app-application-detail-form
+          *ngIf="currentStep$.value === 3"
+          (applicationServiceFormValidityAndProgress)="
+            stepValidityChanged($event, currentStep$.value - 1)
+          "
+          [applicationServiceDetails]="loanApplicationServiceDetails"
+          (nextStepMove)="nextStep()"
+          (previousStepMove)="previousStep()"
+        ></app-application-detail-form>
+
+        <!-- Step 4 -->
+        <app-document-details-form-updated
+          *ngIf="currentStep$.value === 4"
+          [currentLoanDocumentResponse]="loanApplicationDocumentDetails"
+          (documentFormValidityAndProgress)="stepValidityChanged($event, currentStep$.value - 1)"
+          (nextStepMove)="nextStep()"
+          (previousStepMove)="previousStep()"
+        ></app-document-details-form-updated>
+
+        <!-- Step 5 -->
+        <app-loan-application-review
+          (reviewDetailsValidityAndProgress)="stepValidityChanged($event, currentStep$.value - 1)"
+          *ngIf="currentStep$.value === 5"
+          [loanApplicationId]="currentApplicationId"
+          (previousStepMove)="previousStep()"
+          [loanApplicationSector]="loanApplicationSector!"
+          [loanApplicationProductType]="loanApplicationProductType"
+          [loanApplicationStatus]="loanApplicationStatus"
+        ></app-loan-application-review>
+      </ng-container>
+
+      <!-- Group Loan Application -->
+      <ng-container
+        *ngIf="
+          loanType === groupLoanApplicationType || loanType === 'GROUP' || loanType === 'Group'
+        "
+      >
+        <!-- Step 1 -->
+        <app-company-or-group-details
+          *ngIf="currentStep$.value === 1"
+          [legalPersonaDetails]="legalPersonaLoanApplicationDetails"
+          (nextStepMove)="nextStep()"
+          (previousStepMove)="previousStep()"
+          (legalPersonaFormValidityAndProgress)="
+            stepValidityChanged($event, currentStep$.value - 1)
+          "
+        ></app-company-or-group-details>
+
+        <!-- Step 2 -->
+        <app-individual-form
+          *ngIf="currentStep$.value === 2"
+          [individualDetails]="individualLoanApplicationDetails"
+          (nextStepMove)="nextStep()"
+          (previousStepMove)="previousStep()"
+          (individualFormValidityAndProgress)="stepValidityChanged($event, currentStep$.value - 1)"
+        ></app-individual-form>
+
+        <!-- Step 3 -->
+        <app-application-detail-form
+          *ngIf="currentStep$.value === 3"
+          (applicationServiceFormValidityAndProgress)="
+            stepValidityChanged($event, currentStep$.value - 1)
+          "
+          [applicationServiceDetails]="loanApplicationServiceDetails"
+          (nextStepMove)="nextStep()"
+          (previousStepMove)="previousStep()"
+        ></app-application-detail-form>
+
+        <!-- Step 4 -->
+        <app-document-details-form-updated
+          *ngIf="currentStep$.value === 4"
+          [currentLoanDocumentResponse]="loanApplicationDocumentDetails"
+          (documentFormValidityAndProgress)="stepValidityChanged($event, currentStep$.value - 1)"
+          (nextStepMove)="nextStep()"
+          (previousStepMove)="previousStep()"
+        ></app-document-details-form-updated>
+
+        <!-- Step 5 -->
+        <app-loan-application-review
+          (reviewDetailsValidityAndProgress)="stepValidityChanged($event, currentStep$.value - 1)"
+          *ngIf="currentStep === 5"
+          [loanApplicationId]="currentApplicationId"
+          (previousStepMove)="previousStep()"
+          [loanApplicationSector]="loanApplicationSector!"
+          [loanApplicationProductType]="loanApplicationProductType"
+          [loanApplicationStatus]="loanApplicationStatus"
+        ></app-loan-application-review>
+      </ng-container>
+
+      <!-- Mabogo Dinku Loan Application -->
+      <ng-container *ngIf="loanType === mabogoDinkuApplicationType || loanType === 'Mabogo Dinku'">
+        <!-- Step 1 -->
+        <app-mabogo-dinku-group-details-form
+          *ngIf="currentStep$.value === 1"
+          [legalPersonaDetails]="legalPersonaLoanApplicationDetails"
+          (nextStepMove)="nextStep()"
+          (previousStepMove)="previousStep()"
+          (legalPersonaFormValidityAndProgress)="
+            stepValidityChanged($event, currentStep$.value - 1)
+          "
+        ></app-mabogo-dinku-group-details-form>
+
+        <!-- Step 2 -->
+        <app-mabogo-dinku-individual-form
+          *ngIf="currentStep$.value === 2"
+          [individualDetails]="individualLoanApplicationDetails"
+          (nextStepMove)="nextStep()"
+          (previousStepMove)="previousStep()"
+          (individualFormValidityAndProgress)="stepValidityChanged($event, currentStep$.value - 1)"
+        ></app-mabogo-dinku-individual-form>
+
+        <!-- Step 3 -->
+        <app-mabogo-dinku-application-details-form
+          *ngIf="currentStep$.value === 3"
+          (applicationServiceFormValidityAndProgress)="
+            stepValidityChanged($event, currentStep$.value - 1)
+          "
+          [applicationServiceDetails]="loanApplicationServiceDetails"
+          (nextStepMove)="nextStep()"
+          (previousStepMove)="previousStep()"
+        ></app-mabogo-dinku-application-details-form>
+
+        <!-- Step 4 -->
+        <app-mabogo-dinku-document-details-form
+          *ngIf="currentStep$.value === 4"
+          [currentLoanDocumentResponse]="loanApplicationDocumentDetails"
+          (documentFormValidityAndProgress)="stepValidityChanged($event, currentStep$.value - 1)"
+          (nextStepMove)="nextStep()"
+          (previousStepMove)="previousStep()"
+        ></app-mabogo-dinku-document-details-form>
+
+        <!-- Step 5 -->
+        <app-mabogo-dinku-review-application
+          (reviewDetailsValidityAndProgress)="stepValidityChanged($event, currentStep$.value - 1)"
+          *ngIf="currentStep === 5"
+          [loanApplicationId]="currentApplicationId"
+          (previousStepMove)="previousStep()"
+          [loanApplicationSector]="loanApplicationSector!"
+          [loanApplicationProductType]="loanApplicationProductType"
+          [loanApplicationStatus]="loanApplicationStatus"
+        ></app-mabogo-dinku-review-application>
+      </ng-container>
+    </div>
+  </app-wizard-content>
+  <!--end::Wizard Body-->
+</app-horizontal-wizard>

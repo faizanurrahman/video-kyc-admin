@@ -1,0 +1,19 @@
+<ng-container *ngIf="isPermanent">
+  <span
+    data-kt-menu-trigger="{default: 'hover', lg: 'hover'}"
+    data-kt-menu-placement="bottom"
+    data-kt-menu-offset=",20"
+    data-kt-menu-permanent="true"
+  >
+    <ng-content select="[popover-trigger]"></ng-content>
+  </span>
+</ng-container>
+
+<div #menuElement class="menu menu-sub menu-sub-dropdown" data-kt-menu="true">
+  <span class="position-absolute top-0 end-0">
+    <span (click)="closePopover()" class="">
+      <i class="bi bi-x fs-2 text-hover-danger cursor-pointer"></i>
+    </span>
+  </span>
+  <ng-content select="[popover-content]"></ng-content>
+</div>

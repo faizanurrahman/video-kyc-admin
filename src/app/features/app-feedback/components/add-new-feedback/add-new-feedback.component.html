@@ -1,0 +1,132 @@
+<app-popup #popup>
+  <!-- Flex Box -->
+  <div class="row justify-content-center d-flex flex-row">
+    <!-- Flex Item 1 -->
+    <div class="col-md-6 col-12 px-0 px-md-5">
+      <div class="form-group form-group-last">
+        <div class="alert alert-custom alert-default p-0" role="alert">
+          <!--              <div class="alert-icon"><i class="fa fa-warning text-primary"></i></div>-->
+          <div class="alert-text">
+            <div
+              style="
+                background-color: #fffdf5;
+                padding: 20px;
+                border: 2px solid #f4a100;
+                border-radius: 10px;
+              "
+            >
+              <h2 style="color: #5a1818; text-align: center">
+                {{ 'Attention' | uppercase }}
+              </h2>
+              <p class="mb-2" style="font-size: 16px">Dear Customer,</p>
+              <p class="mb-2" style="font-size: 16px">
+                Thank you for using our loan application management and banking services
+                application. We appreciate your feedback and want to make sure that we are meeting
+                your expectations.
+              </p>
+              <p class="mb-2" style="font-size: 16px">
+                We would love to hear about your experience using our application. Please share any
+                <strong>issues or challenges</strong>
+                you encountered, and provide suggestions for how we can
+                <strong>improve the application to better suit your needs</strong>
+                . If you have specific areas that you would like to focus on, such as the
+                <strong>loan application process or account management features</strong>
+                , please let us know.
+              </p>
+              <p class="mb-2" style="font-size: 16px">
+                Your feedback is extremely valuable to us and we take it very seriously. It helps us
+                to continuously improve our application and provide the best possible experience for
+                our users.
+              </p>
+              <p class="mb-2" style="font-size: 16px">
+                If you have any questions or concerns, please do not hesitate to
+                <strong>contact our support center</strong>
+                . Our team is always here to assist you.
+              </p>
+              <p class="mb-2" style="font-size: 16px">
+                Thank you again for choosing our application for your loan and banking needs.
+              </p>
+              <p class="mb-2" style="font-size: 16px">Best regards,</p>
+              <p class="mb-2" style="font-size: 16px">CEDA Online Services</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Flex Item 2 -->
+    <div class="col-md-6 col-12 px-0 px-md-5">
+      <div [formGroup]="feedbackForm" class="feedback-container">
+        <h4 class="feedback-title mb-5">Select Topic</h4>
+        <select formControlName="department" class="form-select form-select-lg mb-5">
+          <option value="" disabled>Select Topic</option>
+          <option *ngFor="let item of feedbackDepartments | keyvalue" value="{{ item.key }}">
+            {{ item.value }}
+          </option>
+        </select>
+
+        <h4 class="feedback-title mb-5">Select Branch</h4>
+        <select formControlName="branchId" class="form-select form-select-lg mb-5">
+          <option value="" disabled>Select Branch</option>
+          <option *ngFor="let item of branches$ | async | keyvalue" value="{{ item.key }}">
+            {{ item.value }}
+          </option>
+        </select>
+
+        <h4 class="feedback-title mb-5">Leave Your Feedback</h4>
+        <div class="feedback-content w-100 position-relative">
+          <textarea
+            formControlName="feedback"
+            class="feedback-input resize-none mh-200px"
+            rows="8"
+            placeholder="Enter your feedback here"
+          ></textarea>
+          <div
+            class="word-limit"
+            [ngClass]="{
+              'bg-light-danger text-danger fw-bold': wordCount > maxWords
+            }"
+          >
+            <span
+              *ngIf="wordCount <= maxWords; else wordCountExceed"
+              class="word-limit--word-count"
+            >
+              {{ wordCount }}
+            </span>
+            <ng-template #wordCountExceed>
+              <span class="word-limit--word-count fw-bold text-danger">
+                {{ maxWords - wordCount }}
+              </span>
+            </ng-template>
+            <span class="">/</span>
+            <span class="word-limit--max-words">{{ maxWords }}</span>
+            words
+          </div>
+        </div>
+
+        <h4 class="feedback-title mb-5">Rate our service</h4>
+
+        <ngb-rating class="mb-5" (rateChange)="ratingChanged($event)" [rate]="0" [max]="5">
+          <ng-template let-fill="fill" let-index="index">
+            <i class="bi-star{{ fill === 100 ? '-fill' : '' }}" [class.filled]="fill === 100"></i>
+          </ng-template>
+        </ngb-rating>
+
+        <!-- [class.low]="index < 2"
+              [class.mid]="index >= 2 && index <= 3"
+              [class.high]="index > 3 && index <= 5" -->
+
+        <!-- <button
+          (click)="onSubmitFeedback(feedbackMessage.value)"
+          class="btn btn-primary btn-lg"
+        >
+          Submit
+        </button> -->
+        <button (click)="feedbackSubmitted()" class="btn btn-primary btn-lg">Submit</button>
+      </div>
+    </div>
+  </div>
+</app-popup>
+
+<app-popup #successFeedback></app-popup>
+
+<app-popup #failureFeedback></app-popup>

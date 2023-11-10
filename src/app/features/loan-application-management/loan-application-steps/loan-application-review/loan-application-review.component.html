@@ -1,0 +1,343 @@
+<div class="d-flex flex-column flex-row-fluid">
+  <!-- <h2 class="text-center mb-5">Loan Application Review</h2> -->
+
+  <div class="d-flex flex-stack mb-10">
+    <h2 class="">Loan Application Review</h2>
+    <ng-container *ngIf="errorIsVisible; else defaultGeneratePdfButton">
+      <button
+        [disabled]="true"
+        [ngbTooltip]="'You must field all required fields to generate pdf'"
+        [triggers]="'hover'"
+        class="btn btn-dark"
+        (click)="generatePDF()"
+      >
+        <span *ngIf="!isPdfGenerating">
+          <i class="fas fa-download"></i>
+          Generate Pdf
+        </span>
+        <span *ngIf="isPdfGenerating">
+          <i class="fas fa-spinner fa-spin"></i>
+          Generating Pdf
+        </span>
+      </button>
+    </ng-container>
+    <ng-template #defaultGeneratePdfButton>
+      <button [disabled]="false" [ngbTooltip]="''" class="btn btn-dark" (click)="generatePDF()">
+        <span *ngIf="!isPdfGenerating">
+          <i class="fas fa-download"></i>
+          Generate Pdf
+        </span>
+        <span *ngIf="isPdfGenerating">
+          <i class="fas fa-spinner fa-spin"></i>
+          Generating Pdf
+        </span>
+      </button>
+    </ng-template>
+  </div>
+
+  <div id="loan-review-wrapper" class="d-flex flex-column flex-row-fluid gap-5">
+    <p-messages *ngIf="errorIsVisible" severity="error">
+      <ng-template pTemplate>
+        <div class="d-flex align-items-start p-4">
+          <!-- <i class="fa fa-times-circle text-danger fs-2x mr-3"></i> -->
+          <div class="mr-3">
+            <div class="fw-bold fs-2x mb-3 lh-1">Incomplete Form</div>
+
+            <p class="mb-3 fw-normal fs-5">
+              We've noticed that there are some mandatory fields in the form that haven't been
+              filled out yet. To successfully complete your submission, please review each step of
+              the form thoroughly and ensure that all required fields are filled. You'll find these
+              fields marked with an asterisk (*), and completing them accurately is necessary for
+              the proper processing of your submission.
+            </p>
+
+            <p class="mb-3 fw-normal fs-5">
+              Below, you'll find a list of missing required fields across various steps. Take a
+              moment to review the details and provide the necessary information to proceed with
+              your application.
+            </p>
+
+            <p-accordion [activeIndex]="-1" class="py-0">
+              <p-accordionTab
+                *ngIf="individualRequiredFields.length > 0"
+                header="Individual Details"
+              >
+                <ng-container
+                  *ngFor="
+                    let individualFields of individualRequiredFields;
+                    let individualIndex = index
+                  "
+                >
+                  <p-fieldset
+                    class="py-0"
+                    legend="Individual / Shareholder {{ individualIndex + 1 }}"
+                    [toggleable]="true"
+                    [collapsed]="true"
+                  >
+                    <ul class="fs-4 text-danger ml-3 p-0">
+                      <li *ngFor="let field of individualFields" class="p-1">{{ field }}</li>
+                    </ul>
+                  </p-fieldset>
+                </ng-container>
+              </p-accordionTab>
+              <p-accordionTab
+                *ngIf="
+                  loanApplicationType.toLowerCase() !== 'individual' &&
+                  companyRequiredFields.length > 0
+                "
+                header="Company / Group / Mabago Dinku Details"
+              >
+                <ul class="fs-4 text-danger ml-3">
+                  <li *ngFor="let field of companyRequiredFields" class="p-1">{{ field }}</li>
+                </ul>
+              </p-accordionTab>
+              <p-accordionTab
+                header="Application Details"
+                *ngIf="applicationRequiredFields.length > 0"
+              >
+                <ul class="fs-4 text-danger ml-3">
+                  <li *ngFor="let field of applicationRequiredFields" class="p-1">{{ field }}</li>
+                </ul>
+              </p-accordionTab>
+
+              <p-accordionTab header="Document Details" *ngIf="documentRequiredFields.length > 0">
+                <ul class="fs-4 text-danger ml-3">
+                  <li *ngFor="let field of documentRequiredFields" class="p-1">{{ field }}</li>
+                </ul>
+              </p-accordionTab>
+            </p-accordion>
+          </div>
+        </div>
+      </ng-template>
+    </p-messages>
+
+    <p-panel header="Basic Details" [toggleable]="true">
+      <ng-template #noBasicDetails>
+        <div class="text-center">
+          <h3>No Basic Details</h3>
+        </div>
+      </ng-template>
+      <ng-container *ngIf="loanBasicDetails; else noBasicDetails">
+        <review-basic-details [loanBasicDetails]="loanBasicDetails"></review-basic-details>
+      </ng-container>
+    </p-panel>
+
+    <p-panel header="Individual Details" [toggleable]="true">
+      <ng-template #noLoanIndividualDetails>
+        <div class="text-center">
+          <h3>No Individual Details</h3>
+        </div>
+      </ng-template>
+      <!-- * If application type is individual -->
+      <ng-container *ngIf="loanIndividualDetails; else noLoanIndividualDetails">
+        <review-individual-details
+          [loanApplicationType]="loanApplicationType.toLowerCase()"
+          [loanIndividualDetails]="loanIndividualDetails"
+        ></review-individual-details>
+      </ng-container>
+    </p-panel>
+
+    <p-panel
+      *ngIf="loanApplicationType.toLowerCase() !== 'individual'"
+      header="Company / Group / Mabogo Dinku Details"
+      [toggleable]="true"
+    >
+      <ng-template #noLegalPersona>
+        <div class="text-center p-2">
+          <span class="fs-4 fw-bold">No Company Details Available</span>
+        </div>
+      </ng-template>
+
+      <ng-container *ngIf="loanLegalPersona; else noLegalPersona">
+        <review-company-group-details
+          [companyDetails]="loanLegalPersona"
+        ></review-company-group-details>
+      </ng-container>
+    </p-panel>
+
+    <p-panel header="Service Center Details" [toggleable]="true">
+      <ng-template #noLoanServiceCentre>
+        <div class="text-center p-2">
+          <span class="fs-4 fw-bold">No Service Center Details</span>
+        </div>
+      </ng-template>
+      <ng-container *ngIf="loanServiceCentre; else noLoanServiceCentre">
+        <review-service-center-details
+          [loanServiceCentre]="loanServiceCentre"
+        ></review-service-center-details>
+      </ng-container>
+    </p-panel>
+
+    <p-panel header="Document Details" [toggleable]="true">
+      <ng-template #noLoanDocs>
+        <div class="text-center p-2">
+          <span class="fs-4 fw-bold">No Document Details</span>
+        </div>
+      </ng-template>
+
+      <ng-container *ngIf="loanDocs; else noLoanDocs">
+        <review-documents-details [loanDocs]="loanDocs"></review-documents-details>
+      </ng-container>
+    </p-panel>
+
+    <p-panel header="Disclaimer" [toggleable]="true">
+      <div class="row gx-10">
+        <div class="text-dark fs-4 text-start mb-2">Promoters Warranty At Submission</div>
+        <!-- Disclaimer statement -->
+        <div class="list-group list-group-numbered px-4">
+          <!-- Agreement of Declaimer -->
+          <div class="d-flex mb-3">
+            <span class="form-check form-check-solid form-check-lg mt-2">
+              <input
+                #disclaimer1
+                type="checkbox"
+                class="form-check-input"
+                (change)="firstDisclaimerChanged(disclaimer1.checked)"
+                [checked]="isApplicationDisabled"
+                [disabled]="isApplicationDisabled"
+                [style]="'border: 2px solid var(--kt-primary)'"
+              />
+            </span>
+
+            <div class="d-flex flex-column gap-4">
+              <p class="text-dark fs-5 ls-0">
+                I hereby declare that the information I submitted herein is true and correct to the
+                best of my knowledge. I furthermore note that in the event any of the information I
+                have provided herein is not true and correct, whether so submitted by me
+                intentionally or erroneously, the Agency shall decline my application immediately
+                and the application shall not be considered further.
+              </p>
+
+              <p class="text-dark fs-5 ls-0">
+                I furthermore note that the information I have provided herein is the information
+                upon which the Agency shall consider my loan application. In the event that any
+                information provided herein is not true and correct, I shall be liable to criminal
+                and civil sanction for any such information provided herein.
+              </p>
+            </div>
+          </div>
+
+          <div *ngIf="false" class="d-flex mb-3">
+            <span class="form-check form-check-solid form-check-lg mt-2">
+              <input
+                #disclaimer2
+                type="checkbox"
+                class="form-check-input"
+                (change)="secondDisclaimerChanged(disclaimer2.checked)"
+                [checked]="isApplicationDisabled"
+                [disabled]="isApplicationDisabled"
+              />
+            </span>
+
+            <p class="text-dark fs-5 ls-0">
+              I furthermore note that the information I have provided herein is the information upon
+              which the Agency shall consider my loan application. In the event that any information
+              provided herein is not true and correct, I shall be liable to criminal and civil
+              sanction for any such information provided herein.
+            </p>
+          </div>
+
+          <div *ngIf="!isApplicationDisabled" class="text-gray-600 text-end fs-7">
+            Please agree to the disclaimer to submit the application
+          </div>
+        </div>
+      </div>
+    </p-panel>
+  </div>
+
+  <!-- Form Action -->
+  <div class="row mt-5">
+    <div class="col-lg-12">
+      <div class="d-flex flex-column flex-row-fluid">
+        <div class="d-flex flex-row justify-content-between">
+          <div class="previous-button">
+            <button
+              appClickable
+              (click)="previousStep()"
+              type="button"
+              class="btn btn-light font-weight-bolder text-uppercase"
+            >
+              Previous
+            </button>
+          </div>
+
+          <div class="d-flex flex-row gap-5">
+            <!-- <div *ngIf="!isApplicationDisabled" class="save-button">
+              <button
+                [disabled]="isApplicationDisabled"
+                (click)="saveApplication()"
+                class="btn btn-info fw-bold text-uppercase"
+              >
+                <span *ngIf="(loading$ | async) === false">Save</span>
+                <span *ngIf="(loading$ | async) === true" class="fa fa-spinner svg-spin"></span>
+              </button>
+            </div> -->
+
+            <div
+              class="next-button"
+              [ngStyle]="{
+                cursor: isSubmitDisabled ? 'not-allowed' : 'pointer'
+              }"
+              [ngbTooltip]="isSubmitDisabled ? 'Please check the terms and condition' : ''"
+              [triggers]="'hover'"
+            >
+              <ng-container
+                *ngIf="
+                  (loanApplicationReqiredField.loanApplicationHasLeftRequiredField$ | async) &&
+                    ((loanApplicationReqiredField.requiredFields$ | async) || []).length > 0;
+                  else defaultSubmitApplicationButton
+                "
+              >
+                <button
+                  appClickable
+                  *ngIf="!isApplicationDisabled"
+                  (click)="submitApplication()"
+                  type="button"
+                  class="btn btn-primary font-weight-bolder text-uppercase"
+                  [ngbTooltip]="
+                    isSubmitDisabled
+                      ? 'Please check the terms and condition'
+                      : 'Please check the missing fields'
+                  "
+                  [ngClass]="{
+                    'disabled': true,
+
+                    'btn-light-secondary': true
+                  }"
+                >
+                  Submit
+                </button>
+              </ng-container>
+              <ng-template #defaultSubmitApplicationButton>
+                <button
+                  appClickable
+                  *ngIf="!isApplicationDisabled"
+                  (click)="submitApplication()"
+                  type="button"
+                  class="btn btn-primary font-weight-bolder text-uppercase"
+                  [ngClass]="{
+                    'disabled': isSubmitDisabled,
+                    'btn-primary': !isSubmitDisabled,
+                    'btn-light-secondary': isSubmitDisabled
+                  }"
+                >
+                  Submit
+                </button>
+              </ng-template>
+
+              <button
+                appClickable
+                [routerLink]="['/dashboard']"
+                *ngIf="isApplicationDisabled"
+                type="button"
+                class="btn btn-primary font-weight-bolder text-uppercase"
+              >
+                Go to Dashboard
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

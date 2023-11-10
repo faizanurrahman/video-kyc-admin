@@ -1,0 +1,123 @@
+:host {
+  --header-bg: #fff1ea;
+}
+
+.menu-sub-accordion {
+  border: 1px solid var(--kt-primary);
+  border-top: none;
+  border-radius: 0 0 5px 5px;
+}
+
+
+.menu-item {
+  margin-bottom: 15px;
+}
+
+
+
+
+.menu-item>.menu-link {
+  border: 1px solid var(--kt-gray-400);
+  transition: all 0.3s ease;
+  border-radius: 5px;
+  background: var(--kt-white);
+
+  &:hover {
+    border-color: var(--kt-primary);
+    background: var(--header-bg);
+  }
+}
+
+.show.menu-item>.menu-link {
+  border-color: var(--kt-primary);
+  background: var(--header-bg);
+}
+
+.menu-item.show>.menu-link {
+  border-radius: 5px 5px 0 0 !important;
+}
+
+
+
+
+
+/* CSS styles for the disclaimer statement */
+.disclaimer {
+  background-color: #f7f7f7;
+  padding: 10px;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+}
+
+.disclaimer p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+
+
+::ng-deep {
+  .p-element .p-panel.p-component {
+    margin-bottom: 10px !important;
+
+    & .p-panel-header {
+      border-radius: 15px;
+      transition: border-radius 0.5s;
+
+    }
+
+    &.p-panel-expanded .p-panel-header {
+      border-radius: 15px 15px 0px 0px;
+    }
+  }
+
+  button.p-button {
+    background: var(--kt-danger);
+    box-shadow: none;
+
+    &:hover {
+      box-shadow: none;
+      background: var(--kt-dark);
+    }
+  }
+
+  .p-accordion {
+    .p-accordion-header-link {
+      box-shadow: none !important;
+      background: #ffe7e6 !important;
+      color: #ff5757 !important;
+      border: none !important;
+    }
+
+    .p-accordion-content {
+      background: #ffe7e6 !important;
+      border: none !important;
+    }
+  }
+
+  p-fieldset fieldset {
+    background: none !important;
+    border: none !important;
+
+    .p-fieldset-legend {
+      border-color: #ff3736 !important;
+    }
+
+    .p-fieldset-legend a {
+      background: #ffe7e6 !important;
+      border-color: #ff3736 !important;
+      color: #ff3736 !important;
+      box-shadow: none !important;
+
+      .p-fieldset-legend-text {
+        font-weight: 400;
+        font-size: 17px;
+      }
+    }
+  }
+
+
+
+
+}

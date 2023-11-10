@@ -1,0 +1,26 @@
+// Dropdowns
+// Dropdown menu container and contents.
+$dropdown-color: $body-color !default;
+$dropdown-color-dark: $body-color-dark !default;
+$dropdown-bg: $body-bg !default;
+$dropdown-bg-dark: $body-bg-dark !default;
+$dropdown-divider-bg: $gray-100 !default;
+$dropdown-divider-bg-dark: $gray-100-dark !default;
+$dropdown-box-shadow: 0px 0px 50px 0px rgba(82, 63, 105, 0.15) !default;
+$dropdown-box-shadow-dark: 0px 0px 30px rgba(0, 0, 0, 0.3) !default;
+$dropdown-border-radius: $border-radius !default;
+$dropdown-border-width: 0 !default;
+$dropdown-link-color: $gray-900 !default;
+$dropdown-link-color-dark: $gray-900-dark !default;
+$dropdown-link-hover-color: shade-color($dropdown-link-color, 10%) !default;
+$dropdown-link-hover-color-dark: shade-color($dropdown-link-color-dark, 10%) !default;
+$dropdown-link-hover-bg: $gray-200 !default;
+$dropdown-link-hover-bg-dark: $gray-200-dark !default;
+$dropdown-link-active-color: $component-active-color !default;
+$dropdown-link-active-color-dark: $component-active-color-dark !default;
+$dropdown-link-active-bg: $component-active-bg !default;
+$dropdown-link-active-bg-dark: $component-active-bg-dark !default;
+$dropdown-link-disabled-color: $gray-500 !default;
+$dropdown-link-disabled-color-dark: $gray-500-dark !default;
+$dropdown-header-color: $gray-600 !default;
+$dropdown-header-color-dark: $gray-600-dark !default;

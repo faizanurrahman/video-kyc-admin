@@ -1,0 +1,216 @@
+<div class="loan-calculator-container">
+  <div class="loan-calculator--header">
+    <h1>
+      <span>Loan Calculator</span>
+
+      <span class="ms-5 cursor-pointer" (click)="disclaimerHidden = !disclaimerHidden">
+        <i class="fas fs-1 text-hover-danger fa-exclamation-circle"></i>
+      </span>
+    </h1>
+
+    <div class="">
+      <button
+        (click)="openLoanRatesModal()"
+        class="btn btn-lg fs-3 fw-bold border btn-secondary-light border-1 border-danger rounded-3 bg-hover-light-danger text-hover-primary border-hover-primary"
+      >
+        View Rates
+      </button>
+    </div>
+  </div>
+
+  <div class="sub-container">
+    <div class="view">
+      <!-- Input Details -->
+      <div class="details">
+        <div *ngIf="!disclaimerHidden" class="disclaimer position-relative">
+          <div id="disclaimer">
+            <span
+              ngbTooltip="dismiss"
+              class="dismissable-disclaimer"
+              (click)="disclaimerHidden = true"
+            >
+              <i class="fa fa-multiply text-hover-danger fs-5"></i>
+            </span>
+            <p>
+              <span class="text-danger fw-bold fs-5">Disclaimer:</span>
+              <span class="fw-normal text-start">
+                The calculation provided by this loan calculator is for informational purposes only
+                and should not be considered as an exact representation of the actual repayment
+                amount and period. The final repayments amount and duration will be communicated
+                formally as part of the loan offer.
+              </span>
+            </p>
+          </div>
+        </div>
+        <div class="detail">
+          <app-my-nouislider
+            class=""
+            #amountSlider
+            [label]="'Amount (Pula)'"
+            [min]="100"
+            [max]="50000000"
+            [step]="100"
+            [formatPrefix]="'P'"
+            [floatPoints]="0"
+            (currentValue)="amountChanged($event)"
+          ></app-my-nouislider>
+        </div>
+
+        <!-- Period Section -->
+
+        <div class="detail">
+          <!-- <p class="text-light">Length</p>
+                    <p id="loan-period-text" class="text-light"></p>
+                  </div>
+                  <input type="range" id="loan-period" min="1" max="20" step="1"> -->
+          <app-my-nouislider
+            #termsLengthSlider
+            [label]="'Tenure (Months)'"
+            [min]="1"
+            [max]="240"
+            [step]="1"
+            [formatSuffix]="'Mo'"
+            [floatPoints]="0"
+            (currentValue)="termsLengthChanged($event)"
+          ></app-my-nouislider>
+        </div>
+
+        <!-- Interest Section -->
+
+        <div class="detail">
+          <!-- <p class="text-light">% Interest</p>
+                    <p id="interest-rate-text" class="text-light"></p>
+                  </div>
+                  <input type="range" id="interest-rate" min="1" max="15" step="0.5"> -->
+
+          <app-my-nouislider
+            #interestSlider
+            [label]="'Interest (%)'"
+            [min]="0.1"
+            [max]="15"
+            [step]="0.01"
+            [start]="2"
+            [formatSuffix]="'%'"
+            (currentValue)="interestChanged($event)"
+          ></app-my-nouislider>
+        </div>
+      </div>
+      <!-- Price Container -->
+      <div class="footer bg-dark bg-opacity-90">
+        <div id="price-container" class="price-container">
+          <div>
+            <div class="price-title">Proposed Installment</div>
+            <span>
+              <span id="price">0</span>
+              <span style="color: var(--clr-white)">/mo</span>
+            </span>
+          </div>
+
+          <div>
+            <button
+              *ngIf="!showCalculateButton"
+              (click)="openLoanBreakdownModal()"
+              class="btn btn-dark btn-sm border border-1 text-nowrap btn-active-color-primary"
+            >
+              View Details
+            </button>
+
+            <button
+              *ngIf="showCalculateButton"
+              (click)="calculateLoan()"
+              style="background-color: #9f2421;
+}"
+              class="btn btn-sm text-nowrap text-white fw-bold"
+            >
+              Calculate
+            </button>
+          </div>
+        </div>
+        <div class="loan-details">
+          <div class="chart-details">
+            <p class="text-light">Principal</p>
+            <p id="cp" style="font-size: 17px"></p>
+          </div>
+          <div class="chart-details">
+            <p class="text-light">Interest</p>
+            <p id="ci" style="font-size: 17px"></p>
+          </div>
+          <div class="chart-details">
+            <p class="text-light">Total Payable</p>
+            <p id="ct" style="font-size: 17px"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chart Container -->
+    <div class="breakup">
+      <canvas id="pieChart"></canvas>
+    </div>
+  </div>
+
+  <!-- line chart -->
+  <div *ngIf="false" class="lineChart">
+    <canvas id="lineChart" height="200px" width="400px"></canvas>
+  </div>
+</div>
+
+<app-popup [popupConfig]="popupConfig" #modal>
+  <div class="card card-custom p-0 position-relative">
+    <div class="card-header">
+      <div class="alert alert-warning text-dark border border-2 fs-6">
+        {{ breakdownMessage }}
+      </div>
+    </div>
+
+    <div class="card-body p-0">
+      <div class="table-responsive table-loading h-100">
+        <!-- Table Loading Message  -->
+        <div *ngIf="false" class="table-loading-message">
+          <span class="d-inline-flex justify-content-center align-items-center">
+            <span class="spinner-border spinner-border-sm text-primary me-2"></span>
+            <span class="text-primary">Fetching Records, please wait...</span>
+          </span>
+        </div>
+
+        <!-- Table -->
+        <table
+          class="table table-hover table-header-bg-gray-300 table-rounded table-header-rounded-3 align-middle gs-4 gs-lg-6 gy-3 table-layout-fixed position-relative"
+        >
+          <thead class="position-sticky top-0">
+            <tr class="text-capitalize fw-bold">
+              <th class="w-60px">S.No</th>
+              <th class="">Proposed Installment</th>
+              <th class="">Principal Paid</th>
+              <th class="">Interest Paid</th>
+              <th class="">New Balance</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let item of breakdownInterestData; let i = index">
+              <td class="">{{ i + 1 }}</td>
+              <td class="">{{ item.emi | currency : 'P ' : 'symbol' : '1.2' }}</td>
+              <td class="">{{ item.principalPaid | currency : 'P ' : 'symbol' : '1.2' }}</td>
+              <td class="">{{ item.interestPaid | currency : 'P ' : 'symbol' : '1.2' }}</td>
+              <td class="">{{ item.newBalance | currency : 'P ' : 'symbol' : '1.2' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</app-popup>
+
+<app-popup [popupConfig]="loanRatesPopupConfig" #loanRatesModal>
+  <app-loan-rates></app-loan-rates>
+</app-popup>
+
+<!-- todo: need to update the view rates -->
+<div
+  id="intrestRate"
+  data-kt-menu="true"
+  class="menu menu-sub menu-sub-dropdown menu-rounded fw-bold py-4 px-10 fs-6 w-500px"
+>
+  <app-loan-rates></app-loan-rates>
+</div>

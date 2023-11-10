@@ -1,0 +1,156 @@
+<!-- begin::Header -->
+<div class="card-header border-0 pt-5">
+  <h3 class="card-title align-items-start flex-column">
+    <span class="card-label fw-bolder fs-3 mb-1">{{ title }}</span>
+  </h3>
+</div>
+
+<div class="card-body py-3">
+  <div class="table-responsive h-100">
+    <table
+      class="table table-header-bg-gray-300 table-header-rounded-3 table-hover table-row-bordered align-middle gs-4 gy-3"
+    >
+      <thead>
+        <tr class="fw-bolder text-capitalize">
+          <th class="min-w-60px">Id</th>
+          <th class="min-w-120px">Name</th>
+          <th class="min-w-140px">Description</th>
+          <th class="min-w-120px">Date</th>
+          <th class="min-w-120px">Status</th>
+          <th class="min-w-100px text-end">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let item of statusTableData">
+          <td class="text-dark fw-bolder text-hover-primary fs-6">{{ item.id }}</td>
+          <td class="text-dark text-hover-primary fs-6">{{ item.name }}</td>
+
+          <td class="text-dark fw-normal fs-6">
+            {{ item.description }}
+          </td>
+
+          <td class="text-dark text-hover-primary fs-6">
+            {{ item.date }}
+          </td>
+
+          <td class="">
+            <ng-container *ngIf="item.status">
+              <span *ngIf="item.status === 'rejected'" class="badge badge-light-warning">
+                {{ item.status }}
+              </span>
+              <span *ngIf="item.status === 'approved'" class="badge badge-light-success">
+                {{ item.status }}
+              </span>
+            </ng-container>
+          </td>
+
+          <!-- Action Button -->
+          <td>
+            <div
+              class="d-flex flex-lg-row flex-column flex-stack gap-4 px-3 py-2 rounded rounded-3 bg-gray-200"
+            >
+              <div class="d-flex flex-lg-row flex-column gap-2">
+                <label class="option active d-flex gap-2">
+                  <div class="option-control">
+                    <input
+                      [checked]="item.status === 'approved'"
+                      class="form-check-input"
+                      type="radio"
+                      [name]="item.name"
+                      [value]="'approved'"
+                    />
+                  </div>
+                  <div class="option-label flex-shrink-1">
+                    <div class="option-head">
+                      <div class="option-title">Approve</div>
+                    </div>
+                  </div>
+                </label>
+
+                <label class="option d-flex gap-2">
+                  <div class="option-control">
+                    <input
+                      [checked]="item.status === 'rejected'"
+                      class="form-check-input"
+                      type="radio"
+                      [name]="item.name"
+                      [value]="'rejected'"
+                    />
+                  </div>
+                  <div class="option-label flex-shrink-1">
+                    <div class="option-head">
+                      <div class="option-title">Reject</div>
+                    </div>
+                  </div>
+                </label>
+              </div>
+
+              <button (click)="statusChanged(item)" class="btn btn-sm btn-dark">Proceed</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!--
+
+ <label
+              class="option"
+              [ngClass]="{
+                active: loanType?.value === item
+              }"
+            >
+              <div class="option-control">
+                <input
+                  formControlName="loanType"
+                  class="form-check-input"
+                  type="radio"
+                  name="loanType"
+                  [value]="item"
+                />
+              </div>
+              <div class="option-label flex-shrink-1">
+                <div class="option-head">
+                  <div class="option-title">{{ item }}</div>
+                </div>
+              </div>
+            </label>
+ -->
+
+<!--
+ <div class="row mb-2" data-kt-buttons="true">
+              <div class="col">
+                <label
+                  class="btn btn-outline btn-outline-dashed btn-outline-default w-100 p-4"
+                  for="approve"
+                >
+                  <input
+                    formControlName="accountTeamSize"
+                    type="radio"
+                    class="form-check-input"
+                    id="approve"
+                    value="approve"
+                  />
+                  <span class="fw-bolder fs-3">Approve</span>
+                </label>
+              </div>
+              <div class="col">
+                <label
+                  class="btn btn-outline btn-outline-dashed btn-outline-default w-100 p-4"
+                  for="reject"
+                >
+                  <input
+                    formControlName="accountTeamSize"
+                    type="radio"
+                    class="form-check-input"
+                    id="reject"
+                    value="reject"
+                  />
+                  <span class="fw-bolder fs-3">Reject</span>
+                </label>
+              </div>
+            </div>
+ -->

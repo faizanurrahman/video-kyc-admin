@@ -1,0 +1,80 @@
+.instruction-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.instruction-list li {
+  margin-bottom: 10px;
+}
+
+.instruction-list li strong {
+  font-weight: 400;
+  color: #cc3a00;
+  /* or any other color you prefer */
+}
+
+
+.individula-form {}
+
+.form-loading {
+  position: relative;
+
+
+  .form-loading-message {
+    position: absolute;
+    background-color: rgba(61, 60, 60, 0.665);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 30;
+    border-radius: 0.25rem;
+
+    color: rgb(250, 246, 244);
+
+    display: grid;
+    place-items: center;
+  }
+}
+
+
+.form-body-visible {
+  display: grid;
+  grid-template-columns: 1fr;
+
+
+
+}
+
+.individual-section-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: #221e1e;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  width: fit-content;
+  border-radius: 10px;
+
+  background-color: rgb(250, 246, 244);
+}
+
+
+
+
+
+
+.svg-spin {
+  animation: fa-spin 1.5s infinite linear 0s;
+}
+
+
+@keyframes fa-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(359deg);
+  }
+}

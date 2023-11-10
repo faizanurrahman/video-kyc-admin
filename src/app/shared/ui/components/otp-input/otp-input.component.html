@@ -1,0 +1,64 @@
+<div [formGroup]="otpForm" class="form-group">
+  <div [formArrayName]="'digits'" class="d-flex flex-wrap flex-stack rounded px-0">
+    <!--First Digit-->
+
+    <ng-container *ngFor="let item of otpDigits?.controls; let i = index">
+      <input
+        #digit
+        class="form-control form-control-solid-bg validate digit border-hover h-60px w-60px fs-2qx text-center mx-1 my-2"
+        [formControlName]="i"
+        maxlength="1"
+        name="code_{{ i }}"
+        type="text"
+        inputmode="numeric"
+        placeholder="*"
+        (keypress)="isOtpNumericKeyPress($event)"
+      />
+    </ng-container>
+
+    <!-- <input
+      #digit
+      class="form-control form-control-solid-bg validate digit border-hover h-60px w-60px fs-2qx text-center mx-1 my-2"
+      formControlName="firstDigit"
+      maxlength="1"
+      name="code_1"
+      type="text"
+      inputmode="numeric"
+      placeholder="*"
+      (keypress)="isOtpNumericKeyPress($event)"
+    />
+    <input
+      #digit
+      class="form-control form-control-solid-bg validate digit border-hover h-60px w-60px fs-2qx text-center mx-1 my-2"
+      formControlName="secondDigit"
+      maxlength="1"
+      name="code_2"
+      type="text"
+      inputmode="numeric"
+      placeholder="*"
+      (keypress)="isOtpNumericKeyPress($event)"
+    />
+    <input
+      #digit
+      class="form-control form-control-solid-bg validate digit border-hover h-60px w-60px fs-2qx text-center mx-1 my-2"
+      formControlName="thirdDigit"
+      maxlength="1"
+      name="code_3"
+      type="text"
+      inputmode="numeric"
+      placeholder="*"
+      (keypress)="isOtpNumericKeyPress($event)"
+    />
+    <input
+      #digit
+      class="form-control form-control-solid-bg validate digit border-hover h-60px w-60px fs-2qx text-center mx-1 my-2"
+      formControlName="fourthDigit"
+      maxlength="1"
+      name="code_4"
+      type="text"
+      inputmode="numeric"
+      placeholder="*"
+      (keypress)="isOtpNumericKeyPress($event)"
+    /> -->
+  </div>
+</div>

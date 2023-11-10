@@ -1,0 +1,31 @@
+// List group
+$list-group-color: $gray-900 !default;
+$list-group-color-dark: $gray-900-dark !default;
+$list-group-bg: $white !default;
+$list-group-bg-dark: $black !default;
+$list-group-border-color: rgba($black, 0.125) !default;
+$list-group-border-color-dark: rgba($white, 0.125) !default;
+
+$list-group-hover-bg: $gray-100 !default;
+$list-group-hover-bg-dark: $gray-100 !default;
+$list-group-active-color: $component-active-color !default;
+$list-group-active-color-dark: $component-active-color-dark !default;
+$list-group-active-bg: $component-active-bg !default;
+$list-group-active-bg-dark: $component-active-bg-dark !default;
+$list-group-active-border-color: $list-group-active-bg !default;
+$list-group-active-border-color-dark: $list-group-active-bg-dark !default;
+
+$list-group-disabled-color: $gray-600 !default;
+$list-group-disabled-color-dark: $gray-600-dark !default;
+$list-group-disabled-bg: $list-group-bg !default;
+$list-group-disabled-bg-dark: $list-group-bg-dark !default;
+
+$list-group-action-color: $gray-700 !default;
+$list-group-action-color-dark: $gray-700-dark !default;
+$list-group-action-hover-color: $list-group-action-color !default;
+$list-group-action-hover-color-dark: $list-group-action-color-dark !default;
+
+$list-group-action-active-color: $body-color !default;
+$list-group-action-active-color-dark: $body-color-dark !default;
+$list-group-action-active-bg: $gray-200 !default;
+$list-group-action-active-bg-dark: $gray-200-dark !default;

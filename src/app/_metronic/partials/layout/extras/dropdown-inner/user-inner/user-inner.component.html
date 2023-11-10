@@ -1,0 +1,345 @@
+<ng-container *ngIf="user$ | async as _user">
+  <div class="menu-item px-3 d-lg-none">
+    <div class="menu-content d-flex align-items-center px-3">
+      <!-- <div class="symbol symbol-50px me-5">
+        <img alt="Logo" [src]="_user.genericServiceBean.newLoginBean.doMobeeCustomer.picId" />
+      </div> -->
+      <div class="symbol symbol-50px me-5">
+        <span class="symbol-label bg-light-secondary text-dark rounded-circle fw-bolder">
+          <!-- {{
+            _user.genericServiceBean.newLoginBean.doMobeeCustomer.custName
+              | initials
+          }} -->
+          MR
+        </span>
+      </div>
+
+      <div class="d-flex flex-column">
+        <div class="fw-bolder text-primary d-flex align-items-center fs-5">
+          <!-- {{ _user.genericServiceBean.newLoginBean.doMobeeCustomer.custName }} -->
+          <!-- -Hidden badge -->
+          <span class="d-none badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">Pro</span>
+        </div>
+        <a class="fw-bold text-muted text-hover-primary fs-7 cursor-pointer">
+          <!-- {{
+            _user.genericServiceBean.newLoginBean.doMobeeCustomer.acctPrimary
+          }} -->
+          NA
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="separator my-2 d-lg-none"></div>
+
+  <div *ngIf="false" class="menu-item px-5">
+    <a routerLink="/crafted/pages/profile" class="menu-link px-5">My Profile</a>
+  </div>
+
+  <div class="menu-item px-5 py-1 d-lg-none">
+    <a routerLink="/dashboard" class="menu-link px-5">My Dashboard</a>
+  </div>
+
+  <div *ngIf="false" class="menu-item px-5">
+    <a class="menu-link px-5 cursor-pointer" placement="top-start" ngbTooltip="Coming soon">
+      <span class="menu-text">My Loans</span>
+      <span class="menu-badge">
+        <span class="badge badge-light-danger badge-circle fw-bolder fs-7">3</span>
+      </span>
+    </a>
+  </div>
+
+  <div
+    *ngIf="false"
+    class="menu-item px-5"
+    data-kt-menu-trigger="hover"
+    data-kt-menu-placement="left-start"
+    data-kt-menu-flip="bottom"
+  >
+    <a class="menu-link px-5 cursor-pointer">
+      <span class="menu-title">My Subscription</span>
+      <span class="menu-arrow"></span>
+    </a>
+
+    <div class="menu-sub menu-sub-dropdown w-175px py-4">
+      <div class="menu-item px-3">
+        <a class="menu-link px-5 cursor-pointer" placement="top-start" ngbTooltip="Coming soon">
+          Referrals
+        </a>
+      </div>
+
+      <div class="menu-item px-3">
+        <a class="menu-link px-5 cursor-pointer" placement="top-start" ngbTooltip="Coming soon">
+          Billing
+        </a>
+      </div>
+
+      <div class="menu-item px-3">
+        <a class="menu-link px-5 cursor-pointer" placement="top-start" ngbTooltip="Coming soon">
+          Payments
+        </a>
+      </div>
+
+      <div class="menu-item px-3">
+        <a
+          class="menu-link d-flex flex-stack px-5 cursor-pointer"
+          placement="top-start"
+          ngbTooltip="Coming soon"
+        >
+          Statements
+          <i
+            class="fas fa-exclamation-circle ms-2 fs-7"
+            data-bs-toggle="tooltip"
+            title="View your statements"
+          ></i>
+        </a>
+      </div>
+
+      <div class="separator my-2"></div>
+
+      <div class="menu-item px-3">
+        <div class="menu-content px-3">
+          <label class="form-check form-switch form-check-custom form-check-solid">
+            <input
+              class="form-check-input w-30px h-20px"
+              type="checkbox"
+              value="1"
+              defaultChecked="{true}"
+              name="notifications"
+            />
+            <span class="form-check-label text-muted fs-7">Notifications</span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-item px-5 d-lg-none">
+    <a class="menu-link px-5 cursor-pointer" [routerLink]="['/feature/loan-statements']">
+      My Statements
+    </a>
+  </div>
+
+  <div class="separator my-2 d-lg-none"></div>
+
+  <div
+    *ngIf="false"
+    class="menu-item px-5"
+    data-kt-menu-trigger="hover"
+    data-kt-menu-placement="left-start"
+    data-kt-menu-flip="bottom"
+  >
+    <a class="menu-link px-5 cursor-pointer">
+      <span class="menu-title position-relative">
+        Language
+        <span
+          class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0"
+        >
+          {{ language.name }}{{ ' ' }}
+          <img class="w-15px h-15px rounded-1 ms-2" [src]="language.flag" alt="metronic" />
+        </span>
+      </span>
+    </a>
+
+    <div class="menu-sub menu-sub-dropdown w-175px py-4">
+      <div
+        *ngFor="let l of langs"
+        class="menu-item px-3 cursor-pointer"
+        (click)="selectLanguage(l.lang)"
+      >
+        <a class="menu-link d-flex px-5" [ngClass]="l.lang === language.lang ? 'active' : ''">
+          <span class="symbol symbol-20px me-4">
+            <img class="rounded-1" [src]="l.flag" alt="metronic" />
+          </span>
+          {{ l.name }}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="false" class="menu-item px-5 my-1">
+    <a routerLink="/crafted/account/settings" class="menu-link px-5">Account Settings</a>
+  </div>
+
+  <div class="menu-item px-5 my-1">
+    <a (click)="openChangePasswordPopup()" class="menu-link px-5">Change Password</a>
+  </div>
+
+  <div class="menu-item px-5 d-lg-none">
+    <a (click)="logout()" class="menu-link px-5 cursor-pointer">Sign Out</a>
+  </div>
+</ng-container>
+
+<app-popup #changePasswordFormPopup>
+  <div class="d-flex flex-column-fluid">
+    <div class="d-flex flex-column flex-row-fluid">
+      <div class="container">
+        <div class="row mb-10">
+          <div class="col-12 justify-content-center">
+            <h3 class="">Change Your Password</h3>
+            <div class="text-muted fs-6"></div>
+          </div>
+        </div>
+
+        <form [formGroup]="changePasswordForm" class="form row mb-10">
+          <div class="col-12 justify-content-center">
+            <div class="form-group mb-4">
+              <label class="form-label required">Current Password</label>
+              <input
+                type="password"
+                autocomplete="new-password"
+                class="form-control form-control-solid form-control-sm"
+                formControlName="currentPassword"
+              />
+              <div class="form-text">Enter your current password</div>
+            </div>
+
+            <div class="form-group mb-4">
+              <label class="form-label required">New Password</label>
+              <input
+                type="text"
+                class="form-control form-control-solid form-control-sm"
+                formControlName="newPassword"
+              />
+              <div class="form-text">Enter your new password</div>
+              <div *ngIf="fc.newPassword.dirty" class="invalid-feedback d-block">
+                <div *ngIf="fc.newPassword.errors?.required">new password is required</div>
+
+                <div *ngIf="!fc.newPassword.errors?.required && fc.newPassword.errors?.password">
+                  {{ fc.newPassword.errors?.password }}
+                </div>
+
+                <div *ngIf="formError?.samePassword && fc.newPassword.valid">
+                  new password cannot be same as old password, try different
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group mb-4">
+              <label class="form-label required">Re-enter Password</label>
+              <input
+                class="form-control form-control-solid form-control-sm"
+                formControlName="reNewPassword"
+              />
+              <div class="form-text">Re-enter your new password</div>
+              <div *ngIf="fc.reNewPassword.dirty" class="invalid-feedback d-block">
+                <div *ngIf="fc.reNewPassword.errors?.required">re-enter password is required</div>
+
+                <div
+                  *ngIf="!fc.reNewPassword.errors?.required && fc.reNewPassword.errors?.password"
+                >
+                  {{ fc.reNewPassword.errors?.password }}
+                </div>
+
+                <div *ngIf="formError?.mustMatch && fc.reNewPassword.valid">
+                  Password doesn't match
+                </div>
+              </div>
+
+              <div
+                class="valid-feedback d-block"
+                *ngIf="!formError?.mustMatch && fc.reNewPassword.valid"
+              >
+                Password matched
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex align-item-center justify-content-end">
+            <button
+              [disabled]="changePasswordForm.invalid"
+              class="btn btn-primary btn-lg"
+              (click)="changePassword()"
+            >
+              Change Password
+            </button>
+            <button class="ms-5 btn btn-light" (click)="changePasswordFormPopup.close()">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</app-popup>
+
+<app-popup #passwordChanged>
+  <div class="d-flex flex-column-fluid">
+    <div class="d-flex flex-column flex-row-fluid">
+      <div class="container">
+        <div class="row mb-10">
+          <div class="col-12 justify-content-center">
+            <h3 class="">Change Your Password</h3>
+            <div class="text-muted fs-6"></div>
+          </div>
+        </div>
+
+        <form [formGroup]="changePasswordForm" class="form row mb-10">
+          <div class="col-12 justify-content-center">
+            <div class="form-group mb-4">
+              <label class="form-label">Current Password</label>
+              <input
+                class="form-control form-control-solid form-control-sm"
+                formControlName="currentPassword"
+              />
+              <div class="form-text">Enter your current password</div>
+            </div>
+
+            <div class="form-group mb-4">
+              <label class="form-label">New Password</label>
+              <input
+                class="form-control form-control-solid form-control-sm"
+                formControlName="newPassword"
+              />
+              <div class="form-text">Enter your new password</div>
+              <div
+                *ngIf="
+                  changePasswordForm.errors?.samePassword &&
+                  changePasswordForm.get('newPassword')?.dirty
+                "
+                class="invalid-feedback d-block"
+              >
+                new password cannot be old, try different
+              </div>
+            </div>
+
+            <div class="form-group mb-4">
+              <label class="form-label">Re-enter Password</label>
+              <input
+                class="form-control form-control-solid form-control-sm"
+                formControlName="reNewPassword"
+              />
+              <div *ngIf="!changePasswordForm.errors" class="valid-feedback d-block">
+                Password Matched
+              </div>
+              <div
+                *ngIf="
+                  changePasswordForm.errors?.passwordMismatch &&
+                  changePasswordForm.get('reNewPassword')?.dirty
+                "
+                class="invalid-feedback d-block"
+              >
+                Doesn't matched with new password
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 justify-content-end">
+            <button class="btn btn-primary btn-lg" (click)="changePassword()">
+              <span *ngIf="isLoading">
+                <i class="fa fa-spinner fa-spin me-2"></i>
+                processing
+              </span>
+              <span *ngIf="!isLoading">Change Password</span>
+            </button>
+            <button class="ms-5 btn btn-light" (click)="changePasswordFormPopup.close()">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</app-popup>
+
+<app-popup #passwordChangeFailed></app-popup>

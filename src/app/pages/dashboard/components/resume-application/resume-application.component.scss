@@ -1,0 +1,31 @@
+:host {
+  padding: 20px;
+  border-radius: 15px;
+  // background-color: lightgoldenrodyellow;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  background: hsla(0, 66%, 21%, 0.22);
+}
+
+.form-control {
+  --kt-input-readonly-bg: #fff;
+}
+
+.text-elipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.spinning-icon {
+  animation: fa-spin 1.5s infinite linear 0s;
+}
+
+@keyframes fa-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(359deg);
+  }
+}

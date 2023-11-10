@@ -1,0 +1,8 @@
+{
+  "/pfsvc/*": {
+    "target": "http://ceda.mobeebank.com:8081",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "logLevel": "debug"
+}

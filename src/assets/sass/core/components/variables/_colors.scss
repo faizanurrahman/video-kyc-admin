@@ -1,0 +1,233 @@
+// Bootstrap color system
+$white: #ffffff !default;
+$black: #000000 !default;
+
+// Bootstrap grey colors
+$gray-100: #f5f8fa !default;
+$gray-200: #eff2f5 !default;
+$gray-300: #e4e6ef !default;
+$gray-400: #b5b5c3 !default;
+$gray-500: #a1a5b7 !default;
+$gray-600: #7e8299 !default;
+$gray-700: #5e6278 !default;
+$gray-800: #3f4254 !default;
+$gray-900: #181c32 !default;
+
+$gray-100-dark: #1b1b29 !default;
+$gray-200-dark: #2b2b40 !default;
+$gray-300-dark: #323248 !default;
+$gray-400-dark: #474761 !default;
+$gray-500-dark: #565674 !default;
+$gray-600-dark: #6d6d80 !default;
+$gray-700-dark: #92929f !default;
+$gray-800-dark: #cdcdde !default;
+$gray-900-dark: #ffffff !default;
+
+// Bootstrap muted color
+$text-muted: $gray-500 !default;
+$text-muted-dark: $gray-500-dark !default;
+
+//- Bootstrap gray colors MAP
+$grays: (
+  '100': $gray-100,
+  '200': $gray-200,
+  '300': $gray-300,
+  '400': $gray-400,
+  '500': $gray-500,
+  '600': $gray-600,
+  '700': $gray-700,
+  '800': $gray-800,
+  '900': $gray-900,
+) !default;
+
+$grays-dark: (
+  '100': $gray-100-dark,
+  '200': $gray-200-dark,
+  '300': $gray-300-dark,
+  '400': $gray-400-dark,
+  '500': $gray-500-dark,
+  '600': $gray-600-dark,
+  '700': $gray-700-dark,
+  '800': $gray-800-dark,
+  '900': $gray-900-dark,
+) !default;
+
+// Bootstrap contextual colors
+// Primary colors
+$primary: #3699ff !default;
+$primary-active: #187de4 !default;
+$primary-light: #f1faff !default;
+$primary-light-dark: #212e48 !default;
+$primary-inverse: $white !default;
+
+// Secondary colors
+$secondary: $gray-300 !default;
+$secondary-dark: $gray-300-dark !default;
+$secondary-active: $gray-400 !default;
+$secondary-active-dark: $gray-400-dark !default;
+$secondary-light: $gray-100 !default;
+$secondary-light-dark: $gray-100-dark !default;
+$secondary-inverse: $gray-800 !default;
+$secondary-inverse-dark: $gray-800-dark !default;
+
+// Light colors
+$light: $gray-100 !default;
+$light-dark: $gray-200-dark !default;
+$light-active: $gray-200 !default;
+$light-active-dark: $gray-300-dark !default;
+$light-light: gba($gray-100, 0.75) !default;
+$light-inverse: $gray-600 !default;
+$light-inverse-dark: $gray-600-dark !default;
+
+// Success colors
+$success: #1bc5bd !default;
+$success-active: #0bb7af !default;
+$success-light: #c9f7f5 !default;
+$success-light-dark: #1c3833 !default;
+$success-inverse: $white !default;
+
+// Info colors
+$info: #8950fc !default;
+$info-active: #7337ee !default;
+$info-light: #eee5ff !default;
+$info-light-dark: #2f264f !default;
+$info-inverse: $white !default;
+
+// Warning colors
+$warning: #ffa800 !default;
+$warning-active: #ee9d01 !default;
+$warning-light: #fff4de !default;
+$warning-light-dark: #392f28 !default;
+$warning-inverse: $white !default;
+
+// Danger colors
+$danger: #f64e60 !default;
+$danger-active: #ee2d41 !default;
+$danger-light: #ffe2e5 !default;
+$danger-light-dark: #3a2434 !default;
+$danger-inverse: $white !default;
+
+// Dark colors
+$dark: $gray-900 !default;
+$dark-dark: $gray-900-dark !default;
+$dark-active: darken($gray-900, 3%) !default;
+$dark-active-dark: lighten($gray-900-dark, 3%) !default;
+$dark-light: $gray-200 !default;
+$dark-light-dark: $gray-200-dark !default;
+$dark-inverse: $white !default;
+$dark-inverse-dark: $gray-100-dark !default;
+
+// Contextual colors
+$theme-colors: (
+  'white': $white,
+  // custom color type
+  'light': $light,
+  'primary': $primary,
+  'secondary': $secondary,
+  'success': $success,
+  'info': $info,
+  'warning': $warning,
+  'danger': $danger,
+  'dark': $dark,
+) !default;
+
+$theme-colors-dark: (
+  'dark': $dark-dark,
+  'light': $light-dark,
+  'secondary': $secondary-dark,
+) !default;
+
+// Contextual active state colors
+$theme-active-colors: (
+  'primary': $primary-active,
+  'secondary': $secondary-active,
+  'light': $light-active,
+  'success': $success-active,
+  'info': $info-active,
+  'warning': $warning-active,
+  'danger': $danger-active,
+  'dark': $dark-active,
+) !default;
+
+$theme-active-colors-dark: (
+  'dark': $dark-active-dark,
+  'light': $light-active-dark,
+  'secondary': $secondary-active-dark,
+) !default;
+
+// Contextual inverse state colors
+$theme-inverse-colors: (
+  'primary': $primary-inverse,
+  'secondary': $secondary-inverse,
+  'light': $light-inverse,
+  'success': $success-inverse,
+  'info': $info-inverse,
+  'warning': $warning-inverse,
+  'danger': $danger-inverse,
+  'dark': $dark-inverse,
+) !default;
+
+$theme-inverse-colors-dark: (
+  'dark': $dark-inverse-dark,
+  'light': $light-inverse-dark,
+  'secondary': $secondary-inverse-dark,
+) !default;
+
+// Contextual light state colors
+$theme-light-colors: (
+  'primary': $primary-light,
+  'secondary': $secondary-light,
+  'success': $success-light,
+  'info': $info-light,
+  'warning': $warning-light,
+  'danger': $danger-light,
+  'dark': $dark-light,
+) !default;
+
+$theme-light-colors-dark: (
+  'primary': $primary-light-dark,
+  'success': $success-light-dark,
+  'info': $info-light-dark,
+  'warning': $warning-light-dark,
+  'danger': $danger-light-dark,
+  'dark': $dark-light-dark,
+  'secondary': $secondary-light-dark,
+) !default;
+
+// Text colors
+$theme-text-colors: (
+  'white': $white,
+  'primary': $primary,
+  'secondary': $secondary,
+  'light': $light,
+  'success': $success,
+  'info': $info,
+  'warning': $warning,
+  'danger': $danger,
+  'dark': $dark,
+  'muted': $text-muted,
+  'gray-100': $gray-100,
+  'gray-200': $gray-200,
+  'gray-300': $gray-300,
+  'gray-400': $gray-400,
+  'gray-500': $gray-500,
+  'gray-600': $gray-600,
+  'gray-700': $gray-700,
+  'gray-800': $gray-800,
+  'gray-900': $gray-900,
+) !default;
+
+$theme-text-colors-dark: (
+  'dark': $dark-dark,
+  'muted': $text-muted-dark,
+  'secondary': $secondary-dark,
+  'gray-100': $gray-100-dark,
+  'gray-200': $gray-200-dark,
+  'gray-300': $gray-300-dark,
+  'gray-400': $gray-400-dark,
+  'gray-500': $gray-500-dark,
+  'gray-600': $gray-600-dark,
+  'gray-700': $gray-700-dark,
+  'gray-800': $gray-800-dark,
+  'gray-900': $gray-900-dark,
+) !default;

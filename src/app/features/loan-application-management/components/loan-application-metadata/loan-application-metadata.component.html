@@ -1,0 +1,136 @@
+<div
+  auto-animate
+  [options]="{ duration: 500 }"
+  class="d-flex flex-center flex-column px-8 py-3 bg-transparent position-relative"
+>
+  <div
+    (click)="toggleApplicationMetadata = !toggleApplicationMetadata"
+    class="position-absolute top-0 end-0 p-5 cursor-pointer"
+  >
+    <span
+      [ngStyle]="{
+        transform: toggleApplicationMetadata ? 'rotate(180deg)' : 'rotate(0deg)',
+        transition: 'all 0.5s ease-in-out'
+      }"
+      class="svg-icon svg-icon-2x svg-icon-hover-primary d-block"
+      [inlineSVG]="'./assets/media/icons/duotune/arrows/arr082.svg'"
+    ></span>
+  </div>
+
+  <div *ngIf="true" class="table-responsive mw-lg-450px">
+    <table
+      [ngStyle]="{}"
+      class="table table-rounded gs-4 gy-1"
+      [ngClass]="{ table: toggleApplicationMetadata }"
+    >
+      <thead>
+        <tr>
+          <th></th>
+          <th class="mw-30px"></th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody class="">
+        <tr>
+          <td class="fw-bold fs-5">Loan Application Id</td>
+          <td class="fw-bold fs-5">:</td>
+          <td class="fw-normal fs-5">{{ loanApplicationId }}</td>
+        </tr>
+        <ng-container *ngIf="toggleApplicationMetadata">
+          <tr>
+            <td class="fw-bold fs-5">Loan Application Sector</td>
+            <td class="fw-bold fs-5">:</td>
+            <td class="fw-normal fs-5">{{ loanApplicationSector | titlecase }}</td>
+          </tr>
+          <tr>
+            <td class="fw-bold fs-5">Loan Application Product Type</td>
+            <td class="fw-bold fs-5">:</td>
+            <td class="fw-normal fs-5">{{ loanApplicationProductType | titlecase }}</td>
+          </tr>
+
+          <tr>
+            <td class="fw-bold fs-5">Loan Application Type</td>
+            <td class="fw-bold fs-5">:</td>
+            <td class="fw-normal fs-5">{{ loanApplicationType | titlecase }}</td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Application Status -->
+  <ng-container *ngIf="!loanApplicationSapAppStatus">
+    <ng-container
+      *ngIf="
+        loanApplicationStatus === 'SUBMITTED' ||
+        loanApplicationStatus === 'ACCEPTED' ||
+        loanApplicationStatus === 'REJECTED' ||
+        loanApplicationStatus === 'REQUEST_FOR_CHANGE' ||
+        loanApplicationStatus === 'APPLICATION_NOT_ACCEPTED'
+      "
+    >
+      <div class="d-flex flex-center pb-3 text-center text-uppercase">
+        <span class="fs-5 me-3">APPLICATION STATUS:</span>
+
+        <ng-container *ngIf="loanApplicationStatus === 'SUBMITTED'">
+          <span class="badge badge-sm badge-info fs-5">Under Review</span>
+        </ng-container>
+
+        <ng-container *ngIf="loanApplicationStatus === 'ACCEPTED'">
+          <span class="badge badge-sm badge-success fs-5">Accepted</span>
+        </ng-container>
+
+        <ng-container
+          *ngIf="
+            loanApplicationStatus === 'REJECTED' ||
+            loanApplicationStatus === 'APPLICATION_NOT_ACCEPTED'
+          "
+        >
+          <span class="badge badge-sm badge-dark fs-5">Rejected</span>
+        </ng-container>
+
+        <ng-container *ngIf="loanApplicationStatus === 'REQUEST_FOR_CHANGE'">
+          <span class="badge badge-sm badge-warning fs-5">
+            Action Required
+            <!-- Need to add action message -->
+          </span>
+        </ng-container>
+
+        <span
+          (click)="viewLoanApplicationComment()"
+          [ngbTooltip]="'View Comment'"
+          class="ms-5 btn btn-icon btn-hover-color-info pluse pulse-primary d-flex flex-center"
+        >
+          <span
+            [inlineSVG]="'./assets/media/icons/duotune/general/gen007.svg'"
+            class="svg-icon svg-icon-info svg-icon-2x"
+          ></span>
+          <span class="pulse-ring"></span>
+        </span>
+      </div>
+    </ng-container>
+  </ng-container>
+
+  <!-- SAP Application Status -->
+  <ng-container *ngIf="loanApplicationSapAppStatus">
+    <div class="d-flex flex-center pb-3 text-center text-uppercase">
+      <span class="fs-5 me-3">APPLICATION STATUS:</span>
+      <span class="badge badge-sm badge-primary fs-5">
+        {{ loanApplicationSapAppStatus | titlecase }}
+      </span>
+
+      <span
+        (click)="viewLoanApplicationComment()"
+        [ngbTooltip]="'View Comment'"
+        class="ms-5 btn btn-icon btn-hover-color-info pluse pulse-primary d-flex flex-center"
+      >
+        <span
+          [inlineSVG]="'./assets/media/icons/duotune/general/gen007.svg'"
+          class="svg-icon svg-icon-info svg-icon-2x"
+        ></span>
+        <span class="pulse-ring"></span>
+      </span>
+    </div>
+  </ng-container>
+</div>

@@ -1,0 +1,57 @@
+:host {
+  // --primary-clr: #906700;
+  // --secondary-clr: #7E4001;
+  // --danger-clr: #621101;
+  // --horizontal-line-1-position-from-top: 60px;
+  // --horizontal-line-2-position-from-top: 55%;
+  // --horizontal-line-3-position-from-bottom: 55px;
+  // --lines-clr: rgba(239, 237, 237, 0.422);
+  // --kaekapakae-clr: #cecfeb;
+
+  // --virtual-keboard-positon-from-bottom: 100px;
+
+  // ============== Responsive Variables =========
+
+
+
+
+
+  height: 100%;
+  width: 100%;
+  margin: 0;
+
+
+  // Background Image center
+  background-image: url('/assets/media/ceda-images/login-page-bg-min.jpg');
+  // background-image: url('/assets/media/ceda-images/auth-bg-new-2.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 250px center;
+  background-attachment: fixed !important;
+
+
+
+
+  .flex-root {
+    height: 100%;
+  }
+
+}
+
+
+
+::ng-deep .authentication-wrapper {
+  position: relative;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 80px;
+    border: 1px solid transparent;
+    border-left-color: var(--lines-clr);
+    transform: translateX(-50%);
+    z-index: 100;
+  }
+}

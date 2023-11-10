@@ -1,0 +1,108 @@
+<div class="card">
+  <div class="card-body">
+
+    <!-- Stepper-->
+    <div class="stepper stepper-multistep stepper-links">
+      <div class="stepper-nav border-bottom">
+        <div [ngClass]="getStepClass(1)"
+             class="stepper-item"
+        >
+
+          <div class="stepper-icon">
+
+
+            <span class="svg-icon svg-icon-primary svg-icon-5x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo4/dist/../src/media/svg/icons/Map/Position.svg-->
+              <svg
+                height="24px"
+                version="1.1" viewBox="0 0 24 24" width="24px" xmlns="http://www.w3.org/2000/svg">
+                <g fill="none" fill-rule="evenodd" stroke="none" stroke-width="1">
+                    <rect height="24" width="24" x="0" y="0"/>
+                    <path
+                      d="M19,11 L21,11 C21.5522847,11 22,11.4477153 22,12 C22,12.5522847 21.5522847,13 21,13 L19,13 C18.4477153,13 18,12.5522847 18,12 C18,11.4477153 18.4477153,11 19,11 Z M3,11 L5,11 C5.55228475,11 6,11.4477153 6,12 C6,12.5522847 5.55228475,13 5,13 L3,13 C2.44771525,13 2,12.5522847 2,12 C2,11.4477153 2.44771525,11 3,11 Z M12,2 C12.5522847,2 13,2.44771525 13,3 L13,5 C13,5.55228475 12.5522847,6 12,6 C11.4477153,6 11,5.55228475 11,5 L11,3 C11,2.44771525 11.4477153,2 12,2 Z M12,18 C12.5522847,18 13,18.4477153 13,19 L13,21 C13,21.5522847 12.5522847,22 12,22 C11.4477153,22 11,21.5522847 11,21 L11,19 C11,18.4477153 11.4477153,18 12,18 Z"
+                      fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+                    <circle cx="12" cy="12" fill="#000000" opacity="0.3" r="2"/>
+                    <path
+                      d="M12,17 C14.7614237,17 17,14.7614237 17,12 C17,9.23857625 14.7614237,7 12,7 C9.23857625,7 7,9.23857625 7,12 C7,14.7614237 9.23857625,17 12,17 Z M12,19 C8.13400675,19 5,15.8659932 5,12 C5,8.13400675 8.13400675,5 12,5 C15.8659932,5 19,8.13400675 19,12 C19,15.8659932 15.8659932,19 12,19 Z"
+                      fill="#000000" fill-rule="nonzero"/>
+                </g>
+              </svg>
+            </span>
+
+          </div>
+          <div class="stepper-label">
+            <span class="mb-3">1. Personal Details</span>
+          </div>
+
+
+        </div>
+
+        <div [ngClass]="getStepClass(2)"
+             class="stepper-item"
+
+        >
+          <a href="#">
+            <span class="stepper-circle">2</span>
+            <span class="stepper-label">Step 2</span>
+          </a>
+        </div>
+
+        <div [ngClass]="getStepClass(3)"
+             class="stepper-item"
+        >
+          <a href="#">
+            <span class="stepper-circle">3</span>
+            <span class="stepper-label">Step 3</span>
+          </a>
+        </div>
+
+        <div [ngClass]="getStepClass(4)"
+             class="stepper-item"
+        >
+          <a href="#">
+            <span class="stepper-circle">4</span>
+            <span class="stepper-label">Step 4</span>
+          </a>
+        </div>
+      </div>
+
+      <form class="mx-auto mw-600px w-100 pt-15 pb-10" id="kt_loan_application_form"
+            novalidate>
+        <div class="current">
+          <ng-container *ngIf="currentStepBS$.value === 1">
+            <span class="text-dark-75 font-weight-bolder font-size-h2 mb-3">Personal Details</span>
+          </ng-container>
+          <ng-container *ngIf="currentStepBS$.value === 2">
+            <span class="text-dark-75 font-weight-bolder font-size-h2 mb-3">Step 2</span>
+          </ng-container>
+          <ng-container *ngIf="currentStepBS$.value === 3">
+            <span class="text-dark-75 font-weight-bolder font-size-h2 mb-3">Step 3</span>
+          </ng-container>
+          <ng-container *ngIf="currentStepBS$.value === 4">
+            <span class="text-dark-75 font-weight-bolder font-size-h2 mb-3">Step 4</span>
+          </ng-container>
+
+          <div class="separator separator-dashed my-5"></div>
+          <div class="d-flex flex-stack pt-15">
+            <div class="mr-2">
+              <button (click)="prevStep()" [disabled]="currentStepBS$.value === 1"
+                      class="btn btn-light-primary font-weight-bolder font-size-sm px-4 py-2"
+                      type="button"
+              >Previous
+              </button>
+            </div>
+            <div>
+              <button (click)="nextStep()" [disabled]="currentStepBS$.value === 4"
+                      class="btn btn-primary font-weight-bolder font-size-sm px-4 py-2"
+                      type="button"
+              >Next
+              </button>
+
+            </div>
+          </div>
+        </div>
+      </form>
+
+
+    </div>
+  </div>
+</div>

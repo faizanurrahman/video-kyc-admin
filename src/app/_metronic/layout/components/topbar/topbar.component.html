@@ -1,0 +1,225 @@
+<!-- -- Hidden -->
+<!-- Search toolbar -->
+<div
+  *ngIf="false"
+  class="d-flex align-items-center"
+  [ngClass]="toolbarButtonMarginClass"
+>
+  <div
+    class="btn btn-icon btn-active-color-primary position-relative"
+    [ngClass]="toolbarButtonHeightClass"
+    data-kt-menu-trigger="click"
+    data-kt-menu-attach="parent"
+    data-kt-menu-placement="bottom-end"
+    data-kt-menu-flip="bottom"
+    data-kt-menu-permanent="true"
+  >
+    <span
+      [inlineSVG]="'./assets/media/icons/duotune/general/gen021.svg'"
+      class="svg-icon"
+      [ngClass]="toolbarButtonIconSizeClass"
+    ></span>
+  </div>
+  <app-search-result-inner></app-search-result-inner>
+</div>
+
+<!-- CHAT -->
+<div
+  *ngIf="false"
+  class="d-flex align-items-center"
+  [ngClass]="toolbarButtonMarginClass"
+>
+  <!-- begin::Menu wrapper -->
+  <div
+    class="btn btn-icon btn-active-color-primary position-relative"
+    [ngClass]="toolbarButtonHeightClass"
+    id="kt_drawer_chat_toggle"
+  >
+    <span
+      [inlineSVG]="'./assets/media/icons/duotune/communication/com012.svg'"
+      class="svg-icon"
+      [ngClass]="toolbarButtonIconSizeClass"
+    ></span>
+    <!-- <span
+      class="bullet bullet-dot bg-success h-6px w-6px position-absolute translate-middle top-0 start-50 animation-blink"
+    ></span> -->
+  </div>
+  <!-- end::Menu wrapper -->
+</div>
+
+<!-- NOTIFICATIONS -->
+<div
+  *ngIf="false"
+  class="d-flex align-items-center"
+  [ngClass]="toolbarButtonMarginClass"
+>
+  <div
+    class="btn btn-icon btn-active-color-primary position-relative"
+    [ngClass]="toolbarButtonHeightClass"
+    data-kt-menu-trigger="click"
+    data-kt-menu-attach="parent"
+    data-kt-menu-placement="bottom-end"
+    data-kt-menu-flip="bottom"
+  >
+    <!-- <span
+      [inlineSVG]="'./assets/media/icons/duotune/general/gen022.svg'"
+      class="svg-icon"
+      [ngClass]="toolbarButtonIconSizeClass"
+    ></span> -->
+
+    <span class="svg-icon svg-icon-info" [ngClass]="toolbarButtonIconSizeClass">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        width="24px"
+        height="24px"
+        viewBox="0 0 24 24"
+        version="1.1"
+      >
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <path
+            d="M17,12 L18.5,12 C19.3284271,12 20,12.6715729 20,13.5 C20,14.3284271 19.3284271,15 18.5,15 L5.5,15 C4.67157288,15 4,14.3284271 4,13.5 C4,12.6715729 4.67157288,12 5.5,12 L7,12 L7.5582739,6.97553494 C7.80974924,4.71225688 9.72279394,3 12,3 C14.2772061,3 16.1902508,4.71225688 16.4417261,6.97553494 L17,12 Z"
+            fill="currentColor"
+          />
+          <rect
+            fill="currentColor"
+            opacity="0.3"
+            x="10"
+            y="16"
+            width="4"
+            height="4"
+            rx="2"
+          />
+        </g>
+      </svg>
+    </span>
+    <span
+      class="bullet bullet-dot bg-primary h-6px w-6px position-absolute translate-middle top-0 start-50 animation-blink"
+    ></span>
+  </div>
+  <app-notifications-inner></app-notifications-inner>
+</div>
+
+<!-- begin::Theme mode -->
+<app-theme-mode-switcher
+  *ngIf="false"
+  class="d-flex align-items-center"
+  [ngClass]="toolbarButtonMarginClass"
+  toggleBtnClass="{`btn btn-icon btn-active-color-primary ${toolbarButtonHeightClass}`}"
+>
+</app-theme-mode-switcher>
+<!-- end::Theme mode -->
+
+<!-- -- Visible -->
+<!-- begin::User -->
+<div
+  class="d-flex align-items-center"
+  [ngClass]="toolbarButtonMarginClass"
+  id="kt_header_user_menu_toggle"
+>
+  <!-- begin::Toggle -->
+  <div
+    class="cursor-pointer symbol btn btn-icon btn-active-color-primary"
+    [ngClass]="toolbarUserAvatarHeightClass"
+    data-kt-menu-trigger="hover"
+    data-kt-menu-attach="parent"
+    data-kt-menu-placement="bottom-end"
+    data-kt-menu-flip="bottom"
+  >
+    <!-- <img src="./assets/media/avatars/300-1.jpg" alt="metronic" /> -->
+    <span class="svg-icon svg-icon-1 svg-icon-info">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        width="24px"
+        height="24px"
+        viewBox="0 0 24 24"
+        version="1.1"
+      >
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <rect x="0" y="0" width="24" height="24" />
+          <path
+            d="M7.62302337,5.30262097 C8.08508802,5.000107 8.70490146,5.12944838 9.00741543,5.59151303 C9.3099294,6.05357769 9.18058801,6.67339112 8.71852336,6.97590509 C7.03468892,8.07831239 6,9.95030239 6,12 C6,15.3137085 8.6862915,18 12,18 C15.3137085,18 18,15.3137085 18,12 C18,9.99549229 17.0108275,8.15969002 15.3875704,7.04698597 C14.9320347,6.73472706 14.8158858,6.11230651 15.1281448,5.65677076 C15.4404037,5.20123501 16.0628242,5.08508618 16.51836,5.39734508 C18.6800181,6.87911023 20,9.32886071 20,12 C20,16.418278 16.418278,20 12,20 C7.581722,20 4,16.418278 4,12 C4,9.26852332 5.38056879,6.77075716 7.62302337,5.30262097 Z"
+            fill="currentColor"
+            fill-rule="nonzero"
+          />
+          <rect
+            fill="currentColor"
+            opacity="0.3"
+            x="11"
+            y="3"
+            width="2"
+            height="10"
+            rx="1"
+          />
+        </g></svg
+      ><!--end::Svg Icon--></span
+    >
+  </div>
+  <!-- end::Toggle  -->
+  <app-user-inner></app-user-inner>
+</div>
+<!-- end::User -->
+
+<!-- -- Hidden -->
+<!-- Activities -->
+<div
+  *ngIf="false"
+  class="d-flex align-items-center"
+  [ngClass]="toolbarButtonMarginClass"
+>
+  <!-- begin::Drawer toggle -->
+  <div
+    class="btn btn-icon btn-active-color-primary"
+    [ngClass]="toolbarButtonHeightClass"
+    id="kt_activities_toggle"
+  >
+    <span
+      [inlineSVG]="'./assets/media/icons/duotune/general/gen032.svg'"
+      class="svg-icon"
+      [ngClass]="toolbarButtonIconSizeClass"
+    ></span>
+  </div>
+  <!-- end::Drawer toggle -->
+</div>
+
+<!-- Quick links -->
+<div
+  *ngIf="false"
+  class="d-flex align-items-center"
+  [ngClass]="toolbarButtonMarginClass"
+>
+  <div
+    class="btn btn-icon btn-active-color-primary"
+    [ngClass]="toolbarButtonHeightClass"
+    data-kt-menu-trigger="click"
+    data-kt-menu-attach="parent"
+    data-kt-menu-placement="bottom-end"
+    data-kt-menu-flip="bottom"
+  >
+    <span
+      [inlineSVG]="'./assets/media/icons/duotune/general/gen025.svg'"
+      class="svg-icon"
+      [ngClass]="toolbarButtonIconSizeClass"
+    ></span>
+  </div>
+  <app-quick-links-inner></app-quick-links-inner>
+</div>
+
+<ng-container *ngIf="headerLeft === 'menu'">
+  <div
+    *ngIf="false"
+    class="d-flex align-items-center d-lg-none ms-2 me-n3"
+    title="Show header menu"
+  >
+    <div
+      class="btn btn-icon btn-active-color-primary w-30px h-30px w-md-40px h-md-40px"
+      id="kt_header_menu_mobile_toggle"
+    >
+      <span
+        [inlineSVG]="'./assets/media/icons/duotune/text/txt001.svg'"
+        class="svg-icon svg-icon-1"
+      ></span>
+    </div>
+  </div>
+</ng-container>

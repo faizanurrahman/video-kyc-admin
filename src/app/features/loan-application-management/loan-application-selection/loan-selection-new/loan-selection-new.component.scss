@@ -1,0 +1,184 @@
+$primary-clr: #906700;
+$secondary-clr: #7E4001;
+$danger-clr: #621101;
+
+:host {
+  --horizontal-line-1-position-from-top: 60px;
+  --horizontal-line-2-position-from-top: 55%;
+  --horizontal-line-3-position-from-bottom: 55px;
+  --lines-clr: rgba(239, 237, 237, 0.422);
+  --kaekapakae-clr: #cecfeb;
+  --big-text-line-height: 1;
+  --big-text-font-size: 32px;
+
+  height: 100%;
+  margin: 0;
+  overflow-y: auto;
+
+  .flex-root {
+    height: 100%;
+  }
+
+
+
+}
+
+:host {
+  background-image: url('/assets/media/ceda-images/loan-type-selection-bg-min.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 200px center;
+  background-attachment: fixed !important;
+  height: 100%;
+  width: 100%;
+}
+
+.authentication-content {
+  position: relative;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 80px;
+    border: 1px solid transparent;
+    border-left-color: var(--lines-clr);
+    transform: translateX(-50%);
+    z-index: 100;
+  }
+}
+
+.curved-image {
+  background: url('/assets/media/ceda-images/left-side-curve.png');
+  z-index: 100;
+  background-size: 580px 101%;
+  background-repeat: no-repeat;
+  background-position: -5px -5px;
+  background-attachment: fixed;
+}
+
+
+.horizontal-line {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+
+  border-bottom: 1px solid var(--lines-clr);
+
+  &.line1 {
+    top: var(--horizontal-line-1-position-from-top);
+  }
+
+  &.line2 {
+    top: var(--horizontal-line-2-position-from-top);
+  }
+
+  &.line3 {
+    bottom: var(--horizontal-line-3-position-from-bottom);
+  }
+
+}
+
+
+/* src/styles.scss */
+
+// @font-face {
+//   font-family: 'Architects Daughter';
+//   src: url('/assets/font-families/architects-daughter/ArchitectsDaughter-Regular.ttf');
+// }
+
+// /* Apply the font to an element */
+// .custom-font {
+//   font-family: 'Architects Daughter', sans-serif;
+//   /* Add other styles as needed */
+// }
+
+
+
+
+.form-group {
+  input::placeholder {
+    color: #{$primary-clr};
+  }
+}
+
+.header-clr {
+  color: #{$secondary-clr};
+}
+
+.text-custom-primary {
+  color: #{$primary-clr};
+}
+
+.text-custom-danger {
+  color: #{$danger-clr};
+}
+
+.nav-link {
+
+  .nav-link-text {
+    color: #{$primary-clr};
+    background-size: 0px;
+
+    transition: background-size 2s ease-in-out;
+
+
+  }
+
+
+
+  .nav-link-underline {
+    display: block;
+    width: 0;
+    height: 2px;
+    background-color: #{$danger-clr};
+    transition: width 0.3s ease-in-out;
+
+  }
+
+  &:hover {
+    .nav-link-text {
+
+      background-color: #{$danger-clr};
+      background-size: contain;
+      background-clip: text;
+      color: transparent;
+
+    }
+
+    .nav-link-underline {
+      width: 100%;
+    }
+  }
+}
+
+
+
+
+::ng-deep {
+  .ng-dropdown-panel {
+    // background-color: #fff1ea;
+    --bg-clr: #ffe5d9;
+    width: 300px !important;
+
+
+  }
+
+  .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {}
+
+  .form-select[ng-select] {
+    background-image: none;
+    padding: 0;
+  }
+
+  .ng-select .ng-select-container {
+    --bg-clr: #ffe5d9;
+    background: var(--bg-clr);
+  }
+
+  .ng-select.ng-select-opened .ng-select-container {
+    background: darken(#ffe5d9, 10)
+  }
+}

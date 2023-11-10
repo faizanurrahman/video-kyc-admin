@@ -1,0 +1,43 @@
+.card-header {
+  min-height: fit-content;
+  padding-top: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.card-body {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+:host {
+  width: 100%;
+}
+
+.table-loading-message {
+  box-shadow: none;
+}
+
+.svg-spin {
+  animation: spin 1.2s infinite linear 0s;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+
+  50% {
+    transform: rotate(178deg) scale(1);
+  }
+
+  100% {
+    transform: rotate(359.999deg) scale(1);
+  }
+}
+
+::ng-deep {
+  .nav-line-tabs .nav-item .nav-link {
+    color: #727685;
+  }
+}

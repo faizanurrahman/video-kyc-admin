@@ -1,0 +1,173 @@
+<div class="row">
+  <div class="d-flex">
+    <!-- - Welcome Message -->
+    <div class="fw-bold fs-5">Welcome Back, Madhuri R</div>
+
+    <!-- - Toolbar Wrapper -->
+    <div class="d-flex gap-5 align-items-center ms-auto">
+      <!-- - Search Box -->
+      <div class="position-relative">
+        <input type="text" class="form-control h-40px m-0 ps-10" placeholder="Search..." />
+        <span class="position-absolute ms-3 top-50 translate-middle-y">
+          <i class="pi pi-search"></i>
+        </span>
+      </div>
+
+      <!-- - Notification -->
+      <div class="notification-wrapper">
+        <div
+          data-kt-menu-trigger="hover"
+          data-kt-menu-attach="parent"
+          data-kt-menu-placement="bottom-end"
+          class="symbol symbol-circle symbol-40px position-relative"
+        >
+          <div class="symbol-label bg-white shadow-sm">
+            <i class="pi pi-bell"></i>
+          </div>
+          <div
+            class="w-5px h-5px symbol-badge badge badge-circle bg-danger start-30px top-10px"
+          ></div>
+        </div>
+
+        <div
+          class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-title-gray-700 menu-icon-gray-500 menu-active-bg menu-state-color fw-semibold py-4 fs-base w-150px"
+          data-kt-menu="true"
+        >
+          <div class="menu-item px-3 my-0">Notification Item 1</div>
+          <div class="menu-item px-3 my-0">Notification Item 2</div>
+        </div>
+      </div>
+
+      <!-- - Profile -->
+      <div class="profile-wrapper">
+        <div
+          data-kt-menu-trigger="hover"
+          data-kt-menu-attach="parent"
+          data-kt-menu-placement="bottom-end"
+          class="symbol symbol-circle symbol-40px position-relative"
+        >
+          <div class="symbol-label fs-2 fw-semibold bg-dark text-white shadow-sm">MR</div>
+          <!-- <div class="symbol-badge badge badge-circle bg-danger start-100 h-5px w-5px"></div> -->
+        </div>
+
+        <div
+          class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-title-gray-700 menu-icon-gray-500 menu-active-bg menu-state-color fw-semibold py-4 fs-base w-150px"
+          data-kt-menu="true"
+        >
+          <div class="menu-item px-3 my-0">Profile Item 1</div>
+          <div class="menu-item px-3 my-0">Profile Item 2</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <!-- - Column 1 -->
+  <div class="col-md-8 col-12">
+    <div class="row gx-5">
+      <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="d-flex gap-5 justify-content-center align-items-center">
+            <div class="fw-bold fs-4">Statistics</div>
+            <div class="d-flex flex-center">
+              <!-- <span class="svg-icon svg-icon-success svg-icon-2" [inlineSVG]="'src/assets/media/icons/duotune/'"></span> -->
+              <i class="ki-duotone ki-double-check-circle text-success">
+                <span class="path1"></span>
+                <span class="path2"></span>
+                <span class="path3"></span>
+              </i>
+              <span class="text-success ms-2">Live</span>
+            </div>
+          </div>
+
+          <!-- - Tabs -->
+          <ul class="pagination pagination-outline bg-white rounded-2 p-1">
+            <li class="page-item ms-1"><a href="#" class="page-link fs-8 fw-bold">1H</a></li>
+            <li class="page-item ms-1 active"><a href="#" class="page-link fs-8 fw-bold">3H</a></li>
+            <li class="page-item ms-1"><a href="#" class="page-link fs-8 fw-bold">5H</a></li>
+            <li class="page-item ms-1"><a href="#" class="page-link fs-8 fw-bold">1D</a></li>
+            <li class="page-item ms-1"><a href="#" class="page-link fs-8 fw-bold">1W</a></li>
+            <li class="page-item ms-1"><a href="#" class="page-link fs-8 fw-bold">1M</a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- - Column 1-1 -->
+      <div class="col-md-6 col-12 h-200px">
+        <div class="card card-stretch h-100">
+          <div class="card-body"></div>
+        </div>
+      </div>
+      <!-- - Column 1-2 -->
+      <div class="col-md-6 col-12 h-200px">
+        <div class="card card-stretch h-100">
+          <div class="card-body"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- - Upcoming Calls Row -->
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-stretch h-300px">
+          <div class="card-header">
+            <div class="card-title">Upcoming Calls</div>
+            <div class="card-toolbar">...</div>
+          </div>
+          <div class="card-body"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- - Upcoming Calls Row -->
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-stretch h-300px">
+          <div class="card-header">
+            <div class="card-title">Recent Transaction</div>
+            <div class="card-toolbar">...</div>
+          </div>
+          <div class="card-body"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- -  Calls Row -->
+    <div class="row">
+      <!-- Call history  -->
+      <div class="col-6">
+        <div class="card card-stretch h-300px">
+          <div class="card-header">
+            <div class="card-title">Recent Call Histroy</div>
+            <div class="card-toolbar">...</div>
+          </div>
+          <div class="card-body"></div>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="card card-stretch h-300px">
+          <div class="card-header">
+            <div class="card-title">Re-Scheduled Call</div>
+            <div class="card-toolbar">...</div>
+          </div>
+          <div class="card-body"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- - Column 2 -->
+  <div class="col-md-4 col-12">
+    <div class="row">
+      <div class="col-12">
+        <div class="fs-4 fw-bold">Upcoming Calls</div>
+      </div>
+      <div class="col-12">
+        <div class="card card-stretch h-500px">
+          <div class="card-body"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

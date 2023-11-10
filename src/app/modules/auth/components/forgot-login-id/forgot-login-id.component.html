@@ -1,0 +1,309 @@
+<div [attr.hideBackgroundImage]="false" class="forgot-login-id--wrapper flex-row-fluid">
+  <!--Brand Logo Begin-->
+  <div class="brand-logo">
+    <img
+      alt="CEDA BRAND LOGO"
+      class="h-70px"
+      src="./assets/media/logos/ceda-logo-transparent.png"
+    />
+  </div>
+  <!--Brand Logo End-->
+
+  <!--  Registration Page Main Block-->
+  <div class="forgot-login-id--main">
+    <!-- Registration Page Header-->
+    <div class="forgot-login-id--header">
+      <div class="forgot-login-id--header-title">
+        <div class="title-xxl text-gray-900">Find Login Id</div>
+
+        <div class="title-xl text-gray-800">Ceda Online Services</div>
+      </div>
+
+      <div class="forgot-login-id--header-paragraph">
+        <!-- Experience the Next Generation of Loan Management: Register Now with CEDA Online Services -->
+        <div class="paragraph-lg text-primary text-start">
+          <ng-container [ngSwitch]="forgotLoginIdStep$ | async">
+            <ng-container *ngSwitchCase="0">
+              Join the Smart Way to Manage Your Loans with CEDA Online Services
+            </ng-container>
+            <ng-container *ngSwitchCase="1">
+              Secure Your Account with OTP-Based Two-Factor Authentication
+            </ng-container>
+            <ng-container *ngSwitchCase="2">
+              Create a Strong Password to Protect Your Account
+            </ng-container>
+          </ng-container>
+        </div>
+
+        <div class="paragraph-lg text-danger text-start">
+          <ng-container [ngSwitch]="forgotLoginIdStep$ | async">
+            <ng-container *ngSwitchCase="0">
+              Apply for Loans, Make Payments, and Take Control of Your Finances Today
+            </ng-container>
+            <ng-container *ngSwitchCase="1">
+              Enter the OTP Sent to Your Registered Mobile Number to Keep Your Account Safe
+            </ng-container>
+            <ng-container *ngSwitchCase="2">
+              Use a Combination of Letters, Numbers, and Symbols to Keep Your Account Secure
+            </ng-container>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <!--Registration Page Header End-->
+
+    <!--    Registration page form-->
+    <div class="forgot-login-id--form">
+      <div class="multistep-registration-form--wrapper">
+        <div class="registration-form--headline">
+          <div class="title-xl text-gray-900">
+            <ng-container [ngSwitch]="forgotLoginIdStep$ | async">
+              <ng-container *ngSwitchCase="0">Find User</ng-container>
+              <ng-container *ngSwitchCase="1">Validate User</ng-container>
+              <ng-container *ngSwitchCase="2">Your Login ID has been Retrieved</ng-container>
+              <ng-container *ngSwitchCase="3">Oops...</ng-container>
+            </ng-container>
+          </div>
+          <div class="title-md fw-normal text-gray-700">
+            <ng-container [ngSwitch]="forgotLoginIdStep$ | async">
+              <ng-container *ngSwitchCase="0">
+                Already have an account?
+                <a class="register-link text-primary fw-normal" href="#">Sign In</a>
+              </ng-container>
+              <ng-container *ngSwitchCase="1">
+                Already have an account?
+                <a class="register-link text-primary fw-normal" href="#">Sign In</a>
+              </ng-container>
+              <ng-container *ngSwitchCase="2"></ng-container>
+            </ng-container>
+          </div>
+        </div>
+        <div class="separator pb-2 h-2px border-gray-800"></div>
+        <div class="multistep-registration-form position-relative">
+          <form [formGroup]="forgotLoginIdForm" class="form">
+            <ng-container [ngSwitch]="forgotLoginIdStep$ | async">
+              <!-- Step 1: Verification Type-->
+              <ng-container *ngSwitchCase="0">
+                <div class="form-group mb-3">
+                  <label class="form-label required fw-normal">Verification Type</label>
+                  <div
+                    class="custom-switch-button rounded-4 border border-2 cursor-pointer form-group"
+                  >
+                    <input
+                      #customCheckBox
+                      (change)="onSwitchboxChanges(customCheckBox.checked)"
+                      class="custom-switch-button-checkbox"
+                      type="checkbox"
+                      [checked]="fc.verificationType.value === 'MOBILE'"
+                    />
+                    <div
+                      (click)="customCheckBox.click()"
+                      class="custom-switch-label-wrapper d-flex"
+                    >
+                      <div
+                        [ngClass]="{
+                          active: customCheckBox.checked
+                        }"
+                        class="flex-1 label label-1 d-flex flex-center fs-8"
+                      >
+                        Mobile Number
+                      </div>
+                      <div
+                        [ngClass]="{
+                          active: !customCheckBox.checked
+                        }"
+                        class="flex-1 label label-2 d-flex flex-center fs-8"
+                      >
+                        BP Number
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <ng-container *ngIf="fc.verificationType.value === 'MOBILE'">
+                  <!-- * Mobile Number -->
+                  <div class="form-group">
+                    <label class="form-label required fw-normal">Mobile Number</label>
+
+                    <div
+                      class="position-relative input-group input-group-lg input-group-solid d-flex flex-wrap gap-2"
+                    >
+                      <div class="input-group-prepend flex-column flex-sm-row">
+                        <app-tel-country-code
+                          formControlName="mobileCountryCode"
+                        ></app-tel-country-code>
+                      </div>
+                      <input
+                        class="form-control h-auto py-4 px-6 rounded-lg rounded"
+                        formControlName="mobileNumber"
+                        placeholder=""
+                        type="text"
+                        appDigitOnly
+                        inputmode="numeric"
+                      />
+                    </div>
+
+                    <div class="form-text text-muted">
+                      Enter the mobile number registered with CEDA
+                      <br />
+                      (e.g., +267 7342XXXX)
+                    </div>
+
+                    <div
+                      class="form-text text-danger"
+                      *ngIf="
+                        fc.mobileNumber?.dirty &&
+                        !isMobileNumberValid(fc.mobileNumber.value, fc.mobileCountryCode.value)
+                      "
+                    >
+                      Please enter a valid mobile number The format should be "+267 XXXX XXXX".
+                    </div>
+                  </div>
+
+                  <!-- * Date Of Birth -->
+                  <div class="form-group">
+                    <label class="form-label required fw-normal">Date of Birth</label>
+                    <input
+                      class="form-control h-auto py-4 px-6 rounded-lg"
+                      formControlName="dateOfBirth"
+                      type="date"
+                      placeholder="mm/dd/yyyy"
+                      [min]="maxDateOfBirth"
+                      [max]="minDateOfBirth"
+                    />
+
+                    <div class="form-text text-muted">
+                      Enter Your dob, You must be 18 year to 100 year old
+                    </div>
+                  </div>
+                </ng-container>
+
+                <ng-container *ngIf="fc.verificationType.value === 'BPNUMBER'">
+                  <!-- * BP Number -->
+                  <div class="form-group">
+                    <label class="form-label required fw-normal">BP Number</label>
+                    <input
+                      class="form-control h-auto py-4 px-6 rounded-lg"
+                      formControlName="bpNumber"
+                      placeholder=""
+                      type="text"
+                      appDigitOnly
+                      inputmode="numeric"
+                    />
+                  </div>
+                </ng-container>
+
+                <!-- * Action Buttons -->
+                <div class="form-group">
+                  <button
+                    appClickable
+                    (click)="proceedForVerification()"
+                    [disabled]="forgotLoginIdForm.invalid"
+                    class="btn btn-primary w-100 h-40px fs-6 fw-bolder"
+                    type="button"
+                  >
+                    Proceed
+                  </button>
+                </div>
+              </ng-container>
+
+              <!--          Step 2: Two Factor Authentication-->
+              <ng-container *ngSwitchCase="1">
+                <div class="d-flex flex-column flex-center h-250px position-relative">
+                  <div class="position-absolute text-center text-muted w-100 top-0">
+                    We've sent a One-Time Password (OTP) to your mobile number. Please enter it
+                    below.
+                  </div>
+                  <lottie-icon
+                    class="z-index-n1"
+                    #lottieIcon
+                    [play]="true"
+                    [animationPath]="
+                      '/assets/media/lottie-animations/lottie-phone-sent-2-animation.json'
+                    "
+                  ></lottie-icon>
+                </div>
+                <!-- * OTP -->
+                <div class="form-group mb-3 mt-n17">
+                  <div class="fw-bold text-center fs-2 ls-2 my-2">Enter OTP</div>
+                  <app-otp-input formControlName="otp"></app-otp-input>
+                </div>
+
+                <!-- * Action Buttons -->
+                <div class="form-group">
+                  <button
+                    appClickable
+                    (click)="verifyIdentity()"
+                    [disabled]="forgotLoginIdForm.invalid"
+                    class="btn btn-primary w-100 h-40px fs-6 fw-bolder"
+                    type="button"
+                  >
+                    Proceed
+                  </button>
+                </div>
+              </ng-container>
+
+              <!--          Step 3: Create Password-->
+              <ng-container *ngSwitchCase="2">
+                <!-- Success Icon -->
+                <div class="d-flex justify-content-center h-200px">
+                  <lottie-icon
+                    style="margin-top: -30px"
+                    class="z-index-n1 mt-n8"
+                    [play]="true"
+                    [animationPath]="
+                      '/assets/media/lottie-animations/lottie-success-icon-5-animation.json'
+                    "
+                    [animationSpeed]="2"
+                  ></lottie-icon>
+                </div>
+                <div class="text-center" style="margin-top: -60px">
+                  <h4 style="background: #3eea10" class="fw-bold fs-4 ls-2 my-2 badge">Success!</h4>
+                  <p class="fw-normal fs-6 my-2">
+                    Your login ID details have been sent to your phone.
+                  </p>
+                  <button
+                    [routerLink]="['/auth/login']"
+                    class="btn btn-sm btn-primary fw-bold px-4"
+                  >
+                    Go to Login Page
+                  </button>
+                </div>
+              </ng-container>
+
+              <!-- Step 4 : Error Management -->
+              <ng-container *ngSwitchCase="3">
+                <div class="d-flex justify-content-center h-200px">
+                  <lottie-icon
+                    style="margin-top: -30px"
+                    class="z-index-n1 mt-n8"
+                    [play]="true"
+                    [animationPath]="
+                      './assets/media/lottie-animations/lottie-404-not-found-animation.json'
+                    "
+                    [animationSpeed]="2"
+                  ></lottie-icon>
+                </div>
+                <div class="text-center" style="margin-top: -50px">
+                  <h4 style="background: #ea2d10" class="fw-bold fs-4 ls-2 my-2 badge">Failure</h4>
+                  <p class="fw-normal fs-6 my-2">
+                    {{ errorMessage || 'Something went wrong. Please try again later.' }}
+                  </p>
+                  <button
+                    (click)="forgotLoginIdStep$.next(0)"
+                    class="btn btn-sm btn-danger fw-bold px-4"
+                  >
+                    Try Again
+                  </button>
+                </div>
+              </ng-container>
+            </ng-container>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  Registration Page Main Block-->
+</div>
+
+<!--end::Form-->

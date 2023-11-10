@@ -1,0 +1,51 @@
+.glowMe,
+.glowAll {
+  opacity: 0;
+  transition: opacity 300ms linear 0s;
+}
+
+.svg-base {
+
+  position: relative;
+  cursor: pointer;
+
+
+  transition: all 300ms linear 0s;
+
+
+  border-radius: 50%;
+  filter: drop-shadow(0 2mm 2mm #d6d6d6);
+  transition: filter 300ms linear 0s;
+
+  &:hover {
+    filter: drop-shadow(0 4mm 3mm #898989);
+    transform: translateY(-1px);
+    transition: all 600ms linear 0s;
+
+  }
+
+  &:active {
+    filter: drop-shadow(0 -4mm 2mm #cacaca);
+    transform: translateY(0px);
+    transition: all 600ms linear 0s;
+  }
+
+  ;
+
+}
+
+svg:hover .glowMe {
+  opacity: 0.5;
+}
+
+svg:hover .glowAll {
+  opacity: 1;
+}
+
+
+
+
+
+svg:focus {
+  outline: none;
+}

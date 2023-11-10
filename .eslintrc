@@ -1,0 +1,154 @@
+{
+    "root": true,
+    "ignorePatterns": [
+        "projects/**/*"
+    ],
+    "parserOptions": {
+        // "ecmaVersion": "latest"
+    },
+    "env": {
+        // "node": true,
+        // "browser": true,
+        // "es6": true,
+        // "commonjs": true,
+        // "jquery": true,
+        // "amd": true,
+        // "prototypejs": true
+    },
+    "overrides": [
+        {
+            "files": [
+                "*.ts"
+            ],
+            "parserOptions": {
+                "project": [
+                    "tsconfig.app.json"
+                ],
+                "createDefaultProgram": true
+            },
+            "extends": [
+                "plugin:@angular-eslint/recommended",
+                "plugin:@angular-eslint/template/process-inline-templates"
+            ],
+            "rules": {
+                // Possible Errors
+                "no-console": "off", // Allowing console statements during development
+                "no-debugger": "off", // Allowing debugger statements during development
+                // Stylistic Issues
+                "arrow-parens": [
+                    "off",
+                    "as-needed"
+                ], // Enforcing no parens for single param arrow functions
+                "comma-dangle": [
+                    "warn",
+                    "always-multiline"
+                ], // Enforcing trailing commas only for multiline
+                "quotes": [
+                    "warn",
+                    "single"
+                ], // Prefer single quotes
+                "indent": [
+                    "warn",
+                    2
+                ], // Use 2 spaces for indentation
+                "semi": [
+                    "off",
+                    "never"
+                ], // No semicolons
+                "max-len": [
+                    "warn",
+                    {
+                        "code": 200
+                    }
+                ], // Limiting lines to 120 characters
+                "no-trailing-spaces": "warn", // Disallow trailing spaces
+                // Best Practices
+                "eqeqeq": [
+                    "warn",
+                    "smart"
+                ], // Enforce strict equality (smart mode allows == null)
+                // Angular ESLint
+                "@angular-eslint/component-selector": "off", // Allow any selector for components
+                "@angular-eslint/directive-selector": "off", // Allow any selector for directives
+                "@angular-eslint/no-empty-lifecycle-method": "off", // Allow empty lifecycle methods
+                // Typescript ESLint
+                "@typescript-eslint/explicit-module-boundary-types": "off", // Don"t force explicit return types
+                "@typescript-eslint/no-explicit-any": "off", // Allow using any type
+                "@typescript-eslint/no-non-null-assertion": "off", // Allow using non-null assertions
+                // "@typescript-eslint/no-unused-vars": "warn", // Show warnings for unused variables
+                // Custom Rules
+                // You can add your own custom rules here if needed.
+                // Keep in mind that these rules are less strict and may not catch all potential issues.
+                // Adjust the rule severity and options based on your team's preferences and requirements.
+                // "@angular-eslint/directive-selector": [
+                //     "warn",
+                //     {
+                //         "type": "attribute",
+                //         "prefix": "app",
+                //         "style": "camelCase"
+                //     }
+                // ],
+                // "@angular-eslint/component-selector": [
+                //     "warn",
+                //     {
+                //         "type": "element",
+                //         "prefix": "app",
+                //         "style": "kebab-case"
+                //     }
+                // ],
+                "no-empty-function": "off",
+                "@typescript-eslint/no-empty-function": "off",
+                // "@angular-eslint/no-empty-lifecycle-method": "off",
+                "@angular-eslint/no-input-rename": "off",
+                "@angular-eslint/no-output-rename": "off"
+                // Enforce consistent naming for Inputs, Outputs, and ViewChild/ContentChild
+                // "@angular-eslint/input-name": [
+                //     "error",
+                //     "camelCase"
+                // ],
+                // "@angular-eslint/output-name": [
+                //     "error",
+                //     "camelCase"
+                // ]
+                // "@angular-eslint/no-inputs-metadata-property": "error",
+                // "@angular-eslint/no-outputs-metadata-property": "error",
+                // "@angular-eslint/no-host-metadata-property": "error",
+                // // Ensure that lifecycle hooks are implemented correctly
+                // "@angular-eslint/use-lifecycle-interface": "error",
+                // "@angular-eslint/contextual-lifecycle": "error",
+                // // Enforce using Angular decorators properly
+                // "@angular-eslint/use-component-view-encapsulation": "error",
+                // "@angular-eslint/use-component-selector": "error",
+                // "@angular-eslint/use-component-inputs-outputs": "error",
+                // "@angular-eslint/use-injectable-provided-in": "error",
+                // "@angular-eslint/use-pipe-transform-interface": "error",
+                // "@angular-eslint/use-pipe-decorator": "error",
+                // "@angular-eslint/use-lifecycle-interface": "error",
+                // "@angular-eslint/component-class-suffix": "error",
+                // "@angular-eslint/directive-class-suffix": "error",
+            }
+        },
+        {
+            "files": [
+                "*.html"
+            ],
+            "extends": [
+                "plugin:@angular-eslint/template/recommended"
+            ],
+            "rules": {}
+        },
+        {
+            "files": [
+                "*.ts"
+            ],
+            //            "plugins": [
+            //                "ngrx"
+            //            ],
+            "extends": [
+                // eslint for ngrx eslint
+                // "eslint:recommended",
+                "plugin:ngrx/recommended"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,82 @@
+<!-- - Email Address -->
+
+<div [formGroup]="emailIdVerifyForm" class="d-flex flex-grow-1 gap-2">
+  <input
+    #emailId
+    type="text"
+    formControlName="emailId"
+    class="form-control form-control-sm form-control-solid rounded"
+    inputmode="numeric"
+    (blur)="(fc.emailId.markAsTouched)"
+  />
+
+  <span
+    *ngIf="isEmailIdValid(fc.emailId?.value)"
+    class="input-group-text d-flex gap-2 cursor-pointer"
+    id="basic-addon1"
+  >
+    <span
+      (click)="openOtpVerificationPopup()"
+      *ngIf="fc.verificationStatus?.value === 'NOT_VERIFIED' && !isApplicationDisabled"
+      class="badge badge-sm badge-info"
+      [ngbTooltip]="'Verify Your Email Address'"
+    >
+      Verify
+    </span>
+    <span *ngIf="fc.verificationStatus?.value === 'VERIFIED'" class="badge badge-sm badge-success">
+      Verified
+    </span>
+    <span
+      (click)="editContact()"
+      *ngIf="fc.verificationStatus?.value === 'VERIFIED' && !isApplicationDisabled"
+      class="badge badge-sm badge-dark"
+    >
+      Edit
+    </span>
+  </span>
+</div>
+
+<div class="invalid-feedback d-block" *ngIf="fc.emailId?.dirty || fc.emailId?.touched">
+  <div *ngIf="!isEmailIdValid(fc.emailId?.value)">Email Address is invalid</div>
+
+  <div *ngIf="isEmailIdValid(fc.emailId?.value) && fc.verificationStatus?.value === 'NOT_VERIFIED'">
+    <span class="text-success">Valid Email Address</span>
+
+    <span class="text-danger ms-2">( Not Verified )</span>
+  </div>
+</div>
+
+<app-popup #otpVerificationPopup>
+  <div class="d-flex flex-row flex-column-fluid">
+    <div class="d-flex flex-column flex-row-fluid">
+      <div class="d-flex flex-column justify-content-center align-items-center">
+        <div [formGroup]="otpForm" class="d-flex flex-column">
+          <div class="fw-bold text-center fs-2 ls-2 my-2">Enter OTP</div>
+
+          <app-otp-input
+            class="form-group"
+            [numberOfInputs]="4"
+            [formControlName]="'codeDigit'"
+          ></app-otp-input>
+
+          <div class="d-flex justify-content-end">
+            <a
+              href="javascript:void(0)"
+              (click)="reGenerateOtp()"
+              class="fs-6 fw-bold text-hover-danger text-primary p-3"
+            >
+              Resend OTP
+            </a>
+          </div>
+          <div class="separator separator-2 separator-dashed fs-3 mb-2"></div>
+
+          <div class="d-flex flex-row justify-content-center">
+            <button type="button" class="btn btn-primary btn-lg" (click)="verifyContact()">
+              Verify
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-popup>

@@ -1,0 +1,105 @@
+<div class="dropzone dropzone-multi" id="kt_dropzone_4">
+  <div *ngIf="formControlName === 'KYCForms'" class="">
+    <div class="alert alert-info">
+      <p>
+        Please complete the KYC (Know Your Customer) form, which is available at
+        <a class="link-primary fw-bold" href="https://www.ceda.co.bw/kyc-forms" target="_blank">
+          CEDA Website
+        </a>
+        , and then upload the completed form here.
+      </p>
+    </div>
+  </div>
+  <div
+    class="d-flex flex-wrap justify-content-start align-items-start gap-3 mb-lg-0 mb-2 pb-2"
+    [ngStyle]="{
+      'border-bottom': allFiles.length > 0 ? '2px solid gray' : 'none'
+    }"
+  >
+    <button
+      [disabled]="_disabled"
+      type="button"
+      class="dropzone-select btn btn-light-primary btn-text-dark btn-text-hover-primary font-weight-bold btn-sm dz-clickable text-nowrap"
+      (click)="fileBrowse.click()"
+    >
+      Attach Document(s)
+    </button>
+
+    <button
+      [ngbPopover]="additionalData.longDescription"
+      class="btn btn-hover-scale text-hover-danger btn-sm btn-icon btn-lighht"
+    >
+      <i class="fs-3 fa fa-info"></i>
+    </button>
+  </div>
+
+  <!-- Uploaded Files -->
+  <div class="dropzone-items">
+    <div
+      *ngFor="let file of allFiles | idFilter : currentIndividualId; let i = index"
+      class="dropzone-item flex-wrap"
+    >
+      <div class="dropzone-file d-flex flex-column">
+        <div *ngIf="formControlName === 'addDocs'" class="text-start addDocsCount">
+          Addition Document Number
+        </div>
+        <div class="dropzone-filename d-flex gap-2 flex-wrap" title="{{ file.docName }}">
+          <span>{{ file.docName }}</span>
+        </div>
+      </div>
+
+      <div class="dropzone-progress me-3 w-100 mw-125px">
+        <div class="progress">
+          <div
+            class="progress-bar bg-primary"
+            role="progressbar"
+            [style.width]="fileUploadProgressMap.get(file?.docName!) + '%'"
+          ></div>
+        </div>
+      </div>
+
+      <div
+        class="dropzone-toolbar ms-auto d-flex flex-row justify-content-center gap-3 align-items-center"
+      >
+        <span *ngIf="fileUploadProgressMap.get(file.docName!) === 100 || _disabled" class="">
+          <i class="fa fa-check text-success fs-5"></i>
+        </span>
+
+        <span *ngIf="true" class="" (click)="viewUploadedFiles(i)">
+          <i class="fa fa-eye fs-5 text-hover-primary"></i>
+        </span>
+
+        <span *ngIf="!_disabled" class="" (click)="removeUploadedFiles(i)">
+          <i class="fa fa-multiply text-hover-danger fs-5"></i>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TODO:  Additional Document Functionality -->
+  <div *ngIf="formControlName === 'addDocs'" class="text-start form-text text-muted">
+    To add more additional document click
+    <em>attach files</em>
+  </div>
+</div>
+<div class="form-text text-gray-600">
+  <!-- Maximum {{ maxFiles }} document and each can be {{ formatSize(maxFileSize) }} upload . -->
+  <span *ngIf="maxFiles > 1">
+    You can upload multiple documents. Each file should be up to {{ formatSize(maxFileSize) }} in
+    size.
+  </span>
+  <span *ngIf="maxFiles === 1">
+    Please upload only one relevant document. The file size should be up to
+    {{ formatSize(maxFileSize) }}.
+  </span>
+</div>
+
+<input
+  #fileBrowse
+  type="file"
+  [accept]="allowedFileTypes"
+  multiple
+  (change)="fileChangeEvent($event)"
+  (focus)="fileFocusEvent($event)"
+  style="display: none"
+/>

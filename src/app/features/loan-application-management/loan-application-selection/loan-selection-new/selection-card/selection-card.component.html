@@ -1,0 +1,33 @@
+<div class="card mb-3 w-sm-225px w-lg-250px card-stretch h-100 d-flex flex-column">
+  <img style="height: 180px" class="card-img-top" src="{{ imageUrl }}" alt="Card image cap" />
+  <div
+    class="card-body px-4 pt-0 pb-2 positoin-relative"
+    style="height: 200px; overflow-y: scroll; scrollbar-width: thin"
+  >
+    <h5 class="card-title text-danger position-sticky top-0 py-2 bg-white">{{ title }}</h5>
+    <p class="card-text">
+      <ng-content></ng-content>
+    </p>
+    <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+  </div>
+  <div class="card-footer d-flex justify-content-between gap-2 border-top-0 px-4 py-0 pb-3">
+    <a
+      [ngClass]="{ disabled: isDisabled }"
+      appClickable
+      href="javascript:void(0)"
+      (click)="selected.emit()"
+      class="flex-1 btn btn-primary btn-sm fs-7 px-3 text-nowrap"
+    >
+      Apply Now
+    </a>
+    <!-- Know More -->
+    <a
+      appClickable
+      href="https://www.ceda.co.bw/"
+      target="_blank"
+      class="flex-1 btn btn-danger btn-sm fs-7 px-3 py-2 text-nowrap"
+    >
+      Know More
+    </a>
+  </div>
+</div>

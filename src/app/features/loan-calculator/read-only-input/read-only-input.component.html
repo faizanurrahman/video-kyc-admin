@@ -1,0 +1,307 @@
+<header class="header">
+  <div class="header__text-box">
+    <h1 class="heading-primary">
+      CAR FINANCING CALCULATOR
+    </h1>
+    <h2 class="heading-secondary">
+      Estimate your monthly payment for your next car using the calculator below
+    </h2>
+  </div>
+</header>
+<main>
+  <section class="section-chart">
+    <div class="chart-box">
+      <div class="chart"></div>
+      <div class="chart__description">
+        <div class="chart__legend">
+          <div class="legend__box">
+            <h3 class="chart__description-label label__colored label__colored-1">Interest</h3>
+            <p class="chart__description-value interest">1550</p>
+          </div>
+          <div class="info">
+            <span class="info__icon"></span>
+            <div class="info__tooltip">
+              <h3 class="info__header">Interest</h3>
+              <p class="info__body">Interest is the dollar amount the credit will cost you.</p>
+            </div>
+          </div>
+        </div>
+        <div class="chart__legend">
+          <div class="legend__box">
+            <h3 class="chart__description-label label__colored label__colored-2">Taxes</h3>
+            <p class="chart__description-value taxes">0</p>
+          </div>
+          <div class="info">
+            <span class="info__icon"></span>
+            <div class="info__tooltip">
+              <h3 class="info__header">Taxes</h3>
+              <p class="info__body">
+                The amount presented for taxes reflects the dollar amount of tax
+                based on the MSRP and Tax Rate shown.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="chart__legend">
+          <div class="legend__box">
+            <h3 class="chart__description-label">
+              Estimated Total Cost
+              <span class="label--sub">(including taxes and interest)</span>
+            </h3>
+            <p class="chart__description-value est_total_cost">31,550</p>
+          </div>
+          <div class="info">
+            <span class="info__icon"></span>
+            <div class="info__tooltip">
+              <h3 class="info__header">Estimated Total Cost</h3>
+              <p class="info__body">
+                The Estimated Total Cost is a summation of the
+                Amount Financed, Finance Charge and Taxes and any cash
+                down payment and/or net trade-in amount.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section-chart-controllers">
+    <div class="controllers-box">
+      <div class="controller-row row" id="price">
+        <div class="col-1-of-3">
+          <h3 class="chart__description-label label__colored label__colored-3">Vehicle Price</h3>
+        </div>
+        <div class="col-1-of-3">
+          <input type="range" class="calc__slider">
+        </div>
+        <div class="col-1-of-3">
+          <span class="calc__input-group">
+            <span class="calc__input-group-addon">$</span>
+            <input type="number" class="calc__input" placeholder="Vehicle Price">
+            <div class="info-box">
+              <div class="info">
+                <span class="info__icon"></span>
+                <div class="info__tooltip">
+                  <h3 class="info__header">Vehicle Price</h3>
+                  <p class="info__body">
+                    The Manufacturer Suggested Retail Price (MSRP) or “sticker price”
+                    is the recommended selling price for the vehicle. The Dealer may adjust
+                    the actual selling price, either higher or lower. The MSRP excludes
+                    transportation and handling charges, destination charges, taxes, title,
+                    registration, preparation and documentary fees, tags, labor and installation
+                    charges, insurance, optional equipment or packages and accessories.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </span>
+        </div>
+      </div>
+      <div class="controller-row row" id="cash_down_payment">
+        <div class="col-1-of-3">
+          <h3 class="chart__description-label label__colored label__colored-4">Cash Down Payment</h3>
+        </div>
+        <div class="col-1-of-3">
+          <input type="range" class="calc__slider">
+        </div>
+        <div class="col-1-of-3">
+          <span class="calc__input-group">
+            <span class="calc__input-group-addon">$</span>
+            <input type="number" class="calc__input" placeholder="Cash Down Payment">
+            <div class="info-box">
+              <div class="info">
+                <span class="info__icon"></span>
+                <div class="info__tooltip">
+                  <h3 class="info__header">Cash Down Payment</h3>
+                  <p class="info__body">
+                    The Down Payment is an up-front cash payment
+                    made when you purchase the vehicle that reduces
+                    the amount financed. This app uses a default cash down payment of
+                    20% of MSRP.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </span>
+        </div>
+      </div>
+      <div class="controller-row row" id="trade_in_value">
+        <div class="col-1-of-3">
+          <h3 class="chart__description-label label__colored label__colored-5">Trade-In Value</h3>
+        </div>
+        <div class="col-1-of-3">
+          <input type="range" class="calc__slider">
+        </div>
+        <div class="col-1-of-3">
+          <span class="calc__input-group">
+            <span class="calc__input-group-addon">$</span>
+            <input type="number" class="calc__input" placeholder="Trade-In Value">
+            <div class="info-box">
+              <div class="info">
+                <span class="info__icon"></span>
+                <div class="info__tooltip">
+                  <h3 class="info__header">Trade-In Value</h3>
+                  <p class="info__body">
+                    The Trade-In Value is the value of your trade-in vehicle.
+                    The dealer will determine the amount you actually receive for your
+                    trade-in vehicle.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </span>
+        </div>
+      </div>
+      <div class="controller-row row" id="tax_rate">
+        <div class="col-1-of-3">
+          <h3 class="chart__description-label label__colored label__colored-2">Tax Rate</h3>
+        </div>
+        <div class="col-1-of-3">
+          <input type="range" class="calc__slider">
+        </div>
+        <div class="col-1-of-3">
+          <span class="calc__input-group">
+            <input type="number" class="calc__input" placeholder="Tax Rate">
+            <span class="calc__input-group-addon">%</span>
+            <div class="info-box">
+              <div class="info">
+                <span class="info__icon"></span>
+                <div class="info__tooltip">
+                  <h3 class="info__header">Tax Rate</h3>
+                  <p class="info__body">
+                    The sales tax rate provided is for sample purposes only.
+                    This app uses a default tax rate of 0%.
+                    If you know the sales tax rate for your location,
+                    please enter it in the field provided.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </span>
+        </div>
+      </div>
+      <div class="controller-row row" id="term">
+        <div class="col-1-of-3">
+          <h3 class="chart__description-label label__colored">Term</h3>
+        </div>
+        <div class="col-1-of-3">
+          <input type="range" class="calc__slider">
+        </div>
+        <div class="col-1-of-3">
+          <span class="calc__input-group">
+            <input type="number" class="calc__input" placeholder="Term">
+            <span class="calc__input-group-addon">mo</span>
+            <div class="info-box">
+              <div class="info">
+                <span class="info__icon"></span>
+                <div class="info__tooltip">
+                  <h3 class="info__header">Term</h3>
+                  <p class="info__body">
+                    Term represents the repayment period in months for
+                    the amount financed. This app uses a default term of 60 months.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </span>
+        </div>
+      </div>
+      <div class="controller-row row" id="apr">
+        <div class="col-1-of-3">
+          <h3 class="chart__description-label label__colored">APR</h3>
+        </div>
+        <div class="col-1-of-3">
+          <input type="range" class="calc__slider">
+        </div>
+        <div class="col-1-of-3">
+          <span class="calc__input-group">
+            <input type="number" class="calc__input" placeholder="APR">
+            <span class="calc__input-group-addon">%</span>
+            <div class="info-box">
+              <div class="info">
+                <span class="info__icon"></span>
+                <div class="info__tooltip">
+                  <h3 class="info__header">APR</h3>
+                  <p class="info__body">
+                    APR is the Annual Percentage Rate. Actual APR is based on
+                    the creditworthiness of the customer. Not all customers
+                    will qualify for the lowest rate.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="section-chart-controllers__footer">
+      <button class="btn btn-link btn__toggle-modal">
+        *Financing Disclosures
+      </button>
+      <button class="btn btn-secondary btn__reset">
+        Reset
+      </button>
+    </div>
+  </section>
+</main>
+<div class="dialog">
+  <div class="modal-backdrop"></div>
+  <div class="modal">
+    <div class="modal__header">
+      <span class="modal__header__text">Financing Disclosures</span>
+      <span class="modal__header__close btn__toggle-modal">&Cross;</span>
+    </div>
+    <div class="modal__content">
+      <p>
+        Numerical values are not an advertisement or offer for specific terms of credit.
+        Payment amounts presented are estimates and are for illustrative purposes only.
+        Actual vehicle price may vary by Dealer. The MSRP excludes transportation and handling charges,
+        destination charges, taxes, title, registration, preparation and documentary fees, tags,
+        labor and installation charges, insurance, optional products, equipment or packages and accessories.
+      </p>
+      <h2 class="modal__content-header">
+        Lease Transactions:
+      </h2>
+      <p>
+        The amount due at lease signing is the amount to be paid by the lessee prior to or at signing of
+        the lease or by delivery of the vehicle. It includes the first month’s payment, any acquisition fee,
+        down payment, less any net trade-in amount. The Estimated Monthly Lease Payment shown is based on
+        a 36 month term, down payment of $3,000, annual mileage allowance of 12,000 miles, a 0.001 money
+        factor, a tax rate of 0.0%, and a $0 net trade-in. A security deposit may be required depending on
+        creditworthiness.
+      </p>
+      <p>
+        If you change the Down Payment or Term or Annual Mileage allowance, or if you
+        trade in your current vehicle, the Estimated Monthly Payment will change.
+      </p>
+      <p>
+        The payment amount does not include title, license or registration fees.
+        Payment amounts may be different due to various factors such as fees, specials,
+        rebates, term, down payment, trade-in, applicable tax rate, and creditworthiness of
+        the customer. Please contact your selected dealer or lender for program details and actual terms.
+      </p>
+      <h2 class="modal__content-header">
+        Finance Transactions:
+      </h2>
+      <p>
+        The Estimated Monthly Payment is based on a 60 month term, a down payment of $6,000,
+        Annual Percentage Rate (APR) of 2.49%, a tax rate of 0.0%, and a $0 net trade-in.
+        If you change the Down Payment or Term, or if you trade in your current vehicle,
+        the Estimated Monthly Payment will change.
+      </p>
+      <p>
+        The payment amount does not include title, license or registration fees.
+        Payment amounts may be different due to various factors such as fees, specials,
+        rebates, term, down payment, APR, trade-in, and applicable tax rate. The APR presented
+        may not be the lowest rate available. Actual APR is based on the creditworthiness of the customer.
+        Not all customers will qualify for the lowest rate. Please contact your selected dealer or
+        lender for actual rates, program details and actual terms.
+      </p>
+    </div>
+    <div class="modal__footer">
+      <button class="btn btn-secondary btn_close btn__toggle-modal">
+        Close
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="wizard-horizontal-steps">
+  <ng-container *ngFor="let step of steps as _; let i = index">
+    <div
+      class="cursor-pointer wizard-step"
+      data-wizard-type="step"
+      [attr.data-wizard-state]="
+        currentStep === i + 1 ? 'current' : currentStep > i + 1 ? 'done' : 'pending'
+      "
+      [attr.data-wizard-status]="step.stepStatus"
+      [attr.data-review-step]="currentStep === _.length ? 'true' : 'false'"
+      (click)="onStepClick(i)"
+    >
+      <div class="wizard-label">
+        <div class="wizard-icon mb-md-2 mb-0">
+          <span *ngIf="step.stepStatus === 'invalid' && step.stepState !== 'done'">
+            {{ i + 1 }}
+          </span>
+          <lottie-icon
+            class=""
+            style="color: #00ff00"
+            *ngIf="step.stepStatus === 'valid' || step.stepState === 'done'"
+            [play]="true"
+            [animationPath]="'./assets/media/lottie-animations/lottie-success-icon-animation.json'"
+          ></lottie-icon>
+        </div>
+        <h3 class="wizard-title fw-bold">{{ step.stepTitle }}</h3>
+      </div>
+      <!-- <i class="wizard-arrow fas fa-forward"></i> -->
+      <i class="wizard-arrow ki-duotone ki-double-right-arrow fs-1">
+        <span class="path1"></span>
+        <span class="path2"></span>
+      </i>
+    </div>
+  </ng-container>
+</div>
+
+<!-- <ng-content select="[step-meta-data]"></ng-content> -->

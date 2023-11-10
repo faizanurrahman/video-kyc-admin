@@ -1,0 +1,27 @@
+<div class="captcha-wrapper">
+  <div class="captcha-header">Security Check</div>
+
+  <div id="captcha-image-container" class="captch-image-wrapper d-flex flex-center">
+    <img id="captcha-image" [src]="captcha.captchaImage" class="captcha-image" />
+  </div>
+
+  <div class="captcha-input-wrapper d-flex flex-row gap-5">
+    <div class="d-flex flex-column gap-1 flex-row-fluid">
+      <!-- <label class="form-label">Type above words</label> -->
+      <input [(ngModel)]="value" type="text" class="form-control" placeholder="Enter Captcha" />
+    </div>
+
+    <div class="captcha-referesh--message">
+      <span class="fs-6">
+        Can't read the captcha?
+        <a
+          (click)="refereshCaptcha()"
+          class="text-info text-hover-white btn btn-outline-primary btn-sm px-4 px-3 fw-bold fs-7"
+          href="javascript:void(0)"
+        >
+          Refresh
+        </a>
+      </span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+// Valid
+.form-control.is-invalid.validate,
+
+// Angular Reactive Forms Integration
+.form-control.validate.validate-invalid.ng-invalid.ng-touched,
+.form-control.validate.validate-invalid.ng-invalid.ng-dirty,
+
+.form-select.validate.validate-invalid.ng-invalid.ng-touched,
+.form-select.validate.validate-invalid.ng-invalid.ng-dirty,
+{
+padding-right: calc(1.5em + 1.55rem);
+background-image: url("/assets/media/icons/invalid.svg");
+background-repeat: no-repeat;
+background-position: right calc(0.375em + 0.3875rem) center;
+background-size: calc(0.75em + 0.775rem) calc(0.75em + 0.775rem);
+background-blend-mode: lighten;
+// border: 2px solid #9f2214;
+background-color: rgba(207, 120, 108, 0.8);
+color: #1d0707;
+border: none;
+}
+
+
+
+.form-control.validate.validate-invalid.ng-invalid:focus {}
+
+
+.form-control.validate.is-valid,
+.form-control.validate.ng-valid.ng-touched,
+.form-control.validate.ng-valid.ng-dirty,
+
+.form-select.validate.ng-valid.ng-touched,
+.form-select.validate.ng-valid.ng-dirty {
+  // border-color: #188f73e8;
+  // border-width: 2px;
+  border: none;
+  padding-right: calc(1.5em + 1.55rem);
+  background-image: url("/assets/media/icons/valid.svg");
+  background-repeat: no-repeat;
+  background-color: #188f732e;
+  background-position: right calc(0.375em + 0.3875rem) center;
+  background-size: calc(0.75em + 0.775rem) calc(0.75em + 0.775rem);
+
+}
+
+.form-control.validate.ng-valid.ng-touched.digit,
+.form-control.validate.ng-valid.ng-dirty.digit,
+.form-control.validate.validate-invalid.ng-invalid.ng-touched.digit,
+.form-control.validate.validate-invalid.ng-invalid.ng-dirty.digit {
+  border: none;
+  background-image: none;
+  padding: 0;
+  font-size: 1.8rem;
+}
+
+
+.form-control.validate.ng-valid:focus {
+  // border-color: #f26522;
+  // box-shadow: 0 0 0 0.2rem #f26422d7;
+
+}
+
+.form-control.validate.ng-valid.ng-dirty[type="date"],
+.form-control.validate.validate-invalid.ng-invalid.ng-dirty[type="date"] {
+  // background-position: right 0.1rem center !important;
+  padding-right: 2.5rem !important;
+
+}

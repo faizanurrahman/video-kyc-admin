@@ -1,0 +1,21 @@
+<div class="collapsible" [ngClass]="{ active: isExpanded }">
+  <div class="collapsible-header" (click)="toggle()">
+    <div class="collapsible-header-title">
+      <span class="collapsible-header-title-text">{{ title }}</span>
+    </div>
+    <div class="collapsible-header-icon">
+      <div class="collapsible-header-icon-state">
+        <i *ngIf="isExpanded" class="fa fa-chevron-up" aria-hidden="true"></i>
+        <i
+          *ngIf="!isExpanded"
+          class="fa fa-chevron-down"
+          aria-hidden="true"
+        ></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="collapsible-content" [ngStyle]="{ 'max-height': maxHeight }">
+    <ng-content></ng-content>
+  </div>
+</div>

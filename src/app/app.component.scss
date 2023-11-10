@@ -1,0 +1,27 @@
+:host {
+  height: 100%;
+  margin: 0;
+
+  overflow: hidden; // Fix: need to remove in future if any issues comes regarding hidden content
+  // * added overflow hidden to remove extra scrollbar
+
+}
+
+
+.svg {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+
+// ng-deep
+
+.fullscreen-splash-screen {
+  position: absolute;
+  z-index: 10000;
+
+  top: 0;
+  width: 100%;
+  height: 100%;
+}

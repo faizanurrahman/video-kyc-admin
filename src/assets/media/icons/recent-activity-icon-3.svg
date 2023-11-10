@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="34" height="33" fill="none" viewBox="0 0 34 33">
+  <g class="Group 37377">
+    <rect width="34" height="33" fill="#9F2421" class="Rectangle 4365" rx="8"/>
+    <path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.308 9h5.521c.057 0 .114.004.171.011a4.3 4.3 0 0 1 4 4.275v6.429A4.3 4.3 0 0 1 19.692 24h-5.384A4.3 4.3 0 0 1 10 19.714v-6.428A4.3 4.3 0 0 1 14.308 9Z" class="file-edit" clip-rule="evenodd"/>
+    <path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m14.714 12.129-1.491 1.2a.722.722 0 0 0 .006 1.051l.963 1.159 4.026 4.841a.49.49 0 0 0 .257.157l2 .457a.5.5 0 0 0 .525-.442l-.093-1.946a.447.447 0 0 0-.114-.269l-3.933-4.73-1.06-1.273a.822.822 0 0 0-1.086-.205Z" class="file-edit-2" clip-rule="evenodd"/>
+    <path fill="#fff" d="M24 14.076a.75.75 0 0 0 0-1.5v1.5Zm-4-.75h-.75c0 .414.336.75.75.75v-.75Zm.75-4.315a.75.75 0 0 0-1.5 0h1.5Zm-3.151 4.729a.75.75 0 1 0-1.478-.258l1.478.258Zm-3.296 1.054a.75.75 0 1 0-.222 1.484l.222-1.484ZM24 12.576h-4v1.5h4v-1.5Zm-3.25.75V9.011h-1.5v4.315h1.5Zm-4.629.156a1.605 1.605 0 0 1-1.818 1.312l-.222 1.484A3.105 3.105 0 0 0 17.6 13.74l-1.478-.258Z" class="file-edit-3"/>
+  </g>
+</svg>

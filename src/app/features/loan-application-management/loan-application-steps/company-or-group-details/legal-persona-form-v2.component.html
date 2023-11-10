@@ -1,0 +1,462 @@
+<form class="container" [formGroup]="legalPersonaDetailsForm">
+  <input
+    type="hidden"
+    formControlName="id"
+    class="form-control form-control-sm form-control-solid"
+  />
+  <input
+    type="hidden"
+    formControlName="applicationId"
+    class="form-control form-control-sm form-control-solid"
+  />
+  <input
+    type="hidden"
+    formControlName="sessionId"
+    class="form-control form-control-sm form-control-solid"
+  />
+
+  <div class="row">
+    <!-- Heading Label -->
+    <div class="col-12">
+      <h5 class="text-gray-800 pb-4 border-bottom">
+        <ng-container *ngIf="loanType.toLowerCase() === 'company'">Company Details</ng-container>
+        <ng-container *ngIf="loanType.toLowerCase() === 'group'">Group Details</ng-container>
+
+        <ng-container *ngIf="loanType.toLowerCase() === 'mabogodinku'">
+          Mabogo Dinku Details
+        </ng-container>
+      </h5>
+    </div>
+    <!-- Name of organization -->
+    <div class="col-md-6" *ngIf="loanType.toLowerCase() === 'company'">
+      <div class="form-group mb-5">
+        <label class="form-label required" for="nameOfOrganization">Name of Organization</label>
+        <input
+          appFirstLetterCapitalize
+          type="text"
+          formControlName="nameOfOrganization"
+          class="form-control form-control-sm form-control-solid"
+        />
+        <div
+          *ngIf="fc.nameOfOrganization.touched && fc.nameOfOrganization.invalid"
+          class="invalid-feedback"
+        >
+          <div *ngIf="fc.nameOfOrganization.errors?.required">Name of Organization is required</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- - For Non Company loan type hide name of organization -->
+    <div class="col-md-6" *ngIf="loanType.toLowerCase() !== 'company'">
+      <div class="form-group mb-5">
+        <label class="form-label required" for="nameOfOrganization">Name of Organization</label>
+        <input
+          type="text"
+          formControlName="nameOfOrganization"
+          class="form-control form-control-sm form-control-solid"
+          appFirstLetterCapitalize
+        />
+        <div
+          *ngIf="
+            (fc.nameOfOrganization.dirty || fc.nameOfOrganization.touched) &&
+            fc.nameOfOrganization.invalid
+          "
+          class="invalid-feedback"
+        >
+          <div *ngIf="fc.nameOfOrganization.errors?.required">Name of Organization is required</div>
+          <div *ngIf="fc.nameOfOrganization.errors?.firstLetterCapitalized">
+            Name of Organization must start with a capital letter
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Company UIN -->
+    <div class="col-md-6" *ngIf="loanType.toLowerCase() === 'company'">
+      <div class="form-group mb-5">
+        <label class="form-label required" for="registrationNumber">Company UIN</label>
+        <input
+          [showMaskTyped]="true"
+          mask="AA 99999999999"
+          type="text"
+          appCapitalizeFirstTwo
+          formControlName="registrationNumber"
+          class="form-control form-control-sm form-control-solid"
+        />
+        <div
+          *ngIf="
+            (fc.registrationNumber.dirty || fc.registrationNumber.touched) &&
+            fc.registrationNumber.invalid
+          "
+          class="invalid-feedback d-block"
+        >
+          <div *ngIf="fc.registrationNumber.errors?.required">Company UIN is required</div>
+          <div *ngIf="fc.registrationNumber.errors?.pattern">
+            UIN should start with 'BW' followed by 11 digit
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Primary Contact Mobile Number -->
+    <div class="col-md-6">
+      <div class="form-group mb-5">
+        <label class="form-label required" for="primaryContactMobNumber">
+          Primary Mobile Number
+        </label>
+
+        <div
+          class="position-relative input-group input-group-sm input-group-solid d-flex flex-wrap gap-2"
+        >
+          <!-- Input Dropdown -->
+          <div class="input-group-prepend flex-column flex-sm-row">
+            <app-tel-country-code
+              formControlName="primaryContactMobNumberCode"
+            ></app-tel-country-code>
+          </div>
+
+          <!-- Input -->
+          <app-mobile-number-verification-input
+            (mobileVerified)="
+              $event
+                ? fc.primaryContactMobNumberCode.disable()
+                : fc.primaryContactMobNumberCode.enable()
+            "
+            appDigitOnly
+            [countryCode]="fc.primaryContactMobNumberCode.value"
+            [isApplicationDisabled]="isApplicationDisabled"
+            formControlName="primaryContactMobNumber"
+          ></app-mobile-number-verification-input>
+        </div>
+
+        <!-- Error Message -->
+        <div
+          *ngIf="fc.primaryContactMobNumberCode.dirty || fc.primaryContactMobNumberCode.touched"
+          class="invalid-feedback d-block"
+        >
+          <div *ngIf="fc.primaryContactMobNumberCode.value !== '267'">
+            You must be a botswana citizen
+          </div>
+        </div>
+
+        <div
+          *ngIf="
+            (fc.primaryContactMobNumber.dirty || fc.primaryContactMobNumber.touched) &&
+            fc.primaryContactMobNumber.invalid
+          "
+          class="invalid-feedback d-block"
+        >
+          <div *ngIf="fc.primaryContactMobNumber.errors?.required">
+            Primary Contact Mobile Number is required
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Primary Other Contact Number -->
+    <div class="col-md-6">
+      <div class="form-group mb-5">
+        <label class="form-label" for="primaryContactOtherContactNumber">
+          Primary Telephone Number
+        </label>
+
+        <div
+          class="position-relative input-group input-group-sm input-group-solid d-flex flex-wrap gap-2"
+        >
+          <!-- Input Dropdown -->
+          <div class="input-group-prepend flex-column flex-sm-row">
+            <app-tel-country-code
+              [formControlName]="'primaryContactOtherContactNumberCode'"
+            ></app-tel-country-code>
+          </div>
+
+          <input
+            type="text"
+            formControlName="primaryContactOtherContactNumber"
+            class="form-control form-control-sm form-control-solid"
+            appDigitOnly
+          />
+        </div>
+
+        <div *ngIf="fc.primaryContactOtherContactNumberCode.dirty" class="invalid-feedback d-block">
+          <div *ngIf="fc.primaryContactOtherContactNumberCode.value !== '267'">
+            You must be a botswana citizen
+          </div>
+        </div>
+
+        <div *ngIf="fc.primaryContactOtherContactNumber?.dirty" class="invalid-feedback d-block">
+          <div
+            *ngIf="
+              !isTelephoneNumberValid(
+                fc.primaryContactOtherContactNumber.value,
+                fc.primaryContactOtherContactNumberCode.value
+              )
+            "
+          >
+            <span class="">Invalid Telephone Number</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Primary Contact Email -->
+    <div class="col-md-6">
+      <div class="form-group mb-5">
+        <label class="form-label required" for="primaryContactEmailAddress">
+          Primary Email Address
+        </label>
+        <!-- <input
+          type="email"
+          formControlName="primaryContactEmailAddress"
+          class="form-control form-control-sm form-control-solid"
+        /> -->
+        <app-email-id-verification-input
+          [isApplicationDisabled]="isApplicationDisabled"
+          formControlName="primaryContactEmailAddress"
+        ></app-email-id-verification-input>
+        <div
+          *ngIf="
+            (fc.primaryContactEmailAddress.dirty || fc.primaryContactEmailAddress.touched) &&
+            fc.primaryContactEmailAddress.invalid
+          "
+          class="invalid-feedback d-block"
+        >
+          <div *ngIf="fc.primaryContactEmailAddress.errors?.required">
+            Primary Contact Email Address is required
+          </div>
+          <div
+            *ngIf="
+              fc.primaryContactEmailAddress.errors?.invalidEmailAddress &&
+              !fc.primaryContactEmailAddress.errors?.required
+            "
+          >
+            Invalid email format
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <!-- Address Details header -->
+    <div class="col-12">
+      <h5 class="text-gray-800 py-4 border-bottom">Address Details</h5>
+    </div>
+
+    <!-- Preferred Correspondence Address -->
+    <div class="col-md-12">
+      <div class="form-group mb-5">
+        <label class="form-label required" for="preferredCorrespondanceAddr">
+          Correspondence Address
+        </label>
+        <!-- <input
+          type="text"
+          formControlName="preferredCorrespondanceAddr"
+          class="form-control form-control-sm form-control-solid"
+        /> -->
+
+        <textarea
+          style="min-height: 100px; height: auto; resize: none"
+          formControlName="preferredCorrespondanceAddr"
+          class="form-control form-control-sm form-control-solid"
+        ></textarea>
+
+        <div
+          *ngIf="
+            (fc.preferredCorrespondanceAddr.dirty || fc.preferredCorrespondanceAddr.touched) &&
+            fc.preferredCorrespondanceAddr.invalid
+          "
+          class="invalid-feedback d-block"
+        >
+          <div *ngIf="fc.preferredCorrespondanceAddr.errors?.required">
+            Correspondence Address is required
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Postal Address P.O. Box -->
+    <div class="col-md-6">
+      <div class="form-group mb-5">
+        <label class="form-label required" for="postalAddrPoBox">Postal Address PO Box</label>
+        <input
+          type="text"
+          formControlName="postalAddrPoBox"
+          class="form-control form-control-sm form-control-solid"
+        />
+        <div
+          *ngIf="
+            (fc.postalAddrPoBox.dirty || fc.postalAddrPoBox.touched) && fc.postalAddrPoBox.invalid
+          "
+          class="invalid-feedback d-block"
+        >
+          <div *ngIf="fc.postalAddrPoBox.errors?.required">Postal Address P.O. Box is required</div>
+        </div>
+      </div>
+    </div>
+    <!-- Postal Address Town -->
+    <div class="col-md-6">
+      <div class="form-group mb-5">
+        <label class="form-label required" for="postalAddrTown">Postal Address Town</label>
+        <input
+          type="text"
+          formControlName="postalAddrTown"
+          class="form-control form-control-sm form-control-solid"
+        />
+        <div
+          *ngIf="
+            (fc.postalAddrTown.dirty || fc.postalAddrTown.touched) && fc.postalAddrTown.invalid
+          "
+          class="invalid-feedback d-block"
+        >
+          <div *ngIf="fc.postalAddrTown.errors?.required">Postal Address Town is required</div>
+        </div>
+      </div>
+    </div>
+    <!-- Bussiness Address Plot -->
+    <div class="col-md-6">
+      <div class="form-group mb-5">
+        <label class="form-label required" for="bussAddrPlot">
+          Business Address Street / House Number
+        </label>
+        <input
+          type="text"
+          formControlName="bussAddrPlot"
+          class="form-control form-control-sm form-control-solid"
+        />
+        <div
+          *ngIf="(fc.bussAddrPlot.dirty || fc.bussAddrPlot.touched) && fc.bussAddrPlot.invalid"
+          class="invalid-feedback d-block"
+        >
+          <div *ngIf="fc.bussAddrPlot.errors?.required">
+            Business Address Steet / House Number Required
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bussiness Addr Loc -->
+    <div class="col-md-6">
+      <div class="form-group mb-5">
+        <label class="form-label required" for="bussAddrDistrict">
+          Business Address Postal Code / City
+        </label>
+        <input
+          type="text"
+          formControlName="bussAddrDistrict"
+          class="form-control form-control-sm form-control-solid"
+        />
+        <div
+          *ngIf="
+            (fc.bussAddrDistrict.dirty || fc.bussAddrDistrict.touched) &&
+            fc.bussAddrDistrict.invalid
+          "
+          class="invalid-feedback d-block"
+        >
+          <div *ngIf="fc.bussAddrDistrict.errors?.required">
+            Business Address Postal Code / City is required
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Business Addr Country -->
+    <div class="col-md-6">
+      <div class="form-group mb-5">
+        <label class="form-label required" for="bussAddrCountry">Business Address Country</label>
+        <app-country-dropdown formControlName="bussAddrCountry"></app-country-dropdown>
+
+        <div
+          *ngIf="
+            fc.bussAddrCountry.touched &&
+            fc.bussAddrCountry.invalid &&
+            fc.bussAddrCountry.value !== ''
+          "
+          class="invalid-feedback d-block"
+        >
+          <div *ngIf="fc.bussAddrCountry.errors?.required">
+            Business Address Country is required
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Business Address Trading As -->
+    <div class="col-md-6">
+      <div class="form-group mb-5">
+        <label class="form-label" for="bussAddrTradingAs">Business Address Trading As</label>
+        <input
+          type="text"
+          formControlName="bussAddrTradingAs"
+          class="form-control form-control-sm form-control-solid"
+        />
+        <div
+          *ngIf="
+            (fc.bussAddrTradingAs.dirty || fc.bussAddrTradingAs.touched) &&
+            fc.bussAddrTradingAs.invalid
+          "
+          class="invalid-feedback d-block"
+        >
+          <div *ngIf="fc.bussAddrTradingAs.errors?.required">
+            Business Address Trading As is required
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form Action -->
+  <div class="row mt-5">
+    <div class="col-lg-12">
+      <div class="d-flex flex-column flex-row-fluid">
+        <div class="d-flex flex-row justify-content-between">
+          <div class="previous-button">
+            <button
+              appClickable
+              *ngIf="false"
+              (click)="previousStep()"
+              type="button"
+              class="btn btn-light font-weight-bolder text-uppercase"
+            >
+              Previous
+            </button>
+          </div>
+
+          <div class="d-flex flex-row gap-5">
+            <div *ngIf="!isApplicationDisabled" class="save-button">
+              <button
+                appClickable
+                [disabled]="isApplicationDisabled"
+                (click)="saveApplication()"
+                class="btn btn-info fw-bold text-uppercase"
+              >
+                <span *ngIf="(loading$ | async) === false">Save</span>
+                <span *ngIf="(loading$ | async) === true" class="fa fa-spinner svg-spin"></span>
+              </button>
+            </div>
+
+            <!-- [ngStyle]="{
+                cursor: legalPersonaDetailsForm.invalid ? 'not-allowed' : 'pointer'
+              }"
+
+              [ngClass]="{
+                  'btn-primary': legalPersonaDetailsForm.valid,
+                  'btn-light-secondary': legalPersonaDetailsForm.invalid
+                }"
+
+               -->
+
+            <div class="next-button">
+              <button
+                appClickable
+                (click)="nextStep()"
+                type="button"
+                class="btn btn-primary font-weight-bolder text-uppercase"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,20 @@
+<div
+  class="virtual-keyboard-wrapper"
+  [ngStyle]="{
+    'opacity': showVirtualKeyboard ? '1' : '0',
+    'pointer-events': showVirtualKeyboard ? 'all' : 'none',
+    'max-height': showVirtualKeyboard ? '1000px' : '10px',
+    'transform': showVirtualKeyboard ? 'translateY(0)' : 'translateY(100%)',
+    'transition': keyboardTransition
+  }"
+>
+  <div
+    class="keyboard-container"
+    [ngStyle]="{
+      'opacity': showVirtualKeyboard ? '1' : '0',
+      'pointer-events': showVirtualKeyboard ? 'all' : 'none',
+      'height': showVirtualKeyboard ? '100%' : '0',
+      'transition': keyboardTransition
+    }"
+  ></div>
+</div>

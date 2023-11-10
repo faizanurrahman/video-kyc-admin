@@ -1,0 +1,252 @@
+// Optimized layout code:
+
+/* Layout */
+/* Define color and size variables througout the page */
+:host {
+  --accent-color: #f26522;
+  --primary-color: #FFB944;
+  --secondary-color: #FFF;
+  --text-color: #3b3838;
+  --header-text-color: #200d02;
+  --header-font-size: 3rem;
+  --description-font-size: 1.4rem;
+  --small-font-size: 1rem;
+  --large-padding: 2rem;
+  --medium-padding: 2rem;
+  --small-padding: 1rem;
+  --border-radius: 0.5rem;
+}
+
+/* This block of styles contains the main layout for the loan selection page. */
+.loan-selection-page {
+  /* Sets the display mode to flex, and the direction to column. */
+  display: flex;
+  flex-flow: column nowrap;
+
+  /* Defines the header section of the page, which is styled with a gradient background and centered content. */
+  .page-header-section {
+    /* Sets the display mode to flex, and the direction to column. */
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+
+    // padding: var(--large-padding) var(--medium-padding);
+    padding-bottom: var(--large-padding);
+    /* Adds padding to the section. */
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    /* Rounds the top corners of the section. */
+    // background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+    /* Applies a linear gradient background. */
+
+    /* Targets the first child element of the header section, which contains the main title of the page. */
+    &>div:first-child {
+      font-size: var(--header-font-size);
+      margin-bottom: 20px;
+      color: var(--header-text-color);
+      font-weight: bolder;
+
+      /* Applies a media query to adjust the font size on smaller screens. */
+      @media (max-width: 676px) {
+        font-size: 2rem;
+      }
+    }
+
+    /* Targets the last child element of the header section, which contains a short description of the page. */
+    &>div:last-child {
+      font-size: 1.4rem;
+      font-weight: normal;
+      color: var(--text-color);
+      max-width: 600px;
+      min-width: 300px;
+
+      /* Applies a media query to adjust the font size on smaller screens. */
+      @media (max-width: 676px) {
+        font-size: var(--small-font-size);
+      }
+    }
+  }
+
+  /* Defines the content section of the page, which contains the loan selection form and an illustration. */
+  .page-content-section {
+    /* Sets the display mode to flex, and the direction to row. */
+    display: flex;
+    flex-flow: row nowrap;
+    padding: var(--medium-padding);
+    /* Adds padding to the section. */
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+    /* Rounds the bottom corners of the section. */
+    background: var(--secondary-color);
+    /* Sets the background color to white. */
+
+    /* Targets the illustration element, and sets its width to 40%. */
+    .page-content-section-illustration {
+      width: 40%;
+    }
+
+    /* Defines the loan selection form, which is styled with centered content and a header section. */
+    .loan-selection-form {
+      flex: 1;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: start;
+      align-items: center;
+      padding: var(--medium-padding) 0;
+      /* Adds padding to the form. */
+      text-align: center;
+
+      /* Defines the header section of the form, which contains the title and description. */
+      .loan-selection-form-header {
+
+        /* Targets the h3 element containing the title text, and styles it with a larger font and bold text. */
+        &>h3 {
+          font-size: 1.5rem;
+          font-weight: bolder;
+          color: var(--header-text-color);
+          margin-bottom: 1rem;
+        }
+
+        /* Targets the p element containing the description text, and styles it with a smaller font and regular text. */
+        &>p {
+          font-size: 1rem;
+          font-weight: normal;
+          color: var(--text-color);
+          margin-bottom: 1rem;
+        }
+      }
+    }
+  }
+}
+
+
+/* Form */
+
+/* This block of styles targets an individual option (e.g. in a dropdown). It has styles for both the default and hover states, as well as an active state that can be applied when the option is selected. */
+.option {
+  /* Sets the display mode to flex and the direction of the flex container to row. */
+  display: flex;
+  flex-direction: row;
+
+  /* Adds padding and a border with rounded corners to the option element. */
+  padding: 1rem;
+  border: 1px solid #eae8e8;
+  border-radius: var(--border-radius);
+
+  /* Defines styles for when the user hovers over the option element. */
+  &:hover {
+
+    border-color: #FFB944;
+    /* Changes the border color to orange. */
+    background-color: #fff;
+    /* Changes the background color to white. */
+    color: #FFB944;
+    /* Changes the text color to orange. */
+
+    /* Targets the control element of the option (e.g. checkbox, radio button), and changes its border, background, and text colors. */
+    .option-control .form-check-input {
+      border-width: 6.5px;
+      border-color: #FFB944;
+      background-color: #ffeaea;
+    }
+
+    /* Targets the label element of the option, and changes the color of its title. */
+    .option-label .option-title {
+      color: #FFB944;
+    }
+  }
+
+  /* Defines styles for when the option is in its active state (i.e. selected). */
+  &.active {
+    border-color: var(--accent-color);
+    /* Changes the border color to dark gray. */
+    background-color: #fde5e5;
+
+    /* Changes the background color to light gray. */
+    transition: all 0.4s ease-in-out;
+    /* Adds a transition effect to the border when it changes. */
+
+    .option-label .option-title {
+      color: var(--accent-color);
+    }
+  }
+}
+
+
+/* This block of styles targets the control element of an option (e.g. in a dropdown), which is typically a checkbox or radio button that allows the user to select the option. */
+.option-control {
+  /* The following properties use flexbox and grid to control the layout and sizing of the control element. */
+  flex: 0 1 auto;
+  /* Prevents the control element from growing, sets its basis (initial size) to auto, and allows it to shrink if necessary. */
+  display: grid;
+  /* Makes the control element a grid container. */
+  place-items: center;
+  /* Vertically and horizontally centers child elements within the grid container. */
+}
+
+
+/* This block of styles targets the label element of an option (e.g. in a dropdown), which serves as a container for the option's title and any other content. */
+.option-label {
+  /* The following properties use flexbox to control the layout and sizing of the label element. */
+  flex: 1 0 auto;
+  /* Allows the label element to grow or shrink as needed, but sets its basis (initial size) to auto. */
+  display: flex;
+  /* Makes the label element a flex container. */
+  flex-direction: column;
+  /* Lays out child elements vertically within the flex container. */
+  justify-content: flex-start;
+  /* Aligns child elements to the top of the flex container. */
+  align-items: center;
+  /* Centers child elements horizontally within the flex container. */
+
+  /* The following styles target the title element within the label element. */
+  .option-title {
+    font-size: 1.2rem;
+    /* Sets the font size of the option title. */
+    font-weight: normal;
+    /* Sets the font weight of the option title to normal. */
+    color: var(--header-text-color);
+    /* Sets the text color of the option title to a dark red. */
+    text-transform: uppercase;
+    /* Converts the option title to all uppercase letters. */
+  }
+}
+
+
+.funding-categories {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.category-list {
+  list-style: none;
+  padding: 0;
+}
+
+.category-item {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+
+  font-size: 18px;
+  color: var(--kt-danger);
+  font-weight: bold;
+  text-align: center;
+
+  cursor: default;
+}
+
+.category-item:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.02);
+}
+
+.category-description {
+  margin-top: 10px;
+}

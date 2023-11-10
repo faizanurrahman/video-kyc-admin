@@ -1,0 +1,442 @@
+<ng-container *ngFor="let individual of loanIndividualDetails; let i = index">
+  <div
+    *ngIf="loanApplicationType !== 'individual'"
+    class="text-center my-4 p-2 bg-light-primary rounded"
+  >
+    <span class="fs-4 fw-bold">Individual {{ i + 1 }}</span>
+  </div>
+
+  <div class="row gx-10">
+    <!-- *title -->
+    <div class="col-md-2">
+      <review-read-only-input [label]="'Title'" [value]="individual.title"></review-read-only-input>
+    </div>
+    <!-- *first name -->
+    <div class="col-md-5">
+      <review-read-only-input
+        [label]="'First Name'"
+        [value]="individual.fullName"
+      ></review-read-only-input>
+    </div>
+
+    <!-- * Last Name -->
+    <div class="col-md-5">
+      <review-read-only-input
+        [label]="'Last Name'"
+        [value]="individual.surname"
+      ></review-read-only-input>
+    </div>
+
+    <!-- * Gender -->
+    <div class="col-md-5">
+      <review-read-only-input
+        [label]="'Gender'"
+        [value]="individual.gender"
+      ></review-read-only-input>
+    </div>
+
+    <!-- * Marital Stauts -->
+    <div class="col-md-5">
+      <review-read-only-input
+        [label]="'Marital Status'"
+        [value]="individual.maritalStatus"
+      ></review-read-only-input>
+    </div>
+
+    <!-- * Omang Number -->
+
+    <review-read-only-input
+      [label]="'Omang Number'"
+      [value]="individual.omangNumber"
+    ></review-read-only-input>
+
+    <!-- * Omang Exipry Date -->
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'Omang Expiry'"
+        [value]="individual.dateOfOmangExpiry"
+      ></review-read-only-input>
+    </div>
+    <!-- * Foreign Passport Number -->
+    <!-- Fix: show hide according to loan application type -->
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'Foreign Passport Number'"
+        [value]="individual.foreignPassportNumber"
+      ></review-read-only-input>
+    </div>
+
+    <!-- * Nationality -->
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'Nationality'"
+        [value]="individual.nationality"
+      ></review-read-only-input>
+    </div>
+
+    <!-- * Disability -->
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'Disability'"
+        [value]="individual.disability"
+      ></review-read-only-input>
+    </div>
+
+    <!-- * Disability Type -->
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'Disability Type'"
+        [value]="individual.disabilityType"
+      ></review-read-only-input>
+    </div>
+
+    <!-- * Mobile Number -->
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'Mobile Number'"
+        [value]="individual.mobileNumber"
+      ></review-read-only-input>
+    </div>
+    <!-- * Secondary Mobile Number -->
+
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'Secondary Mobile Number'"
+        [value]="individual.secondaryMobileNumber!"
+      ></review-read-only-input>
+    </div>
+
+    <!-- * Telephone Number -->
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'Telephone Number'"
+        [value]="individual.otherContactNumber"
+      ></review-read-only-input>
+    </div>
+    <!-- * Email ID -->
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'Email Address'"
+        [value]="individual.emailAddress"
+      ></review-read-only-input>
+    </div>
+
+    <!-- * Standard Address -->
+    <div class="col-md-12">
+      <div class="text-center p-2">
+        <span class="fs-4 fw-bold">Standard Address</span>
+      </div>
+    </div>
+
+    <!-- * Street Addresss -->
+    <div class="col-md-12">
+      <div class="text-start p-0">
+        <span class="fs-5 fw-bold">Street Address</span>
+      </div>
+    </div>
+
+    <!-- * Street Name -->
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'Street Name'"
+        [value]="individual.addrPlot"
+      ></review-read-only-input>
+    </div>
+
+    <!-- * House Number -->
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'House Number'"
+        [value]="individual.addrSuburb"
+      ></review-read-only-input>
+    </div>
+
+    <!-- * City -->
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'City'"
+        [value]="individual.addrTown"
+      ></review-read-only-input>
+    </div>
+
+    <!-- * Country -->
+
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'Country'"
+        [value]="individual.addrCountry"
+      ></review-read-only-input>
+    </div>
+
+    <!-- * Postal Address -->
+    <div class="col-md-12">
+      <div class="text-start p-0">
+        <span class="fs-5 fw-bold">Postal Address</span>
+      </div>
+    </div>
+    <!-- * PO Box -->
+
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'Postal Address'"
+        [value]="individual.postalAddrPoBox"
+      ></review-read-only-input>
+    </div>
+
+    <!-- * Town City -->
+
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'Town / City'"
+        [value]="individual.postalAddrTown"
+      ></review-read-only-input>
+    </div>
+
+    <!-- * Home Village Address -->
+    <div class="col-md-12">
+      <div class="text-center p-2">
+        <span class="fs-4 fw-bold">Home Village Address</span>
+      </div>
+    </div>
+
+    <!-- * Street Address -->
+
+    <div class="col-md-12">
+      <div class="text-start p-0">
+        <span class="fs-5 fw-bold">Street Address</span>
+      </div>
+    </div>
+
+    <!-- * Street Name / House Number -->
+
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'Street Name / Kgotla'"
+        [value]="individual.hvAddrPlot"
+      ></review-read-only-input>
+    </div>
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'House Number'"
+        [value]="individual.hvAddrSuburb"
+      ></review-read-only-input>
+    </div>
+
+    <!-- * City  -->
+
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'Village'"
+        [value]="individual.hvAddrTown"
+      ></review-read-only-input>
+    </div>
+
+    <!-- * Country -->
+
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'Country'"
+        [value]="individual.hvAddrCountry"
+      ></review-read-only-input>
+    </div>
+
+    <!-- * Next to Kin Address -->
+    <div class="col-md-12">
+      <div class="text-center p-2">
+        <span class="fs-4 fw-bold">Next of Kin Address: First</span>
+      </div>
+    </div>
+
+    <!-- * Street Address -->
+    <div class="col-md-12">
+      <div class="text-start p-0">
+        <span class="fs-5 fw-bold">Street Address</span>
+      </div>
+    </div>
+
+    <!-- * Kin Name -->
+    <div class="col-md-6">
+      <review-read-only-input [label]="'Name'" [value]="individual.nkName"></review-read-only-input>
+    </div>
+
+    <!-- * Kin Name -->
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'Surname'"
+        [value]="individual.nkSurname"
+      ></review-read-only-input>
+    </div>
+
+    <!-- * Kin Contact -->
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'Contact'"
+        [value]="individual.nkContact"
+      ></review-read-only-input>
+    </div>
+
+    <!-- * Kin RelationShip -->
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'Relationship'"
+        [value]="individual.nkRelationship"
+      ></review-read-only-input>
+    </div>
+
+    <!-- * Street Address -->
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'Street Name'"
+        [value]="individual.nkAddrPlot"
+      ></review-read-only-input>
+    </div>
+
+    <!-- * House Number -->
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'House Number'"
+        [value]="individual.nkAddrSuburb"
+      ></review-read-only-input>
+    </div>
+
+    <!-- * City -->
+
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'City'"
+        [value]="individual.nkAddrTown"
+      ></review-read-only-input>
+    </div>
+
+    <!-- * Country -->
+
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'Country'"
+        [value]="individual.nkAddrCountry"
+      ></review-read-only-input>
+    </div>
+
+    <!-- * Next to Kin Address: Second -->
+    <div class="col-md-12">
+      <div class="text-center p-2">
+        <span class="fs-4 fw-bold">Next of Kin Address: Second</span>
+      </div>
+    </div>
+
+    <!-- * Street Address -->
+    <div class="col-md-12">
+      <div class="text-start p-0">
+        <span class="fs-5 fw-bold">Street Address</span>
+      </div>
+    </div>
+
+    <!-- * Kin Name -->
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'Name'"
+        [value]="individual.nkName2!"
+      ></review-read-only-input>
+    </div>
+
+    <!-- * Kin Name -->
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'Surname'"
+        [value]="individual.nkSurname2"
+      ></review-read-only-input>
+    </div>
+
+    <!-- * Kin Contact -->
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'Contact'"
+        [value]="individual.nkContact2!"
+      ></review-read-only-input>
+    </div>
+
+    <!-- * Kin RelationShip -->
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'Relationship'"
+        [value]="individual.nkRelationship2!"
+      ></review-read-only-input>
+    </div>
+
+    <!-- * Street Address -->
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'Street Name'"
+        [value]="individual.nkAddrPlot2!"
+      ></review-read-only-input>
+    </div>
+
+    <!-- * House Number -->
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'House Number'"
+        [value]="individual.nkAddrSuburb2!"
+      ></review-read-only-input>
+    </div>
+
+    <!-- * City -->
+
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'City'"
+        [value]="individual.nkAddrTown2!"
+      ></review-read-only-input>
+    </div>
+
+    <!-- * Country -->
+
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'Country'"
+        [value]="individual.nkAddrCountry2!"
+      ></review-read-only-input>
+    </div>
+
+    <!-- * Bussiness Address -->
+
+    <div class="col-md-12">
+      <div class="text-center p-2">
+        <span class="fs-4 fw-bold">Business Address</span>
+      </div>
+    </div>
+
+    <!-- * Street Address -->
+
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'Street Name'"
+        [value]="individual.bussAddrPlot"
+      ></review-read-only-input>
+    </div>
+
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'House Number'"
+        [value]="individual.bussAddrSuburb"
+      ></review-read-only-input>
+    </div>
+
+    <!-- * City -->
+
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'City'"
+        [value]="individual.bussAddrTown"
+      ></review-read-only-input>
+    </div>
+
+    <!-- * Country -->
+
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'Country'"
+        [value]="individual.bussAddrCountry"
+      ></review-read-only-input>
+    </div>
+  </div>
+</ng-container>

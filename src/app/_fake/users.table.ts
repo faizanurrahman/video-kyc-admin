@@ -1,0 +1,350 @@
+export class UsersTable {
+  public static users: any = [
+    //
+    {
+      id: 1,
+      username: 'admin',
+      password: 'demo',
+      email: 'admin@demo.com',
+      authToken: 'auth-token-8f3ae836da744329a6f93bf20594b5cc',
+      refreshToken: 'auth-token-f8c137a2c98743f48b643e71161d90aa',
+      roles: [1], // Administrator
+      pic: './assets/media/avatars/300-1.jpg',
+      fullname: 'Sean S',
+      firstname: 'Sean',
+      lastname: 'Stark',
+      occupation: 'CEO',
+      companyName: 'Keenthemes',
+      phone: '456669067890',
+      language: 'en',
+      timeZone: 'International Date Line West',
+      website: 'https://keenthemes.com',
+      emailSettings: {
+        emailNotification: true,
+        sendCopyToPersonalEmail: false,
+        activityRelatesEmail: {
+          youHaveNewNotifications: false,
+          youAreSentADirectMessage: false,
+          someoneAddsYouAsAsAConnection: true,
+          uponNewOrder: false,
+          newMembershipApproval: false,
+          memberRegistration: true,
+        },
+        updatesFromKeenthemes: {
+          newsAboutKeenthemesProductsAndFeatureUpdates: false,
+          tipsOnGettingMoreOutOfKeen: false,
+          thingsYouMissedSindeYouLastLoggedIntoKeen: true,
+          newsAboutMetronicOnPartnerProductsAndOtherServices: true,
+          tipsOnMetronicBusinessProducts: true,
+        },
+      },
+      communication: {
+        email: true,
+        sms: true,
+        phone: false,
+      },
+      address: {
+        addressLine: 'L-12-20 Vertex, Cybersquare',
+        city: 'San Francisco',
+        state: 'California',
+        postCode: '45000',
+      },
+      socialNetworks: {
+        linkedIn: 'https://linkedin.com/admin',
+        facebook: 'https://facebook.com/admin',
+        twitter: 'https://twitter.com/admin',
+        instagram: 'https://instagram.com/admin',
+      },
+    },
+
+    //
+    {
+      id: 2,
+      username: 'user',
+      password: 'demo',
+      email: 'user@demo.com',
+      authToken: 'auth-token-6829bba69dd3421d8762-991e9e806dbf',
+      refreshToken: 'auth-token-f8e4c61a318e4d618b6c199ef96b9e55',
+      roles: [2], // Manager
+      pic: './assets/media/avatars/300-6.jpg',
+      fullname: 'Megan F',
+      firstname: 'Megan',
+      lastname: 'Fox',
+      occupation: 'Deputy Head of Keenthemes in New York office',
+      companyName: 'Keenthemes',
+      phone: '456669067891',
+      language: 'en',
+      timeZone: 'International Date Line West',
+      communication: {
+        email: true,
+        sms: true,
+        phone: false,
+      },
+      emailSettings: {
+        emailNotification: true,
+        sendCopyToPersonalEmail: false,
+        activityRelatesEmail: {
+          youHaveNewNotifications: false,
+          youAreSentADirectMessage: false,
+          someoneAddsYouAsAsAConnection: true,
+          uponNewOrder: false,
+          newMembershipApproval: false,
+          memberRegistration: true,
+        },
+        updatesFromKeenthemes: {
+          newsAboutKeenthemesProductsAndFeatureUpdates: false,
+          tipsOnGettingMoreOutOfKeen: false,
+          thingsYouMissedSindeYouLastLoggedIntoKeen: true,
+          newsAboutMetronicOnPartnerProductsAndOtherServices: true,
+          tipsOnMetronicBusinessProducts: true,
+        },
+      },
+      address: {
+        addressLine: '3487  Ingram Road',
+        city: 'Greensboro',
+        state: 'North Carolina',
+        postCode: '27409',
+      },
+      socialNetworks: {
+        linkedIn: 'https://linkedin.com/user',
+        facebook: 'https://facebook.com/user',
+        twitter: 'https://twitter.com/user',
+        instagram: 'https://instagram.com/user',
+      },
+    },
+
+    //
+    {
+      id: 3,
+      username: 'admin',
+      password: 'password',
+      email: 'admin@manamtech.com',
+      authToken: 'auth-token-d2dff7b82f784de584b60964abbe45b9',
+      refreshToken: 'auth-token-c999ccfe74aa40d0aa1a64c5e620c1a5',
+      roles: [3], // Guest
+      pic: './assets/media/avatars/300-20.jpg',
+      fullname: 'Admin',
+      firstname: 'Admin',
+      lastname: 'Admin',
+      occupation: 'CFO',
+      companyName: 'Keenthemes',
+      phone: '456669067892',
+      language: 'en',
+      timeZone: 'International Date Line West',
+      communication: {
+        email: true,
+        sms: true,
+        phone: false,
+      },
+      emailSettings: {
+        emailNotification: true,
+        sendCopyToPersonalEmail: false,
+        activityRelatesEmail: {
+          youHaveNewNotifications: false,
+          youAreSentADirectMessage: false,
+          someoneAddsYouAsAsAConnection: true,
+          uponNewOrder: false,
+          newMembershipApproval: false,
+          memberRegistration: true,
+        },
+        updatesFromKeenthemes: {
+          newsAboutKeenthemesProductsAndFeatureUpdates: false,
+          tipsOnGettingMoreOutOfKeen: false,
+          thingsYouMissedSindeYouLastLoggedIntoKeen: true,
+          newsAboutMetronicOnPartnerProductsAndOtherServices: true,
+          tipsOnMetronicBusinessProducts: true,
+        },
+      },
+      address: {
+        addressLine: '1467  Griffin Street',
+        city: 'Phoenix',
+        state: 'Arizona',
+        postCode: '85012',
+      },
+      socialNetworks: {
+        linkedIn: 'https://linkedin.com/guest',
+        facebook: 'https://facebook.com/guest',
+        twitter: 'https://twitter.com/guest',
+        instagram: 'https://instagram.com/guest',
+      },
+    },
+
+    // Faizanur
+    {
+      id: 4,
+      username: 'faizanur rahman',
+      password: 'password',
+      email: 'faizanur@manamtech.com',
+      authToken: 'auth-token-d2dff7b82f784de584b60964abbe4522',
+      refreshToken: 'auth-token-c999ccfe74aa40d0aa1a64c5e620c122',
+      roles: [3], // Guest
+      pic: './assets/media/avatars/300-20.jpg',
+      fullname: 'Faizanur Rahman',
+      firstname: 'Faizanur',
+      lastname: 'Rahman',
+      occupation: 'CFO',
+      companyName: 'Manam Infotech',
+      phone: '456669067892',
+      language: 'en',
+      timeZone: 'International Date Line West',
+      communication: {
+        email: true,
+        sms: true,
+        phone: false,
+      },
+      emailSettings: {
+        emailNotification: true,
+        sendCopyToPersonalEmail: false,
+        activityRelatesEmail: {
+          youHaveNewNotifications: false,
+          youAreSentADirectMessage: false,
+          someoneAddsYouAsAsAConnection: true,
+          uponNewOrder: false,
+          newMembershipApproval: false,
+          memberRegistration: true,
+        },
+        updatesFromKeenthemes: {
+          newsAboutKeenthemesProductsAndFeatureUpdates: false,
+          tipsOnGettingMoreOutOfKeen: false,
+          thingsYouMissedSindeYouLastLoggedIntoKeen: true,
+          newsAboutMetronicOnPartnerProductsAndOtherServices: true,
+          tipsOnMetronicBusinessProducts: true,
+        },
+      },
+      address: {
+        addressLine: '1467  Griffin Street',
+        city: 'Phoenix',
+        state: 'Arizona',
+        postCode: '85012',
+      },
+      socialNetworks: {
+        linkedIn: 'https://linkedin.com/guest',
+        facebook: 'https://facebook.com/guest',
+        twitter: 'https://twitter.com/guest',
+        instagram: 'https://instagram.com/guest',
+      },
+    },
+
+    //
+    // Zahild
+    {
+      id: 4,
+      username: 'Zahid M',
+      password: 'password',
+      email: 'zahid@manamtech.com',
+      authToken: 'auth-token-d2dff7b82f784de584b60964abbe4521',
+      refreshToken: 'auth-token-c999ccfe74aa40d0aa1a64c5e620c121',
+      roles: [3], // Guest
+      pic: './assets/media/avatars/300-20.jpg',
+      fullname: 'Zahid M',
+      firstname: 'Zahid',
+      lastname: 'M',
+      occupation: 'CFO',
+      companyName: 'Manam Infotech',
+      phone: '456669067892',
+      language: 'en',
+      timeZone: 'International Date Line West',
+      communication: {
+        email: true,
+        sms: true,
+        phone: false,
+      },
+      emailSettings: {
+        emailNotification: true,
+        sendCopyToPersonalEmail: false,
+        activityRelatesEmail: {
+          youHaveNewNotifications: false,
+          youAreSentADirectMessage: false,
+          someoneAddsYouAsAsAConnection: true,
+          uponNewOrder: false,
+          newMembershipApproval: false,
+          memberRegistration: true,
+        },
+        updatesFromKeenthemes: {
+          newsAboutKeenthemesProductsAndFeatureUpdates: false,
+          tipsOnGettingMoreOutOfKeen: false,
+          thingsYouMissedSindeYouLastLoggedIntoKeen: true,
+          newsAboutMetronicOnPartnerProductsAndOtherServices: true,
+          tipsOnMetronicBusinessProducts: true,
+        },
+      },
+      address: {
+        addressLine: '1467  Griffin Street',
+        city: 'Phoenix',
+        state: 'Arizona',
+        postCode: '85012',
+      },
+      socialNetworks: {
+        linkedIn: 'https://linkedin.com/guest',
+        facebook: 'https://facebook.com/guest',
+        twitter: 'https://twitter.com/guest',
+        instagram: 'https://instagram.com/guest',
+      },
+    },
+
+    //
+    // Zahild
+    {
+      id: 4,
+      username: 'Sushil D',
+      password: 'password',
+      email: 'sushil@manamtech.com',
+      authToken: 'auth-token-d2dff7b82f784de584b60964abbe4521',
+      refreshToken: 'auth-token-c999ccfe74aa40d0aa1a64c5e620c121',
+      roles: [3], // Guest
+      pic: './assets/media/avatars/300-20.jpg',
+      fullname: 'Sushil D',
+      firstname: 'Sushil',
+      lastname: 'D',
+      occupation: 'CFO',
+      companyName: 'Manam Infotech',
+      phone: '456669067892',
+      language: 'en',
+      timeZone: 'International Date Line West',
+      communication: {
+        email: true,
+        sms: true,
+        phone: false,
+      },
+      emailSettings: {
+        emailNotification: true,
+        sendCopyToPersonalEmail: false,
+        activityRelatesEmail: {
+          youHaveNewNotifications: false,
+          youAreSentADirectMessage: false,
+          someoneAddsYouAsAsAConnection: true,
+          uponNewOrder: false,
+          newMembershipApproval: false,
+          memberRegistration: true,
+        },
+        updatesFromKeenthemes: {
+          newsAboutKeenthemesProductsAndFeatureUpdates: false,
+          tipsOnGettingMoreOutOfKeen: false,
+          thingsYouMissedSindeYouLastLoggedIntoKeen: true,
+          newsAboutMetronicOnPartnerProductsAndOtherServices: true,
+          tipsOnMetronicBusinessProducts: true,
+        },
+      },
+      address: {
+        addressLine: '1467  Griffin Street',
+        city: 'Phoenix',
+        state: 'Arizona',
+        postCode: '85012',
+      },
+      socialNetworks: {
+        linkedIn: 'https://linkedin.com/guest',
+        facebook: 'https://facebook.com/guest',
+        twitter: 'https://twitter.com/guest',
+        instagram: 'https://instagram.com/guest',
+      },
+    },
+  ];
+
+  public static tokens: any = [
+    {
+      id: 1,
+      authToken: 'auth-token-' + Math.random(),
+      refreshToken: 'auth-token-' + Math.random(),
+    },
+  ];
+}

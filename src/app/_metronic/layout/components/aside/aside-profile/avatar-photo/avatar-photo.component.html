@@ -1,0 +1,6 @@
+<div class="circle position-relative" [ngStyle]="{ 'background-color': circleColor }">
+  <img *ngIf="!showInitials" alt="Logo" src="{{ photoUrl }}" />
+  <div *ngIf="showInitials" class="initials">{{ initials }}</div>
+
+  <span class="badge badge-success badge-circle w-10px h-10px position-absolute top-0 end-0"></span>
+</div>

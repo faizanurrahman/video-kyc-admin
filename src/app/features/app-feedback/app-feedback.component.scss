@@ -1,0 +1,17 @@
+:host {
+}
+
+app-add-new-feedback {
+  display: none;
+}
+
+.feedback-container {
+  border: 1px solid #ccc;
+}
+
+::ng-deep {
+  .badge-light-primary {
+    color: #782e0b;
+    background-color: var(--kt-primary-light);
+  }
+}

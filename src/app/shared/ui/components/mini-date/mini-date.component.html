@@ -1,0 +1,12 @@
+<div
+  class="d-flex flex-column flex-center p-2 rounded rounded-2 bg-transparent border border-2 border-gray-200 border-hover-gray-500">
+  <div class="fs-7 text-gray-800 text-nowrap text-hover-gray-900">
+    {{ day | atleastTwoDigit }} / {{ month | atleastTwoDigit }}
+  </div>
+  <!-- <div class="fs-7 text-gray-600">
+                {{ item.loanMonth || "N.A" }}
+              </div> -->
+  <div class="fs-7 text-gray-800 text-hover-gray-800">
+    {{ year || "N.A" }}
+  </div>
+</div>

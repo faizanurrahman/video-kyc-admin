@@ -1,0 +1,22 @@
+<!-- Reusable Form Control -->
+
+<div class="form-group">
+  <label class="">{{ label }}</label>
+  <ng-container *ngIf="type === 'text'">
+    <input
+      type="{{ type }}"
+      class="form-control form-control-sm"
+      [formControl]="control"
+    />
+  </ng-container>
+  <ng-container *ngIf="type === 'select'">
+    <select class="form-select form-select-sm" [formControl]="control">
+      <option *ngFor="let option of options" [value]="option">
+        {{ option }}
+      </option>
+    </select>
+  </ng-container>
+  <div *ngIf="control.invalid && control.touched" class="text-danger">
+    {{ validationMessage }}
+  </div>
+</div>

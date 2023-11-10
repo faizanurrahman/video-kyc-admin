@@ -1,0 +1,134 @@
+<div class="card card-stretch h-100">
+  <div class="card-header">
+    <div class="card-title">
+      <h3>Feedback</h3>
+    </div>
+
+    <div class="card-toolbar">
+      <button
+        class="btn btn-sm border border-primary btn-active-color-primary"
+        (click)="openFeedbackModal()"
+      >
+        Add Feedback
+      </button>
+    </div>
+  </div>
+
+  <div class="card-body position-relative">
+    <div class="table-responsive table-loading h-100 w-100">
+      <table
+        class="table table-hover table-header-bg-gray-300 table-rounded table-header-rounded-3 align-middle gs-4 gs-lg-6 gy-3 position-relative"
+      >
+        <thead>
+          <tr>
+            <th class="">Created On</th>
+            <th class="min-w-200px mw-250px">Feedback</th>
+            <th class="">Ref Id</th>
+            <th class="">Topic</th>
+            <th class="">Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <div
+            *ngIf="(loader.loading$ | async) === true"
+            class="d-flex flex-center flex-column h-100 w-100 position-absolute table-loading-message shadow-none"
+          ></div>
+
+          <div
+            *ngIf="
+              (loader.loading$ | async) === false &&
+              ((allFeedbacks$ | async)?.FEEDBACK_LIST || []).length === 0
+            "
+            class="d-flex flex-center flex-column h-100 w-100 position-absolute table-loading-message shadow-none"
+          >
+            <span>No Records Found</span>
+          </div>
+
+          <tr *ngFor="let item of (allFeedbacks$ | async)?.FEEDBACK_LIST; let i = index">
+            <td>{{ item.createdOn | date : 'mediumDate' }}</td>
+            <td
+              (click)="openFeedbackMessage(item.mobeeFeedBackConversations)"
+              class="mw-250px cursor-pointer"
+              style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis"
+            >
+              {{ item.mobeeFeedBackConversations[0].msg }}
+            </td>
+            <!-- todo: need to fix below line -->
+            <td>{{ item.feedbackReference || 'N.A' }}</td>
+            <!-- todo: need to fix above line -->
+
+            <td>{{ departments[item.mobeeBankBranches.id] }}</td>
+            <td>
+              <ng-container
+                *ngIf="item.status === 'CONV_ADDED' || item.status === 'Conversion Added'"
+              >
+                <span
+                  class="badge badge-light-primary"
+                  ngbTooltip=" A new feedback has been added to the conversation"
+                >
+                  {{ 'Feedback Added' }}
+                </span>
+              </ng-container>
+
+              <ng-container *ngIf="item.status === 'VIEWED' || item.status === 'Viewed'">
+                <span
+                  class="badge badge-light-info"
+                  ngbTooltip="The feedback has been viewed by the recipient"
+                >
+                  {{ 'Feedback Seen' }}
+                </span>
+              </ng-container>
+
+              <ng-container *ngIf="item.status === 'REPLIED' || item.status === 'Replied'">
+                <span
+                  class="badge badge-light-success"
+                  ngbTooltip="The recipient has replied to the feedback"
+                >
+                  {{ 'Replied' }}
+                </span>
+              </ng-container>
+
+              <!-- <span class="badge badge-light-primary">{{ item.status }}</span> -->
+            </td>
+            <td>
+              <button
+                class="btn btn-sm btn-icon btn-active-color-primary"
+                (click)="openFeedbackMessage(item.mobeeFeedBackConversations)"
+              >
+                <i class="bi bi-eye"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<app-add-new-feedback></app-add-new-feedback>
+<app-popup #previewFeedback>
+  <div class="mb-10 d-flex flex-column">
+    <div
+      class="align-self-center w-50 text-center rounded px-10 py-2 mb-2 fw-bold text-gray-800 fs-2"
+    >
+      Feedback
+    </div>
+
+    <div class="py-4 rounded-4 px-4 bg-success bg-opacity-10 feedback-container">
+      {{ currentFeedback || 'No Feedback Available' }}
+    </div>
+  </div>
+
+  <div class="mb-10 d-flex flex-column">
+    <div
+      class="align-self-center w-50 text-center rounded px-10 py-2 mb-2 fw-bold text-gray-800 fs-2"
+    >
+      Response
+    </div>
+    <div class="py-4 rounded-4 px-4 bg-primary bg-opacity-10 text-gray-900 feedback-container">
+      {{ currentResponse || 'No Response Available' }}
+    </div>
+  </div>
+</app-popup>

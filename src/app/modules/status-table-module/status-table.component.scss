@@ -1,0 +1,59 @@
+// Table
+// add more classes as per need
+// For Table
+::ng-deep {
+
+  .table {
+
+    // Header rounded
+    &.table-header-rounded {
+      $border-radius: 0.25rem;
+
+      tr th:first-child {
+
+        border-radius: $border-radius 0 0 $border-radius;
+        border-spacing: 0;
+        border-collapse: separate;
+      }
+
+      tr th:last-child {
+        border-radius: 0 $border-radius $border-radius 0;
+        border-spacing: 0;
+        border-collapse: separate;
+      }
+    }
+
+    &.table-header-rounded-3 {
+      $value: 0.3rem;
+
+      tr th:first-child {
+        border-radius: $value 0 0 $value;
+        border-spacing: 0;
+        border-collapse: separate;
+      }
+
+      tr th:last-child {
+        border-radius: 0 $value $value 0;
+        border-spacing: 0;
+        border-collapse: separate;
+      }
+    }
+
+
+    // Header BG Color
+    // add more classes as per need
+    &.table-header-bg-gray-300 {
+      $value: #4882ce;
+
+      thead tr th {
+        background-color: $value;
+        color: inherit;
+      }
+    }
+
+  }
+}
+
+
+// For Sweet Alert
+::ng-deep {}

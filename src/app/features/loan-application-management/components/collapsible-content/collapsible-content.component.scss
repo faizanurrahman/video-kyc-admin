@@ -1,0 +1,95 @@
+:host {
+  --header-clr: var(--kt-gray-400);
+  --header-hover-active-bg: #270606;
+  --header-hover-bg: #fff7f7;
+  --header-hover-active-clr: var(--kt-info);
+  // --header-active-bg: #fff0f0;
+  --header-active-bg: #fff;
+}
+
+.collabpsible {
+  --border-clr: #dfd5d5;
+  --border-width: 1px;
+}
+
+.collapsible {
+  border-radius: 10px;
+}
+
+.collapsible-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 1rem;
+
+  border: 1px solid var(--header-clr);
+  border-radius: 15px;
+  // color: var(--header-clr);
+  transition: background-color 0.4s ease-in;
+
+  &:hover {
+    cursor: pointer;
+    background-color: var(--header-hover-bg);
+    color: var(--header-hover-active-clr);
+    // border-color: var(--header-hover-active-clr);
+
+    .collapsible-header-title-text,
+    .collapsible-header-icon {
+      color: var(--header-hover-active-clr) !important;
+    }
+  }
+}
+
+.collapsible .collapsible-header .collapsible-header-title .collapsible-header-title-text,
+.collapsible-header-icon-state {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.collapsible .collapsible-header-title-text {
+  color: var(--kt-gray-700);
+
+  &:hover {
+    color: var(--header-hover-active-clr);
+  }
+}
+
+.collapsible.active .collapsible-header-title-text {
+  color: var(--header-hover-active-clr);
+}
+
+.collapsible.active .collapsible-header {
+  border-radius: 15px 15px 0 0;
+  // border-bottom: none;
+  margin-bottom: 0px;
+  // transition: all 1s ease-in;
+
+  background-color: var(--header-active-bg);
+  color: var(--header-hover-active-clr);
+  border-color: var(--header-hover-active-clr);
+}
+
+.collapsible.active .collapsible-header-icon {
+  color: var(--header-hover-active-clr);
+
+  & i {
+    color: var(--header-hover-active-clr);
+  }
+}
+
+.collapsible-content {
+  overflow: hidden;
+}
+
+.collapsible.active .collapsible-content {
+  border: 1px solid var(--header-hover-active-clr);
+  border-radius: 0 0 15px 15px;
+  border-top: none;
+
+  margin-bottom: 1rem;
+  padding: 1rem 1rem 0rem 1rem;
+
+  // transition: height 1s ease-in-out;
+  // transition: all 1s ease-in;
+}

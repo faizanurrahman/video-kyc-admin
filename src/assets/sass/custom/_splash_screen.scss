@@ -1,0 +1,51 @@
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 45vh;
+  z-index: 100;
+}
+
+.text {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-size: 50px;
+  font-weight: thin;
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  user-select: none;
+
+  .wrapper {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    background: transparent;
+
+    .letter {
+      transition: ease-out 1s;
+      transform: translateY(40%);
+    }
+
+    .shadow-latter {
+      transform: scale(1, -1);
+      color: #999;
+      transition: ease-in 5s, ease-out 5s;
+      background: transparent;
+    }
+
+    &:hover {
+      .letter {
+        transform: translateY(-200%);
+      }
+
+      .shadow-latter {
+        opacity: 0;
+
+        transform: translateY(200%);
+      }
+    }
+  }
+}

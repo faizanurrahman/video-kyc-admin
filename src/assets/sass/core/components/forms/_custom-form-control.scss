@@ -1,0 +1,145 @@
+// /* Global Variables */
+// :root {
+//   --input-font-weight: 500;
+//   --label-clr: #221e1e;
+//   --bg-clr: #f8d9d94d;
+//   --bg-solid-clr: #ededed;
+//   --focus-input-clr: #440808;
+//   --input-solid-clr: #460404;
+//   --border-clr: #ffc6c6;
+//   --border-radius: 0.5rem;
+//   --border-width: 1px;
+//   --box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+//   --focus-box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+//   --focus-border-color: #242d37;
+//   --text-clr: #424242;
+//   --text-clr-placeholder: #6c757d;
+//   --text-clr-placeholder-focus: #495057;
+//   --text-clr-focus: #495057;
+//   --text-clr-disabled: #6c757d;
+//   --invalid-feedback-clr: #dc3545;
+// }
+
+// /* Form Control Styles */
+// .form-control.form-control-sm {
+//   font-size: 15px;
+//   font-weight: var(--input-font-weight);
+//   color: var(--text-clr);
+//   background-color: var(--bg-clr);
+//   border-radius: var(--border-radius) !important;
+//   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+//   &:focus {
+//     color: var(--focus-input-clr);
+//     background-color: var(--bg-solid-clr);
+//     border-color: var(--focus-border-color);
+//     outline: 0;
+//   }
+
+//   // &.ng-valid.ng-dirty:focus {
+//   //   border-color: #00ff00;
+//   //   box-shadow: var(--box-shadow);
+//   // }
+// }
+
+// .form-select.form-select-sm,
+// .form-select.form-select-solid {
+//   font-size: 15px;
+//   font-weight: var(--input-font-weight);
+//   color: var(--text-clr);
+//   background-color: var(--bg-clr);
+//   border-radius: var(--border-radius) !important;
+
+
+//   &:focus {
+//     color: var(--focus-input-clr);
+//     background-color: var(--bg-solid-clr);
+//     border-color: var(--focus-border-color);
+//     outline: 0;
+//   }
+
+//   &:placeholder-shown {
+//     font-weight: normal;
+//   }
+// }
+
+// /* Form Control with Solid Background */
+// .form-control.form-control-solid,
+// .input-group-text {
+//   --kt-input-solid-bg: var(--bg-clr);
+//   --kt-input-solid-color: var(--input-solid-color);
+//   background-color: var(--kt-input-solid-bg);
+//   border-color: var(--kt-input-solid-bg);
+//   color: var(--kt-input-solid-color);
+//   letter-spacing: 0.5px;
+//   line-height: 1.5;
+//   font-weight: var(--input-font-weight);
+//   transition: color 0.2s ease;
+
+//   &.ng-invalid.ng-touched,
+//   &.ng-invalid.ng-dirty {
+//     border-color: #c40404;
+//     background-color: #fef1f1;
+
+//   }
+// }
+
+// /* Form Label */
+// .form-label {
+//   font-size: 1rem;
+//   font-weight: var(--input-font-weight);
+//   color: var(--label-clr);
+//   letter-spacing: 0.5px;
+//   line-height: 1.5;
+//   transition: color 0.2s ease;
+// }
+
+// /* Invalid Feedback (Validation Error Message) */
+// .invalid-feedback {
+//   display: none;
+//   width: 100%;
+//   margin-top: 0.25rem;
+//   padding-left: 0.25rem;
+//   font-size: 1rem;
+//   color: var(--invalid-feedback-clr);
+// }
+
+// .ng-invalid+.invalid-feedback {
+//   display: block;
+// }
+
+
+
+
+// // -========== ng select control ===========-
+// .ng-select {
+//   border-radius: var(--border-radius) !important;
+
+//   &.ng-select-opened {
+//     border: 1px solid !important;
+//     color: var(--focus-input-clr) !important;
+//     background-color: var(--bg-solid-clr) !important;
+//     border-color: var(--focus-border-color) !important;
+//     border-radius: var(--border-radius) !important;
+
+//     & .ng-select-container {
+
+
+//       background-color: var(--bg-solid-clr) !important;
+
+//     }
+
+//   }
+
+//   .ng-select-container {
+//     border-radius: var(--border-radius) !important;
+
+
+
+//     &:focus {
+//       border-color: #00ff00 !important;
+//       box-shadow: var(--box-shadow);
+//     }
+
+//   }
+// }

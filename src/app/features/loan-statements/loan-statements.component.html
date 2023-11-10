@@ -1,0 +1,287 @@
+<div class="card card-stretch h-100" [ngClass]="cssClass">
+  <!--begin::Header-->
+  <div class="card-header pb-5 pt-5">
+    <h3 class="card-title align-items-start flex-column">
+      <h3 class=" ">Loan Statements</h3>
+    </h3>
+    <div class="card-toolbar">
+      <ul [formGroup]="searchStatementForm" class="d-flex gap-5 flex-wrap w-100">
+        <li
+          class="nav-item flex-grow-1"
+          (click)="setCurrentTab('Month')"
+          [style.cursor]="'pointer'"
+        >
+          <!-- <a class="nav-link py-2 px-4" [class.active]="currentTab === 'Month'" data-toggle="tab">
+            Month
+          </a> -->
+          <div class="form-group mb-0">
+            <label class="form-label fw-normal text-gray-600 fs-7">Contract Number</label>
+
+            <select formControlName="loanNumber" class="form-select form-select-sm">
+              <option selected value="">Select Contract</option>
+              <ng-container *ngFor="let activeLoan of activeLoans; let i = index">
+                <option [value]="activeLoan.accountNo">
+                  {{ activeLoan.accountNo }}
+                </option>
+              </ng-container>
+            </select>
+
+            <div
+              class="invalid-feedback d-block"
+              *ngIf="(fc.loanNumber.invalid && fc.loanNumber.dirty) || searchStatementFormSubmitted"
+            >
+              <div *ngIf="fc.loanNumber.errors?.required">Must select contract number</div>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-item flex-grow-1" [style.cursor]="'pointer'">
+          <div class="form-group mb-0">
+            <label class="form-label fw-normal text-gray-600 fs-7">Statement Type</label>
+            <select formControlName="statementType" class="form-select form-select-sm">
+              <option selected value="">Select Statement Type</option>
+              <option value="MS">Mini Statement</option>
+              <option value="FS">Full Statement</option>
+            </select>
+          </div>
+        </li>
+
+        <li class="nav-item flex-grow-1" [style.cursor]="'pointer'">
+          <div class="form-group mb-0">
+            <label class="form-label fw-normal text-gray-600 fs-7">Start Date</label>
+            <input
+              bsDatepicker
+              [bsConfig]="startDateBsConfig"
+              name="startDate"
+              #startDate="bsDatepicker"
+              formControlName="startDate"
+              type="text"
+              class="form-control form-control-sm"
+              placeholder="Start Date"
+            />
+
+            <div
+              class="invalid-feedback d-block"
+              *ngIf="(fc.startDate.invalid && fc.startDate.dirty) || searchStatementFormSubmitted"
+            >
+              <div *ngIf="fc.startDate.errors?.required">Start Date is required</div>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-item flex-grow-1" [style.cursor]="'pointer'">
+          <div class="form-group mb-0">
+            <label class="form-label fw-normal text-gray-600 fs-7">End Date</label>
+
+            <!--  -->
+            <input
+              bsDatepicker
+              [bsConfig]="endDateBsConfig"
+              formControlName="endDate"
+              type="text"
+              #endDate="bsDatepicker"
+              class="form-control form-control-sm"
+              placeholder="End Date"
+            />
+
+            <div
+              class="invalid-feedback d-block"
+              *ngIf="(fc.endDate.invalid && fc.endDate.dirty) || searchStatementFormSubmitted"
+            >
+              <div *ngIf="fc.endDate.errors?.required">End Date is required</div>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-item d-flex align-items-center align-self-end" [style.cursor]="'pointer'">
+          <button type="button" (click)="onFindLoanStatement()" class="btn btn-dark btn-sm">
+            <span *ngIf="(loader.loading$ | async) === false">Find Transaction</span>
+            <span *ngIf="(loader.loading$ | async) === true" class="">
+              Fetching
+              <span class="spinner-border spinner-border-sm"></span>
+            </span>
+          </button>
+        </li>
+
+        <li class="nav-item d-flex align-items-center align-self-end">
+          <a
+            target="_blank"
+            [href]="exportStatementPdfUrl"
+            class="align-self-end btn btn-sm btn-active-text-primary btn-bg-light"
+          >
+            Export PDF
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card-toolbar">
+      <ul class="nav nav-tabs nav-line-tabs nav-stretch fs-6 border-0">
+        <li class="nav-item">
+          <a
+            (click)="tabIndex = 1"
+            class="nav-link fw-bold"
+            [class.active]="tabIndex === 1"
+            data-bs-toggle="tab"
+            href="javascript:void(0)"
+          >
+            Statement
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            (click)="tabIndex = 2"
+            class="nav-link fw-bold"
+            [class.active]="tabIndex === 2"
+            data-bs-toggle="tab"
+            href="javascript:void(0)"
+          >
+            Open Items
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!--end::Header-->
+
+  <!--begin::Body-->
+  <div class="card-body h-100 pt-2 pb-0 mt-n3 position-relative">
+    <div class="tab-content h-100 mt-5" id="myTabTables12">
+      <!--begin::Statements-->
+      <div
+        class="tab-pane h-100 fade"
+        role="tabpanel"
+        [ngClass]="{ 'active show': tabIndex === 1 }"
+      >
+        <!--begin::Table-->
+        <div class="table-responsive h-100">
+          <div
+            *ngIf="(loader.loading$ | async) === true"
+            class="d-flex flex-center flex-column h-100 w-100 position-absolute table-loading-message shadow-none"
+          >
+            <!-- <span>Fetching records, please wait</span> -->
+            <!-- <app-loader></app-loader> -->
+          </div>
+
+          <div
+            *ngIf="
+              (loader.loading$ | async) === false &&
+              (currentLoanStatement?.STATEMENT_RESP?.etZloanOutInfSt?.item?.length || 0) === 0
+            "
+            class="d-flex flex-center flex-column h-100 w-100 position-absolute table-loading-message shadow-none"
+          >
+            <span>No Record Found</span>
+          </div>
+
+          <table
+            class="table table-hover table-header-bg-gray-300 table-header-rounded-3 gs-5 gs-lg-7 gy-3"
+          >
+            <thead>
+              <tr class="text-capitalize fw-bold">
+                <th class="">Date of Transaction</th>
+                <th class="">Contract Number</th>
+                <th class=" ">Description</th>
+                <th class="">Ref No</th>
+                <th class="">Debit</th>
+                <th class="">Credit</th>
+                <th class="">Balance</th>
+                <!-- <th class="">Arrears</th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of currentLoanStatement?.STATEMENT_RESP?.etZloanOutInfSt?.item">
+                <td class="">
+                  {{ item.docDate | date : 'mediumDate' }}
+                </td>
+                <td class="">
+                  {{ item.ranl }}
+                </td>
+
+                <td class="">
+                  {{ item.docDesc }}
+                </td>
+
+                <td class="">
+                  {{ item.docRef }}
+                </td>
+
+                <td class="">P {{ getDecimalValue(item.docDebit) }}</td>
+
+                <td class="">P {{ getDecimalValue(item.docCredit) }}</td>
+
+                <td class="">P {{ getDecimalValue(item.docBalance) }}</td>
+
+                <!-- <td class="">
+                  {{item.arrears}}
+                </td> -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!--end::Table-->
+      </div>
+      <!--end::Statements-->
+
+      <!--begin:: Open Items   -->
+      <div
+        class="tab-pane h-100 fade"
+        role="tabpanel"
+        [ngClass]="{ 'active show': tabIndex === 2 }"
+      >
+        <!--begin::Table-->
+        <div class="table-responsive h-100">
+          <div
+            *ngIf="
+              (loader.loading$ | async) === false &&
+              (currentLoanStatement?.STATEMENT_RESP?.etZloanOutInfSt?.item?.length || 0) === 0
+            "
+            class="d-flex flex-center flex-column h-100 w-100 position-absolute table-loading-message shadow-none"
+          >
+            <span>No Record Found</span>
+          </div>
+
+          <table
+            class="table table-hover table-header-bg-gray-300 table-header-rounded-3 gs-5 gs-lg-7 gy-3"
+          >
+            <thead>
+              <tr class="fw-bold text-capitalize">
+                <th class="">Date of Transaction</th>
+                <th class="">Contract Number</th>
+                <th class=" ">Description</th>
+                <th class="">Ref No</th>
+                <th class="">Debit</th>
+                <th class="">Credit</th>
+                <th class="">Balance</th>
+                <!-- <th class="">Arrears</th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of currentLoanStatement?.STATEMENT_RESP?.etZloanOutSt?.item">
+                <td class="">
+                  {{ item.docDate | date : 'mediumDate' }}
+                </td>
+                <td class="">
+                  {{ item.ranl }}
+                </td>
+
+                <td class="">
+                  {{ item.docDesc }}
+                </td>
+
+                <td class="">
+                  {{ item.docRef }}
+                </td>
+
+                <td class="">P {{ getDecimalValue(item.docDebit) }}</td>
+
+                <td class="">P {{ getDecimalValue(item.docCredit) }}</td>
+
+                <td class="">P {{ getDecimalValue(item.docBalance) }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

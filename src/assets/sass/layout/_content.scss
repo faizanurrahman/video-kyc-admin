@@ -1,0 +1,41 @@
+//
+// Content
+//
+
+$animation-speed: 0.8s;
+$animation-type: ease-in-out;
+
+
+.content {}
+
+// Desktop mode
+@include media-breakpoint-up(lg) {
+  .content {
+    padding: get($content-spacing, desktop) 0;
+
+    // Toolbar enabled and toolbar fixed mode
+    .toolbar-enabled.toolbar-fixed & {
+      padding-top: 0;
+    }
+
+    // Transitions
+    // transition: all #{$animation-speed} #{$animation-type};
+
+
+  }
+}
+
+// Tablet & mobile modes
+@include media-breakpoint-down(lg) {
+  .content {
+    padding: get($content-spacing, tablet-and-mobile) 0;
+
+    // Toolbar enabled mode and toolbar not fixed mode
+    .toolbar-enabled:not(.toolbar-tablet-and-mobile-fixed) & {
+      padding-top: 0;
+    }
+
+    // Transitions
+    // transition: all #{$animation-speed} #{$animation-type};
+  }
+}

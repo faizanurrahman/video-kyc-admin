@@ -1,0 +1,40 @@
+:host {
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  // background: hsla(0, 66%, 21%, 0.22);
+}
+
+.text-elipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.glowMe,
+.glowAll {
+  opacity: 0;
+  transition: opacity 300ms linear 0s;
+}
+
+.svg-base {
+  position: relative;
+  cursor: pointer;
+  transition: all 300ms linear 0s;
+
+  border-radius: 50%;
+  filter: drop-shadow(0 2mm 2mm #421d07ab);
+  transition: filter 300ms linear 0s;
+
+  &:hover {
+    filter: drop-shadow(0 4mm 3mm #421d07ab);
+    transform: translateY(-1px);
+    transition: all 600ms linear 0s;
+  }
+
+  &:active {
+    filter: drop-shadow(0 -4mm 2mm #421d07ab);
+    transform: translateY(0px);
+    transition: all 600ms linear 0s;
+  }
+}

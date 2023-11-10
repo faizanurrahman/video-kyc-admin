@@ -1,0 +1,75 @@
+<!-- <div class="w-100 h-100">
+  <img src="./assets/media/icons/my-loan-cards.png" alt="my-loan-cards" />
+</div> -->
+
+<div class="card card-stretch p-0 px-2 bg-transparent">
+  <!-- Header -->
+  <div class="card-header px-2 pb-3 border-bottom-0">
+    <div class="card-title">
+      <span class="fw-bold fs-3 text-danger">My Loans</span>
+    </div>
+
+    <div class="card-toolbar">
+      <!-- Next and Previous Button Icon -->
+      <button class="btn btn-sm btn-icon text-hover-primary" (click)="previousLoanCard()">
+        <i class="bi bi-chevron-left text-dark fw-bolder"></i>
+      </button>
+      <button class="btn btn-sm btn-icon text-hover-primary" (click)="nextLoanCard()">
+        <i class="bi bi-chevron-right text-dark fw-bolder"></i>
+      </button>
+    </div>
+  </div>
+  <!-- jalaluddin rumi  -->
+  <!-- Body -->
+  <div class="card-body p-0 pb-4">
+    <div auto-animate [options]="{ duration: 300 }" class="loans-card-wrapper">
+      <ng-container *ngIf="activeLoans && activeLoans.length >= 0">
+        <div #loanMiniCard class="loan-mini-card" *ngFor="let loanCard of activeLoans">
+          <app-loan-mini-card
+            class=""
+            [accountNumber]="loanCard.accountNo"
+            [balance]="loanCard.balance"
+            [loanAmount]="loanCard.loanAmount"
+            [arrears]="loanCard.arrears"
+            [status]="loanCard.status"
+            [backgroundColor]="loanCard.backgroundColor!"
+            [backgroundGradient]="loanCard.backgroundGradient!"
+          ></app-loan-mini-card>
+        </div>
+
+        <div *ngIf="true" #loanMiniCard class="loan-mini-card">
+          <div class="no-loan-card d-flex flex-center h-100 w-100">
+            <div class="d-flex flex-column px-6 py-5 text-center">
+              <div class="fw-bold fs-4 text-white mb-4">No More Active Loans</div>
+
+              <div class="fw-normal fs-6 text-white">Apply for a new loan to get started</div>
+
+              <!-- <button class="btn btn-sm btn-outline-dark fw-bold">Apply Now</button> -->
+            </div>
+          </div>
+        </div>
+        <div *ngIf="true" #loanMiniCard class="loan-mini-card">
+          <div class="no-loan-card d-flex flex-center h-100 w-100" [ngStyle]="{}">
+            <div class="d-flex flex-column px-6 py-5 text-center">
+              <div class="fw-bold fs-4 text-white mb-4">No More Active Loans</div>
+
+              <!-- <button class="btn btn-sm btn-outline-dark fw-bold">Apply Now</button> -->
+              <div class="fw-normal fs-6 text-white">Apply for a new loan to get started</div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="true" #loanMiniCard class="loan-mini-card">
+          <div class="no-loan-card d-flex flex-center h-100 w-100" [ngStyle]="{}">
+            <div class="d-flex flex-column px-6 py-5 text-center">
+              <div class="fw-bold fs-4 text-white mb-4">No More Active Loans</div>
+
+              <!-- <button class="btn btn-sm btn-outline-dark fw-bold">Apply Now</button> -->
+              <div class="fw-normal fs-6 text-white">Apply for a new loan to get started</div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

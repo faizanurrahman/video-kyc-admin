@@ -1,0 +1,72 @@
+// Spacing
+//
+// Control the default styling of most Bootstrap elements by modifying these
+// variables. Mostly focused on spacing.
+// You can add more entries to the $spacers map, should you need more variation.
+$spacer: 1rem !default;
+
+$spacers: (0: 0,
+  1: ($spacer * 0.25,
+  ),
+  // 3.5px
+  2: ($spacer * 0.5,
+  ),
+  // 7px;
+  3: ($spacer * 0.75,
+  ),
+  // 10.5px
+  4: ($spacer * 1,
+  ),
+  // 14px
+  5: ($spacer * 1.25,
+  ),
+  // 17.5px
+  6: ($spacer * 1.5,
+  ),
+  // 21px
+  7: ($spacer * 1.75,
+  ),
+  // 24.5px
+  8: ($spacer * 2,
+  ),
+  // 28px
+  9: ($spacer * 2.25,
+  ),
+  // 31.5px
+  10: ($spacer * 2.5,
+  ),
+  // 35px
+  11: ($spacer * 2.75,
+  ),
+  // 38.5px
+  12: ($spacer * 3,
+  ),
+  // 42px
+  13: ($spacer * 3.25,
+  ),
+  // 45.5px
+  14: ($spacer * 3.5,
+  ),
+  // 49px
+  15: ($spacer * 3.75,
+  ),
+  // 52.5px
+  16: ($spacer * 4,
+  ),
+  // 55px
+  17: ($spacer * 4.25,
+  ),
+  // 58.5px
+  18: ($spacer * 4.5,
+  ),
+  // 62px
+  19: ($spacer * 4.75,
+  ),
+  // 65.5px
+  20: ($spacer * 5,
+  ),
+  // 69px
+);
+
+// Position
+//

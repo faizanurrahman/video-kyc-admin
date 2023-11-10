@@ -1,0 +1,230 @@
+<div class="d-flex flex-column flex-root position-relative authentication-wrapper p-0">
+  <div class="horizontal-line line1"></div>
+  <div class="horizontal-line line2"></div>
+  <div class="horizontal-line line3"></div>
+  <div class="vertical-line"></div>
+  <div
+    style="z-index: 1000"
+    class="position-absolute top-15px end-50px animate__animated animate__fadeInRight animate__fast"
+  >
+    <button [routerLink]="['/dashboard']" class="btn btn-primary btn-sm d-flex flex-center">
+      <i class="fas fa-arrow-left me-2"></i>
+      Back
+    </button>
+  </div>
+  <div class="d-flex flex-column-fluid flex-column flex-root position-relative curved-image">
+    <!-- Main Content -->
+    <div class="authentication-content d-flex flex-row flex-1 overflow-hidden position-relative">
+      <div
+        #leftContent
+        id="left-content"
+        class="px-10 left-content d-flex flex-column justify-content-start align-items-start text-danger rounded w-400px"
+      >
+        <div #brandLogo id="brandLogo" class="brand-logo h-100px d-flex flex-center mt-5">
+          <a href="javascript:void(0)">
+            <img
+              alt="Logo"
+              src="./assets/media/logos/ceda-logo-transparent.png"
+              class=""
+              style="height: 70px"
+            />
+          </a>
+        </div>
+        <div
+          #scrollableContent
+          id="scrollableContent"
+          style="scrollbar-gutter: stable"
+          class="dynamic-routes d-flex flex-column justify-content-center align-items-start"
+        >
+          <div
+            style="line-height: var(--big-text-line-height)"
+            class="fs-4x fw-bolder text-primary"
+          >
+            Loan
+          </div>
+          <div
+            style="line-height: var(--big-text-line-height)"
+            class="fs-4x fw-bolder text-primary"
+          >
+            Categories
+          </div>
+          <div class="mt-5 fs-3 fw-bold text-gray-600">Below you will find the four</div>
+          <div class="fs-3 fw-bold text-gray-600">Categories available for funding</div>
+
+          <div class="fs-2 fw-bold text-danger">Business Loans For Individual</div>
+          <div class="fs-2 fw-bold text-danger">Business Loans For Companies</div>
+          <div class="fs-2 fw-bold text-danger">Business Loans For Group And</div>
+          <div class="fs-2 fw-bold text-danger">Business Loans For Mabogo Dinku</div>
+
+          <div class="mt-10 w-300px fs-3 fw-bold text-gray-600">
+            Please select the category that suits your needs
+          </div>
+        </div>
+      </div>
+
+      <div class="pe-10 d-flex flex-column flex-row-fluid">
+        <div *ngIf="false" class="d-flex flex-row flex-stack py-5">
+          <div
+            style="margin-left: 0px; backdrop-filter: blur(2px)"
+            class="d-flex flex-lg-row gap-10 text-danger fs-4 fw-bold"
+          >
+            <a href="https://www.ceda.co.bw/" target="_blank" class="nav-link">
+              <span class="nav-link-text">Home</span>
+              <span class="nav-link-underline"></span>
+            </a>
+            <a href="https://www.ceda.co.bw/background" class="nav-link">
+              <span class="nav-link-text">About</span>
+              <span class="nav-link-underline"></span>
+            </a>
+            <a href="https://www.ceda.co.bw/board-directors" target="_blank" class="nav-link">
+              <span class="nav-link-text">Team</span>
+              <span class="nav-link-underline"></span>
+            </a>
+            <a href="https://www.ceda.co.bw/contact-us" target="_blank" class="nav-link">
+              <span class="nav-link-text">Contact</span>
+              <span class="nav-link-underline"></span>
+            </a>
+          </div>
+
+          <div
+            class="w-2px h-30px border border-gray-100 opacity-50 border-top-0 border-bottom-0 border-end-0"
+            style="border-color: var(--lines-clr)"
+          ></div>
+
+          <div class="d-flex flex-row flex-stack align-items-center gap-10">
+            <div class="position-relative">
+              <div class="position-absolute top-50 end-10px translate-middle-y">
+                <i class="bi bi-search text-white-50 text-hover-white"></i>
+              </div>
+
+              <input
+                type="text"
+                style=""
+                class="form-control search-control h-30px px-4 form-control-solid rounded rounded-pill"
+                placeholder="Search"
+              />
+            </div>
+
+            <!-- Menu Icon -->
+            <div class="">
+              <a href="javascript:void(0)" class="btn btn-icon ms-2">
+                <span
+                  class="svg-icon svg-icon-1"
+                  [inlineSVG]="'./assets/media/icons/grid-menu.svg'"
+                ></span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="d-flex flex-row flex-wrap flex-1 justify-content-start align-items-end mb-10 gap-5 position-relative"
+        >
+          <div
+            class="position-absolute d-none d-md-flex"
+            style="
+              top: calc(var(--horizontal-line-2-position-from-top) - 8px);
+              left: 70%;
+              color: white;
+              backdrop-filter: blur(2px);
+            "
+          >
+            <div style="font-size: 36px; color: var(--kaekapakae-clr)" class="custom-font">
+              #Kaekapakae
+            </div>
+          </div>
+
+          <app-selection-card
+            class="animate__animated animate__fadeInLeft animate__fast"
+            [title]="'Individual'"
+            [imageUrl]="'./assets/media/ceda-images/individual-min.jpg'"
+            (selected)="onLoanTypeSelection(loanApplicationType[0])"
+          >
+            <span>
+              CEDA offers loans to individual entrepreneurs with innovative business ideas or
+              existing businesses. These loans serve various purposes such as working capital,
+              equipment purchase, and business expansion. Individuals can access financial support
+              to help realize their business goals and contribute to economic growth.
+            </span>
+          </app-selection-card>
+          <app-selection-card
+            class="animate__animated animate__fadeInLeft animate__fast"
+            style="animation-delay: 0.3s"
+            [title]="'Companies'"
+            [imageUrl]="'./assets/media/ceda-images/company-min.jpg'"
+            (selected)="onLoanTypeSelection(loanApplicationType[1])"
+          >
+            <span>
+              CEDA provides financial assistance to companies seeking to expand their operations,
+              introduce new products or services, and enhance their competitiveness. This support
+              plays a vital role in enabling companies to grow, create employment opportunities, and
+              make positive contributions to the local economy.
+            </span>
+          </app-selection-card>
+          <app-selection-card
+            class="animate__animated animate__fadeInLeft animate__fast"
+            style="animation-delay: 0.6s"
+            [title]="'Groups'"
+            [imageUrl]="'./assets/media/ceda-images/groups-min.jpg'"
+            (selected)="onLoanTypeSelection(loanApplicationType[2])"
+          >
+            <span>
+              CEDA supports groups of individuals collaborating on business ventures. These groups
+              can be cooperatives, associations, or partnerships working together for joint business
+              initiatives. Financial funding is available to empower group efforts, foster
+              entrepreneurship, and drive economic development.
+            </span>
+          </app-selection-card>
+          <app-selection-card
+            class="animate__animated animate__fadeInLeft animate__fast"
+            style="animation-delay: 0.9s"
+            [title]="'Mabogo-Dinku'"
+            [imageUrl]="'./assets/media/ceda-images/mabogo-dinku-min.JPG'"
+            (selected)="onLoanTypeSelection(loanApplicationType[3])"
+          >
+            <span>
+              The Mabogo-dinku loan is a specialized initiative by CEDA designed to back
+              agricultural and agri-business projects. This loan type aims to bolster food security,
+              promote rural development, and encourage sustainable agricultural practices. Through
+              this support, CEDA contributes to both economic and agricultural advancement.
+            </span>
+          </app-selection-card>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div style="z-index: 1000" class="authentication-footer d-flex flex-stack flex-row px-10 py-4">
+      <div class="d-flex flex-row gap-8">
+        <a href="javascript:void(0)" class="nav-link text-hover-primary d-flex">
+          <!-- <i class="bi bi-facebook fs-4"></i> -->
+          <span inlineSVG="./assets/media/icons/facebook.svg" class="svg-icon svg-icon-3"></span>
+        </a>
+        <a href="javascript:void(0)" class="nav-link text-hover-primary d-flex">
+          <i class="bi bi-instagram fs-4"></i>
+        </a>
+        <a href="javascript:void(0)" class="nav-link text-hover-primary d-flex">
+          <i class="bi bi-whatsapp fs-4"></i>
+        </a>
+      </div>
+
+      <!--begin::Carousel Indicators-->
+      <div class="carousel carousel-custom slide">
+        <ol
+          class="p-0 m-0 carousel-indicators carousel-indicators-dots carousel-indicators-active-primary"
+          style="--kt-carousel-custom-bullet-indicator-default-bg-color: #ff0000"
+        >
+          <li
+            data-bs-target="#kt_carousel_1_carousel"
+            data-bs-slide-to="0"
+            class="ms-1 active"
+          ></li>
+          <li data-bs-target="#kt_carousel_1_carousel" data-bs-slide-to="1" class="ms-1"></li>
+          <li data-bs-target="#kt_carousel_1_carousel" data-bs-slide-to="2" class="ms-1"></li>
+        </ol>
+      </div>
+
+      <!--end::Carousel Indicators-->
+    </div>
+  </div>
+</div>

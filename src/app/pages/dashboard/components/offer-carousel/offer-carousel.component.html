@@ -1,0 +1,21 @@
+<swiper
+  class="swiper--wrapper"
+  [loop]="true"
+  [autoHeight]="true"
+  [allowTouchMove]="true"
+  [autoplay]="false"
+  [pagination]="{ clickable: true }"
+  [navigation]="true"
+>
+  <ng-template data-swiper-autoplay="3000" class="swiper-slide h-100" swiperSlide>
+    <app-offer-card class=""></app-offer-card>
+  </ng-template>
+
+  <ng-template data-swiper-autoplay="3000" class="swiper-slide h-100" swiperSlide>
+    <app-offer-card2 class=""></app-offer-card2>
+  </ng-template>
+
+  <ng-template data-swiper-autoplay="3000" class="swiper-slide h-100" swiperSlide>
+    <app-offer-card3></app-offer-card3>
+  </ng-template>
+</swiper>

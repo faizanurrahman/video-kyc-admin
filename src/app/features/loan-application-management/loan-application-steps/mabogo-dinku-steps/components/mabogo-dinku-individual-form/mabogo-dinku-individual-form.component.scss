@@ -1,0 +1,59 @@
+::ng-deep {
+  .p-element .p-panel.p-component {
+    margin-bottom: 10px !important;
+
+    & .p-panel-header {
+      border-radius: 15px;
+      transition: border-radius 0.5s;
+
+    }
+
+    &.p-panel-expanded .p-panel-header {
+      border-radius: 15px 15px 0px 0px;
+    }
+  }
+
+  button.p-button {
+    background: var(--kt-danger);
+    box-shadow: none;
+
+    &:hover {
+      box-shadow: none;
+      background: var(--kt-dark);
+    }
+  }
+
+
+
+}
+
+
+
+
+// Mobile Verified
+.mobile-verified,
+.email-verified {
+  padding-right: calc(1.5em + 1.55rem) !important;
+  background-image: url("/assets/media/icons/verified.svg") !important;
+  background-repeat: no-repeat !important;
+  background-position: right calc(0.375em + 0.3875rem) center !important;
+  background-size: calc(0.75em + 0.775rem) calc(0.75em + 0.775rem) !important;
+
+  color: #1d0707 !important;
+  border: none;
+}
+
+
+
+::ng-deep {
+  .ng-dropdown-panel {
+    // background-color: #fff1ea;
+    --bg-clr: #dacfc9;
+    width: 300px !important;
+  }
+
+  .form-select[ng-select] {
+    background-image: none;
+    padding: 0;
+  }
+}

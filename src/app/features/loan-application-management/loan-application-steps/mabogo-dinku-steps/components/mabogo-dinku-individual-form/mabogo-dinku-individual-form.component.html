@@ -1,0 +1,1583 @@
+<form class="individual-form" [formGroup]="individualForm">
+  <!--    Hidden  -->
+  <input type="hidden" formControlName="applicationId" />
+  <input type="hidden" formControlName="sessionId" />
+  <input type="hidden" formControlName="username" />
+
+  <div
+    class="d-flex flex-column gap-5 form-group mb-5"
+    *ngIf="loanApplicationType !== 'Individual' && loanApplicationType !== 'individual'"
+  >
+    <div class="fs-5 fw-bold required">
+      Number of Individuals associated with Application (Shareholders; Group Members)
+    </div>
+    <div class="d-flex flex-row gap-5">
+      <input
+        type="number"
+        [value]="individualList.length"
+        [min]="1"
+        class="form-control form-control-sm form-control-solid"
+        inputmode="numeric"
+        #numberOfIndividualsCount
+        appDigitOnly
+      />
+
+      <button
+        class="btn btn-primary text-nowrap"
+        (click)="addIndividuals(+numberOfIndividualsCount.value)"
+      >
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        Add Individuals
+      </button>
+    </div>
+  </div>
+
+  <!--  Individual Form-->
+
+  <div class="" [formArrayName]="'individualList'">
+    <p-tabView *ngIf="true" [(activeIndex)]="activeIndex" [scrollable]="true">
+      <p-tabPanel
+        *ngFor="let individual of individualList.controls; let i = index"
+        [header]="'Individual ' + (i + 1)"
+      >
+        <div [formGroupName]="i">
+          <p-divider
+            align="left"
+            *ngIf="loanApplicationType !== 'Individual' && loanApplicationType !== 'individual'"
+          >
+            <div class="d-inline-flex align-items-center pe-2">
+              <span class="fs-5 fw-bold">
+                INDIVIDUAL {{ i + 1 }} of {{ individualList.length }}
+              </span>
+
+              <button
+                class="btn btn-color-gray-800 btn-icon btn-sm btn-active-color-danger text-nowrap"
+                (click)="removeIndividual(i, $event)"
+              >
+                <p-confirmPopup></p-confirmPopup>
+                <!-- <i class="fa fa-trash" aria-hidden="true"></i> -->
+                <span
+                  [inlineSVG]="'./assets/media/icons/trash.svg'"
+                  class="svg-icon svg-icon-2 z-index-n1"
+                ></span>
+              </button>
+            </div>
+          </p-divider>
+
+          <input type="hidden" formControlName="id" />
+
+          <!-- - Basic Details -->
+          <p-panel header="A. Personal Details" [toggleable]="true">
+            <div class="row">
+              <!-- - Title -->
+              <div class="col-lg-2">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="title">Title</label>
+
+                  <app-select
+                    placeholder="Select Title"
+                    formControlName="title"
+                    [options]="[
+                      { label: 'Mr', value: 'Mr' },
+                      { label: 'Mrs', value: 'Mrs' },
+                      { label: 'Miss', value: 'Miss' },
+                      { label: 'Ms', value: 'Ms' },
+                      { label: 'Dr', value: 'Dr' },
+                      { label: 'Prof', value: 'Prof' }
+                    ]"
+                  ></app-select>
+
+                  <div
+                    *ngIf="
+                      (individual.get('title')?.dirty || individual.get('title')?.touched) &&
+                      individual.get('title')?.invalid
+                    "
+                    class="invalid-feedback d-block"
+                  >
+                    <div *ngIf="individual.get('title')?.errors?.required">Title is required</div>
+                  </div>
+                </div>
+              </div>
+              <!-- - Full Name -->
+              <div class="col-lg-5">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="fullName">First Name</label>
+                  <input
+                    type="text"
+                    formControlName="fullName"
+                    class="form-control form-control-sm form-control-solid"
+                    appAlphabetOnly
+                  />
+                  <div class="invalid-feedback d-block" *ngIf="individual.get('fullName')?.invalid">
+                    <span *ngIf="individual.get('fullName')?.hasError('requried')">
+                      First Name is required
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <!-- - Surname -->
+              <div class="col-lg-5">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="surname">Last Name</label>
+                  <input
+                    type="text"
+                    formControlName="surname"
+                    class="form-control form-control-sm form-control-solid"
+                    appAlphabetOnly
+                  />
+
+                  <div class="invalid-feedback d-block" *ngIf="individual.get('surname')?.invalid">
+                    <span *ngIf="individual.get('surname')?.hasError('requried')">
+                      Last Name is required
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <!--  - Dob -->
+              <div class="col-md-6">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="surname">Date of Birth</label>
+                  <input
+                    type="date"
+                    formControlName="dateOfBirth"
+                    class="form-control form-control-sm form-control-solid"
+                    [max]="maxBirthDate"
+                    [min]="minBirthDate"
+                  />
+                </div>
+
+                <div
+                  class="invalid-feedback d-block"
+                  *ngIf="individual.get('dateOfBirth')?.invalid"
+                >
+                  <span *ngIf="individual.get('dateOfBirth')?.hasError('requried')">
+                    Date of birth is required
+                  </span>
+                </div>
+              </div>
+
+              <!-- - Marital Status -->
+              <div class="col-12 col-md-6">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="mobileNumber">Marital Status</label>
+
+                  <app-select
+                    placeholder="Select Marital Status"
+                    formControlName="maritalStatus"
+                    [options]="[
+                      { label: 'Single', value: 'Single' },
+                      { label: 'Married (In Community)', value: 'MarriedInCommunity' },
+                      { label: 'Married (Out Of Community)', value: 'MarriedOutCommunity' },
+                      { label: 'Divorced', value: 'Divorced' },
+                      { label: 'Widowed', value: 'Widowed' }
+                    ]"
+                  ></app-select>
+
+                  <div
+                    class="invalid-feedback d-block"
+                    *ngIf="
+                      individual.get('maritalStatus')?.dirty ||
+                      individual.get('maritalStatus')?.touched
+                    "
+                  >
+                    <div *ngIf="individual.get('maritalStatus')?.errors?.required">
+                      Marital Status is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- - Mobile Number -->
+              <div class="col-12 col-md-6">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="mobileNumber">Mobile Number</label>
+                  <div
+                    class="position-relative input-group input-group-sm input-group-solid d-flex flex-wrap gap-2"
+                  >
+                    <ng-template #tooltipContent>
+                      <div class="d-flex flex-row gap-2">
+                        <span class="fs-6 fw-bold">
+                          + {{ individual.get('mobileNumberCountryCode')?.value }}
+                        </span>
+                      </div>
+                    </ng-template>
+                    <div
+                      *ngIf="true"
+                      class="input-group-prepend flex-column flex-sm-row"
+                      [ngbTooltip]="!!individual.get('mobileNumberCountryCode')?.value ? '' : ''"
+                      [tooltipClass]="'my-tooltip'"
+                      [autoClose]="true"
+                      [triggers]="'hover'"
+                    >
+                      <app-tel-country-code
+                        [formControlName]="'mobileNumberCountryCode'"
+                      ></app-tel-country-code>
+                    </div>
+
+                    <div class="d-flex flex-grow-1 gap-2">
+                      <input
+                        #mobileNumber
+                        type="text"
+                        formControlName="mobileNumber"
+                        class="form-control form-control-sm form-control-solid rounded"
+                        inputmode="numeric"
+                        appDigitOnly
+                      />
+
+                      <span
+                        *ngIf="
+                          checkMobileValidity(
+                            individual.get('mobileNumber')?.value,
+                            individual.get('mobileNumberCountryCode')?.value
+                          )
+                        "
+                        class="input-group-text d-flex gap-2 cursor-pointer"
+                        id="basic-addon1"
+                      >
+                        <span
+                          (click)="openOtpVerificationPopup('PHONE', i)"
+                          *ngIf="
+                            individual.get('mobileNumberStatus')?.value === 'NOT_VERIFIED' &&
+                            !isApplicationDisabled
+                          "
+                          class="badge badge-sm badge-info"
+                          [ngbTooltip]="'Verify Your Mobile Number'"
+                        >
+                          Verify
+                        </span>
+                        <span
+                          *ngIf="individual.get('mobileNumberStatus')?.value === 'VERIFIED'"
+                          class="badge badge-sm badge-success"
+                        >
+                          Verified
+                        </span>
+                        <span
+                          (click)="editContact('PHONE', i)"
+                          *ngIf="
+                            individual.get('mobileNumberStatus')?.value === 'VERIFIED' &&
+                            !isApplicationDisabled
+                          "
+                          class="badge badge-sm badge-dark"
+                        >
+                          Edit
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div
+                    class="form-text ps-1 d-block"
+                    style="font-size: 1rem"
+                    *ngIf="
+                      !individualForm?.errors?.primaryMobileNumberNotUnique &&
+                      individualList.length > 1
+                    "
+                  >
+                    Mobile number across individuals / shareholders should be unique
+                  </div>
+
+                  <div
+                    class="invalid-feedback d-block"
+                    *ngIf="individualForm?.errors?.primaryMobileNumberNotUnique?.includes(i)"
+                  >
+                    <div class="d-block">
+                      Mobile Number must be unique across individuals / shareholder.
+                    </div>
+                    <!-- <div class="d-block">
+                    Above Mobile number already exists for individuals / shareholder number
+                    {{ getDuplicateOmangNumbers(i) }}
+                  </div> -->
+                  </div>
+
+                  <div
+                    class="invalid-feedback d-block"
+                    *ngIf="
+                      individual.get('mobileNumber')?.dirty ||
+                      individual.get('mobileNumber')?.touched
+                    "
+                  >
+                    <div
+                      *ngIf="
+                        !checkMobileValidity(
+                          individual.get('mobileNumber')?.value,
+                          individual.get('mobileNumberCountryCode')?.value
+                        )
+                      "
+                    >
+                      Mobile Number is invalid
+                    </div>
+
+                    <div
+                      *ngIf="
+                        checkMobileValidity(
+                          individual.get('mobileNumber')?.value,
+                          individual.get('mobileNumberCountryCode')?.value
+                        ) && individual.get('mobileNumberStatus')?.value === 'NOT_VERIFIED'
+                      "
+                    >
+                      <span class="text-success">Valid Mobile Number</span>
+
+                      <span class="text-danger ms-2">( Not Verified )</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- - Secondary Mobile Number -->
+              <div class="col-12 col-md-6">
+                <div class="form-group mb-5">
+                  <label class="form-label" for="mobileNumber">Secondary Mobile Number</label>
+
+                  <!-- Appending Country Code  -->
+                  <div
+                    class="position-relative input-group input-group-sm input-group-solid d-flex flex-wrap gap-2"
+                  >
+                    <!-- Input Dropdown -->
+                    <div class="input-group-prepend flex-column flex-sm-row">
+                      <app-tel-country-code
+                        [formControlName]="'secondaryMobileNumberCountryCode'"
+                      ></app-tel-country-code>
+                    </div>
+
+                    <input
+                      type="text"
+                      formControlName="secondaryMobileNumber"
+                      class="form-control form-control-sm form-control-solid"
+                      inputmode="numeric"
+                      appDigitOnly
+                    />
+                  </div>
+                  <!-- - Error -->
+                  <div
+                    class="invalid-feedback d-block"
+                    *ngIf="individual.get('secondaryMobileNumber')?.dirty"
+                  >
+                    <div
+                      *ngIf="
+                        !checkMobileValidity(
+                          individual.get('secondaryMobileNumber')?.value,
+                          individual.get('secondaryMobileNumberCountryCode')?.value
+                        )
+                      "
+                    >
+                      Secondary Mobile Number is invalid
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- - Other Contact Number -->
+              <div class="col-12 col-md-6">
+                <div class="form-group mb-5">
+                  <label class="form-label" for="">Telephone</label>
+
+                  <!-- Appending Country Code  -->
+                  <div
+                    class="position-relative input-group input-group-sm input-group-solid d-flex flex-wrap gap-2"
+                  >
+                    <div class="input-group-prepend flex-column flex-sm-row">
+                      <app-tel-country-code
+                        [formControlName]="'otherContactNumberCountryCode'"
+                      ></app-tel-country-code>
+                    </div>
+
+                    <input
+                      type="tel"
+                      formControlName="otherContactNumber"
+                      class="form-control form-control-sm form-control-solid"
+                      inputmode="numeric"
+                      appDigitOnly
+                    />
+                  </div>
+                  <div
+                    class="invalid-feedback d-block"
+                    *ngIf="individual.get('otherContactNumber')?.dirty"
+                  >
+                    <div
+                      *ngIf="
+                        !checkTelephoneValidity(
+                          individual.get('otherContactNumber')?.value,
+                          individual.get('otherContactNumberCountryCode')?.value
+                        )
+                      "
+                    >
+                      Telephone Number is invalid
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!---  Email Address -->
+              <div class="col-12 col-md-6">
+                <div class="form-group mb-5">
+                  <label class="form-label" for="emailAddress">Email Address</label>
+
+                  <div
+                    class="position-relative input-group input-group-sm input-group-solid d-flex flex-grow-1 gap-2"
+                  >
+                    <input
+                      (change)="emailChanges($event, i)"
+                      #email
+                      type="text"
+                      formControlName="emailAddress"
+                      inputmode="email"
+                      class="form-control form-control-sm form-control-solid"
+                    />
+
+                    <span
+                      *ngIf="emailAddressValidity(email.value)"
+                      class="input-group-text d-flex gap-2 cursor-pointer"
+                      id="basic-addon1"
+                    >
+                      <span
+                        (click)="openOtpVerificationPopup('EMAIL', i)"
+                        *ngIf="
+                          individual.get('emailAddressStatus')?.value === 'NOT_VERIFIED' &&
+                          !isApplicationDisabled
+                        "
+                        class="badge badge-sm badge-info"
+                        [ngbTooltip]="'Verify Your Email Address'"
+                      >
+                        Verify
+                      </span>
+                      <span
+                        *ngIf="individual.get('emailAddressStatus')?.value === 'VERIFIED'"
+                        class="badge badge-sm badge-success"
+                      >
+                        Verified
+                      </span>
+                      <span
+                        (click)="editContact('EMAIL', i)"
+                        *ngIf="
+                          individual.get('emailAddressStatus')?.value === 'VERIFIED' &&
+                          !isApplicationDisabled
+                        "
+                        class="badge badge-sm badge-dark"
+                      >
+                        Edit
+                      </span>
+                    </span>
+                  </div>
+
+                  <div
+                    *ngIf="individual.get('emailAddress')?.dirty"
+                    class="invalid-feedback d-block"
+                  >
+                    <small *ngIf="!emailAddressValidity(email.value)">
+                      Email Address is invalid
+                    </small>
+
+                    <small
+                      *ngIf="
+                        emailAddressValidity(email.value) &&
+                        individual.get('emailAddressStatus')?.value === 'NOT_VERIFIED' &&
+                        individual.get('emailAddress')?.dirty &&
+                        individual.get('emailAddress')?.value !== ''
+                      "
+                    >
+                      <span class="text-success">Valid Email Address</span>
+
+                      <span class="text-danger ms-2">( Not Verified )</span>
+                    </small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </p-panel>
+
+          <p-panel header="B. Identity Details" [toggleable]="true">
+            <div class="row">
+              <!-- -  Nationality -->
+              <div class="col-lg-4">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="nationality">Nationality</label>
+                  <app-country-dropdown formControlName="nationality"></app-country-dropdown>
+                  <div
+                    class="invalid-feedback d-block"
+                    *ngIf="
+                      individual.get('nationality')?.value &&
+                      individual.get('nationality')?.value !== 'BW' &&
+                      loanApplicationType.toLowerCase() === 'individual'
+                    "
+                  >
+                    You must be botswana citizen.
+                  </div>
+                </div>
+              </div>
+
+              <!-- - Omang Number -->
+              <div *ngIf="individual.get('nationality')?.value === 'BW'" class="col-lg-6">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="omangNumber">OMANG Number</label>
+                  <input
+                    type="text"
+                    formControlName="omangNumber"
+                    class="form-control form-control-sm form-control-solid"
+                    inputmode="numeric"
+                    appDigitOnly
+                  />
+
+                  <div
+                    class="form-text ps-1 d-block"
+                    style="font-size: 1rem"
+                    *ngIf="
+                      !individualForm?.errors?.omangNumberNotUnique && individualList.length > 1
+                    "
+                  >
+                    OMANG number across individuals / shareholders should be unique
+                  </div>
+
+                  <div
+                    class="invalid-feedback d-block"
+                    *ngIf="individualForm?.errors?.omangNumberNotUnique?.includes(i)"
+                  >
+                    <div class="d-block">
+                      Omang Number must be unique across individuals / shareholder.
+                    </div>
+                    <div class="d-block">
+                      Above Omang already exists for individuals / shareholder number
+                      {{ getDuplicateOmangNumbers(i) }}
+                    </div>
+                  </div>
+
+                  <div
+                    class="invalid-feedback d-block"
+                    *ngIf="
+                      individual.get('omangNumber')?.invalid &&
+                      (individual.get('omangNumber')?.dirty ||
+                        individual.get('omangNumber')?.touched)
+                    "
+                  >
+                    <div *ngIf="individual.get('omangNumber')?.errors?.required">
+                      OMANG Number is required
+                    </div>
+
+                    <div *ngIf="individual.get('omangNumber')?.errors?.pattern">
+                      OMANG Number is invalid, Pattern: XXXX(1/2)XXXX (X = Number)
+                    </div>
+
+                    <div *ngIf="individual.get('omangNumber')?.errors?.omangNumberExists === true">
+                      OMANG Number already exists in other individual details
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- - Omang Expiry -->
+              <div *ngIf="individual.get('nationality')?.value === 'BW'" class="col-lg-3">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="dateOfOmangExpiry">
+                    Date of OMANG Expiry
+                  </label>
+
+                  <input
+                    type="date"
+                    [min]="minDateOfOmangExpiry"
+                    formControlName="dateOfOmangExpiry"
+                    class="form-control form-control-sm form-control-solid"
+                  />
+
+                  <div
+                    class="invalid-feedback d-block"
+                    *ngIf="individual.get('dateOfOmangExpiry')?.invalid"
+                  >
+                    <span *ngIf="individual.get('dateOfOmangExpiry')?.hasError('requried')">
+                      OMANG Expiry is required
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- - Gender -->
+              <div class="col-lg-3">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="gender">Gender</label>
+                  <select
+                    formControlName="gender"
+                    class="form-select form-select-sm form-select-solid"
+                  >
+                    <option value="" disabled>Select Gender</option>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- - Foreign Passport Number -->
+              <div
+                *ngIf="
+                  loanApplicationType.toLowerCase() !== 'individual' &&
+                  individual.get('nationality')?.value &&
+                  individual.get('nationality')?.value !== 'BW'
+                "
+                class="col-lg-5"
+              >
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="foreignPassportNumber">
+                    Foreign Passport Number
+                  </label>
+                  <input
+                    type="text"
+                    formControlName="foreignPassportNumber"
+                    class="form-control form-control-sm form-control-solid"
+                  />
+                  <div
+                    class="invalid-feedback d-block"
+                    *ngIf="individual.get('foreignPassportNumber')?.invalid"
+                  >
+                    <!-- {{ individual.get('foreignPassportNumber')?.errors | json }} -->
+                    <span *ngIf="individual.get('foreignPassportNumber')?.hasError('required')">
+                      Foreign Passport Number is required
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- - Passport Expiry  -->
+              <div
+                class="col-lg-3"
+                *ngIf="
+                  loanApplicationType.toLowerCase() !== 'individual' &&
+                  individual.get('nationality')?.value &&
+                  individual.get('nationality')?.value !== 'BW'
+                "
+              >
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="dateOfOmangExpiry">Passport Expiry</label>
+
+                  <input
+                    type="date"
+                    [min]="minDateOfOmangExpiry"
+                    formControlName="foreignPassportExpiry"
+                    class="form-control form-control-sm form-control-solid"
+                  />
+
+                  <div
+                    class="invalid-feedback d-block"
+                    *ngIf="individual.get('foreignPassportExpiry')?.invalid"
+                  >
+                    <span *ngIf="individual.get('foreignPassportExpiry')?.hasError('required')">
+                      Foreign Passport Expiry is required
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- - Physical Disability -->
+              <div class="col-lg-8 d-flex flex-row gap-10">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="disability">
+                    Are You a Person Living with Disability?
+                  </label>
+
+                  <div class="d-flex flex-row flex-wrap gap-8">
+                    <div
+                      class="form-check form-check-success form-check-custom form-check-solid form-check-lg"
+                    >
+                      <input
+                        class="form-check-input"
+                        formControlName="disability"
+                        type="radio"
+                        [value]="true"
+                        id="flexCheckboxLg"
+                      />
+                      <label class="form-check-label" for="flexCheckboxLg">Yes</label>
+                    </div>
+                    <div
+                      class="form-check form-check-custom form-check-danger form-check-solid form-check-lg"
+                    >
+                      <input
+                        class="form-check-input"
+                        formControlName="disability"
+                        type="radio"
+                        [value]="false"
+                        checked
+                        id="flexCheckboxSm"
+                      />
+                      <label class="form-check-label" for="flexCheckboxSm">No</label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Disability Type -->
+                <div *ngIf="individual.get('disability')?.value" class="form-group mb-5 flex-1">
+                  <label class="form-label required" for="disabilityType">
+                    Select Disability Type
+                  </label>
+                  <app-select
+                    placeholder="Select Disability Type"
+                    formControlName="disabilityType"
+                    [options]="[
+                      { label: 'Visual Disability', value: 'visual' },
+                      { label: 'Hearing Disability', value: 'hearing' },
+                      { label: 'Mobility Disability', value: 'mobility' },
+                      { label: 'Cognitive Disability', value: 'cognitive' },
+                      { label: 'Other Disability', value: 'other' }
+                    ]"
+                  ></app-select>
+                </div>
+              </div>
+              <!-- - Physical Disability Callout -->
+              <div
+                *ngIf="individual.get('disabilityType')?.value && !isApplicationDisabled"
+                class="col-12"
+              >
+                <div
+                  style="background: #ffc3c378"
+                  class="d-flex border-dashed rounded-3 border border-danger shadow-sm mb-10 p-6"
+                >
+                  <!--begin::Icon-->
+                  <i class="fas fa-warning fs-2tx text-danger me-4"></i>
+
+                  <div class="d-flex flex-column flex-stack flex-grow-1">
+                    <!--begin::Content-->
+                    <div class="fw-semibold w-100 ms-8">
+                      <h2>Pay Attention</h2>
+                      <h4 class="text-gray-900 fw-normal">
+                        Document Upload for Applicants with Disabilities
+                      </h4>
+
+                      <p class="fs-6 text-gray-800">
+                        If you have any type of disability, we require you to upload supporting
+                        documents to facilitate the loan application process.
+                      </p>
+                      <p class="fs-6 text-gray-800">Please follow these steps:</p>
+                      <ol>
+                        <li class="fs-6 text-gray-800">
+                          Prepare the necessary document(s) confirming your disability, such as
+                          medical certificates or disability cards.
+                        </li>
+                        <li class="fs-6 text-gray-800">
+                          Scan or photograph the document(s) clearly, ensuring all relevant details
+                          are visible.
+                        </li>
+                        <li class="fs-6 text-gray-800">
+                          <strong>Proceed</strong>
+                          to securely upload the document(s) in
+                          <strong>upload document section</strong>
+                          .
+                        </li>
+                      </ol>
+                      <p class="fs-6 text-gray-800">
+                        Your privacy is paramount, and all information will be handled in accordance
+                        with our privacy policy.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- - ITC Docuements -->
+              <div class="col-lg-12 d-flex flex-row gap-10">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="creditCheck">Credit Check</label>
+
+                  <div class="d-flex flex-row flex-wrap gap-8">
+                    <div
+                      class="form-check form-check-success form-check-custom form-check-solid form-check-lg"
+                    >
+                      <input
+                        class="form-check-input"
+                        formControlName="creditCheck"
+                        type="radio"
+                        [value]="'clean'"
+                        id="flexCheckboxLg"
+                      />
+                      <label class="form-check-label" for="flexCheckboxLg">Clean</label>
+                    </div>
+                    <div
+                      class="form-check form-check-custom form-check-danger form-check-solid form-check-lg"
+                    >
+                      <input
+                        class="form-check-input"
+                        formControlName="creditCheck"
+                        type="radio"
+                        [value]="'adverse'"
+                        checked
+                        id="flexCheckboxSm"
+                      />
+                      <label class="form-check-label" for="flexCheckboxSm">Adverse</label>
+                    </div>
+                    <div
+                      class="form-check form-check-custom form-check-secondary form-check-solid form-check-lg"
+                    >
+                      <input
+                        class="form-check-input"
+                        formControlName="creditCheck"
+                        type="radio"
+                        [value]="'adverseWithoutClearanceCertificate'"
+                        checked
+                        id="flexCheckboxSm"
+                      />
+                      <label class="form-check-label" for="flexCheckboxSm">
+                        Adverse without Clearance Certificate
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- - Physical creditCheck Callout -->
+              <div
+                *ngIf="individual.get('creditCheck')?.value !== '' && !isApplicationDisabled"
+                class="col-12"
+              >
+                <div
+                  style="background: #ffc3c378"
+                  class="d-flex border-dashed rounded-3 border border-danger shadow-sm p-6"
+                >
+                  <i class="fas fa-warning fs-2tx text-danger me-4"></i>
+
+                  <div class="d-flex flex-column flex-stack flex-grow-1">
+                    <ng-container *ngIf="individual.get('creditCheck')?.value === 'clean'">
+                      <div class="fw-semibold w-100 ms-8">
+                        <h2>Pay Attention</h2>
+                        <h4 class="text-gray-900 fw-normal">
+                          Document Upload for Clean ITC Certificate
+                        </h4>
+
+                        <p class="fs-6 text-gray-800">
+                          To proceed with the credit check, we require you to upload your Clean ITC
+                          certificate as a part of the application process.
+                        </p>
+                        <p class="fs-6 text-gray-800">Please follow these steps:</p>
+                        <ol>
+                          <li class="fs-6 text-gray-800">
+                            Obtain a copy of your Clean ITC certificate from the relevant authority.
+                          </li>
+                          <li class="fs-6 text-gray-800">
+                            Scan or photograph the certificate clearly, ensuring all relevant
+                            details are visible.
+                          </li>
+                          <li class="fs-6 text-gray-800">
+                            <strong>Proceed</strong>
+                            to securely upload the Clean ITC certificate in the
+                            <strong>upload document section</strong>
+                            .
+                          </li>
+                        </ol>
+                        <p class="fs-6 text-gray-800">
+                          Your privacy is important to us, and all information will be handled in
+                          accordance with our privacy policy.
+                        </p>
+                      </div>
+                    </ng-container>
+
+                    <ng-container *ngIf="individual.get('creditCheck')?.value === 'adverse'">
+                      <div class="fw-semibold w-100 ms-8">
+                        <h2>Pay Attention</h2>
+                        <h4 class="text-gray-900 fw-normal">
+                          Document Upload for Adverse ITC Certificate with Clearance Letter
+                        </h4>
+
+                        <p class="fs-6 text-gray-800">
+                          To proceed with the credit check, we require you to upload your Adverse
+                          ITC certificate as a part of the application process. Additionally, if you
+                          have a Clearance Settlement Letter, you can also attach it.
+                        </p>
+                        <p class="fs-6 text-gray-800">Please follow these steps:</p>
+                        <ol>
+                          <li class="fs-6 text-gray-800">
+                            Obtain a copy of your Adverse ITC certificate from the relevant
+                            authority.
+                          </li>
+                          <li class="fs-6 text-gray-800">
+                            Scan or photograph the certificate clearly, ensuring all relevant
+                            details are visible.
+                          </li>
+                          <li class="fs-6 text-gray-800">
+                            <strong>If you have a Clearance Settlement Letter:</strong>
+                            <ol>
+                              <li class="fs-6 text-gray-800">
+                                Obtain a copy of your Clearance Settlement Letter.
+                              </li>
+                              <li class="fs-6 text-gray-800">
+                                Scan or photograph the letter clearly, ensuring all relevant details
+                                are visible.
+                              </li>
+                            </ol>
+                          </li>
+                          <li class="fs-6 text-gray-800">
+                            <strong>Proceed</strong>
+                            to securely upload the Adverse ITC certificate and, if applicable, the
+                            Clearance Settlement Letter in the
+                            <strong>upload document section</strong>
+                            .
+                          </li>
+                        </ol>
+                        <p class="fs-6 text-gray-800">
+                          Your privacy is important to us, and all information will be handled in
+                          accordance with our privacy policy.
+                        </p>
+                      </div>
+                    </ng-container>
+
+                    <ng-container
+                      *ngIf="
+                        individual.get('creditCheck')?.value ===
+                        'adverseWithoutClearanceCertificate'
+                      "
+                    >
+                      <div class="fw-semibold w-100 ms-8">
+                        <h2>Pay Attention</h2>
+                        <h4 class="text-gray-900 fw-normal">
+                          Application will not be Accepted with an Adverse Credit Check without a
+                          Clearance Certificate
+                        </h4>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </p-panel>
+
+          <p-panel header="C. Standard Address" [toggleable]="true">
+            <div class="row">
+              <!-- ! Standard Address Title -->
+              <div class="col-12">
+                <div class="text-center p-2">
+                  <span class="fs-4 fw-bold">Street Address</span>
+                </div>
+              </div>
+
+              <!-- Street Name -->
+
+              <div class="col-12 col-md-6">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="">Street Name</label>
+                  <div class="d-flex gap-2">
+                    <input
+                      type="text"
+                      formControlName="addrPlot"
+                      class="form-control form-control-sm form-control-solid"
+                      placeholder=""
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- House Number -->
+
+              <div class="col-12 col-md-6">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="">House Number</label>
+                  <div class="d-flex gap-2">
+                    <input
+                      type="text"
+                      formControlName="addrSuburb"
+                      class="form-control form-control-sm form-control-solid"
+                      placeholder=""
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Postal Address / City -->
+
+              <div class="col-12 col-md-6">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="">Postal Code / City</label>
+
+                  <div class="d-flex gap-2">
+                    <input
+                      type="text"
+                      formControlName="addrTown"
+                      placeholder=""
+                      class="form-control form-control-sm form-control-solid"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Standard Country Address -->
+              <div class="col-12 col-md-6">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="addrCountry">Country</label>
+
+                  <app-country-dropdown formControlName="addrCountry"></app-country-dropdown>
+                </div>
+              </div>
+
+              <!-- Standard Addrress Po Box Address -->
+
+              <div class="col-12">
+                <div class="text-center p-2">
+                  <span class="fs-4 fw-bold">Postal Addresses</span>
+                </div>
+              </div>
+
+              <!-- Postal Addr PoBox -->
+              <div class="col-12 col-md-6">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="">Postal Address</label>
+                  <input
+                    type="text"
+                    formControlName="postalAddrPoBox"
+                    class="form-control form-control-sm form-control-solid"
+                  />
+                </div>
+              </div>
+
+              <!-- Postal Addr Town -->
+              <div class="col-12 col-md-6">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="">Postal Address Town</label>
+                  <input
+                    type="text"
+                    formControlName="postalAddrTown"
+                    class="form-control form-control-sm form-control-solid"
+                  />
+                </div>
+              </div>
+            </div>
+          </p-panel>
+
+          <p-panel header="D. Home Village Address" [toggleable]="true">
+            <div class="row">
+              <!-- - Copy Address Button/Checkbox -->
+              <div class="col-12">
+                <div class="form-check form-check-solid form-check-lg">
+                  <label class="form-check-label">Same as standard address ?</label>
+
+                  <input
+                    (change)="homeVillageAddressSameAsStandard($event, individual, i)"
+                    type="checkbox"
+                    class="form-check-input"
+                    [disabled]="isApplicationDisabled"
+                    style="border: 2px solid var(--kt-primary)"
+                  />
+                </div>
+              </div>
+
+              <!-- - Home Village Street Name  -->
+              <div class="col-12 col-md-6">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="hvAddrSuburb">Street Name / Kgotla</label>
+                  <div class="d-flex gap-2">
+                    <input
+                      type="text"
+                      formControlName="hvAddrPlot"
+                      class="form-control form-control-sm form-control-solid"
+                      placeholder=""
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- - House Number -->
+              <div class="col-12 col-md-6">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="hvAddrSuburb">House Number</label>
+                  <div class="d-flex gap-2">
+                    <input
+                      type="text"
+                      formControlName="hvAddrSuburb"
+                      class="form-control form-control-sm form-control-solid"
+                      placeholder=""
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- - Home Village Postal Code / City -->
+              <div class="col-12 col-md-6">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="">Village</label>
+                  <input
+                    type="text"
+                    formControlName="hvAddrTown"
+                    class="form-control form-control-sm form-control-solid"
+                  />
+                </div>
+              </div>
+
+              <!-- - Home Village Country -->
+              <div class="col-12 col-md-6">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="hvAddrCountry">Country</label>
+
+                  <app-country-dropdown formControlName="hvAddrCountry"></app-country-dropdown>
+                </div>
+              </div>
+            </div>
+          </p-panel>
+
+          <p-panel header="E. Next of KIN Address" [toggleable]="true">
+            <div class="row">
+              <div
+                class="col-12"
+                *ngIf="individualList.controls[i].errors?.addressesMustBeDifferent"
+              >
+                <div
+                  class="invalid-feedback d-block"
+                  style="color: red; font-size: 14px; padding-top: 5px; padding-bottom: 5px"
+                >
+                  <em>Note:</em>
+                  Next of KIN Address must be different from Alternative Contact
+                </div>
+              </div>
+
+              <!-- Name of next kin -->
+              <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="">Name</label>
+                  <input
+                    formControlName="nkName"
+                    type="text"
+                    class="form-control form-control-sm form-control-solid"
+                  />
+                </div>
+              </div>
+
+              <!-- Name of surname -->
+              <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="">Surname</label>
+                  <input
+                    formControlName="nkSurname"
+                    type="text"
+                    class="form-control form-control-sm form-control-solid"
+                  />
+                </div>
+              </div>
+
+              <!-- Relation Ship -->
+              <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="">Relationship</label>
+                  <input
+                    type="text"
+                    formControlName="nkRelationship"
+                    class="form-control form-control-sm form-control-solid"
+                  />
+                </div>
+              </div>
+
+              <!-- Contact number -->
+              <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="">Contact Number</label>
+                  <!-- Appending Country Code  -->
+                  <div
+                    class="position-relative input-group input-group-sm input-group-solid d-flex flex-wrap gap-2"
+                  >
+                    <!-- Input Dropdown -->
+                    <div class="input-group-prepend flex-column flex-sm-row">
+                      <app-tel-country-code
+                        [formControlName]="'nkContactCountryCode'"
+                      ></app-tel-country-code>
+                    </div>
+
+                    <input
+                      type="text"
+                      formControlName="nkContact"
+                      class="form-control form-control-sm form-control-solid"
+                      appDigitOnly
+                    />
+                  </div>
+                  <!-- Error -->
+                  <div
+                    class="invalid-feedback d-block"
+                    *ngIf="
+                      individual.get('nkContact')?.dirty || individual.get('nkContact')?.touched
+                    "
+                  >
+                    <div
+                      *ngIf="
+                        !checkMobileValidity(
+                          individual.get('nkContact')?.value,
+                          individual.get('nkContactCountryCode')?.value
+                        )
+                      "
+                    >
+                      Contact Number is invalid
+                    </div>
+                    <div *ngIf="individual.errors?.kinContactsWithinNotDifferent">
+                      KIN Contact should be unique, and the Contact is already in use for
+                      Alternative KIN Contact
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Address: Street Name -->
+              <div class="col-12 col-md-6">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="addrSuburb">Street Name</label>
+                  <div class="d-flex gap-2">
+                    <input
+                      type="text"
+                      formControlName="nkAddrPlot"
+                      class="form-control form-control-sm form-control-solid"
+                      placeholder=""
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Address: House Number -->
+              <div class="col-12 col-md-6">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="addrSuburb">House Number</label>
+                  <div class="d-flex gap-2">
+                    <input
+                      type="text"
+                      formControlName="nkAddrSuburb"
+                      class="form-control form-control-sm form-control-solid"
+                      placeholder=""
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Address: Postal Code / City -->
+              <div class="col-12 col-md-6">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="addrTown">Postal Code / City</label>
+                  <input
+                    type="text"
+                    formControlName="nkAddrTown"
+                    class="form-control form-control-sm form-control-solid"
+                  />
+                </div>
+              </div>
+
+              <!-- Addr Country -->
+              <div class="col-12 col-md-6">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="nkAddrCountry">Country</label>
+
+                  <app-country-dropdown formControlName="nkAddrCountry"></app-country-dropdown>
+                </div>
+              </div>
+            </div>
+          </p-panel>
+
+          <p-panel
+            [header]="'F. Alternative Contact (Next of KIN not living with you)'"
+            [toggleable]="true"
+          >
+            <div class="row">
+              <div
+                class="col-12"
+                *ngIf="individualList.controls[i].errors?.addressesMustBeDifferent"
+              >
+                <div
+                  class="invalid-feedback d-block"
+                  style="color: red; font-size: 14px; padding-top: 5px; padding-bottom: 5px"
+                >
+                  <em>Note:</em>
+                  Alternative Contact must be different from Next of KIN Address
+                </div>
+              </div>
+
+              <!-- Name of next kin -->
+              <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="">Name</label>
+                  <input
+                    formControlName="nkName2"
+                    type="text"
+                    class="form-control form-control-sm form-control-solid"
+                  />
+                </div>
+              </div>
+
+              <!-- Name of surname -->
+              <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="">Surname</label>
+                  <input
+                    formControlName="nkSurname2"
+                    type="text"
+                    class="form-control form-control-sm form-control-solid"
+                  />
+                </div>
+              </div>
+
+              <!-- Relation Ship -->
+              <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="">Relationship</label>
+                  <input
+                    type="text"
+                    formControlName="nkRelationship2"
+                    class="form-control form-control-sm form-control-solid"
+                  />
+                </div>
+              </div>
+
+              <!-- Contact number -->
+              <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="">Contact Number</label>
+                  <!-- Appending Country Code  -->
+                  <div
+                    class="position-relative input-group input-group-sm input-group-solid d-flex flex-wrap gap-2"
+                  >
+                    <!-- Input Dropdown -->
+                    <div class="input-group-prepend flex-column flex-sm-row">
+                      <app-tel-country-code
+                        [formControlName]="'nkContact2CountryCode'"
+                      ></app-tel-country-code>
+                    </div>
+
+                    <input
+                      type="text"
+                      formControlName="nkContact2"
+                      class="form-control form-control-sm form-control-solid"
+                      appDigitOnly
+                    />
+                  </div>
+
+                  <!-- Error -->
+                  <div
+                    class="invalid-feedback d-block"
+                    *ngIf="
+                      individual.get('nkContact2')?.dirty || individual.get('nkContact2')?.touched
+                    "
+                  >
+                    <div
+                      *ngIf="
+                        !checkMobileValidity(
+                          individual.get('nkContact2')?.value,
+                          individual.get('nkContact2CountryCode')?.value
+                        )
+                      "
+                    >
+                      Contact Number is invalid
+                    </div>
+
+                    <div *ngIf="individual.errors?.kinContactsWithinNotDifferent">
+                      Alternative KIN Contact should be unique, and the Contact is already in use
+                      for KIN Contact
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Address: Street -->
+              <div class="col-12 col-md-6">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="addrSuburb">Street Name</label>
+                  <div class="d-flex gap-2">
+                    <input
+                      type="text"
+                      formControlName="nkAddrPlot2"
+                      class="form-control form-control-sm form-control-solid"
+                      placeholder=""
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Address: House Number -->
+              <div class="col-12 col-md-6">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="addrSuburb">House Number</label>
+                  <div class="d-flex gap-2">
+                    <input
+                      type="text"
+                      formControlName="nkAddrSuburb2"
+                      class="form-control form-control-sm form-control-solid"
+                      placeholder=""
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Address: Postal Code / City -->
+              <div class="col-12 col-md-6">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="addrTown">Postal Code / City</label>
+                  <input
+                    type="text"
+                    formControlName="nkAddrTown2"
+                    class="form-control form-control-sm form-control-solid"
+                  />
+                </div>
+              </div>
+
+              <!-- Addr Country -->
+              <div class="col-12 col-md-6">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="nkAddrCountry">Country</label>
+
+                  <app-country-dropdown formControlName="nkAddrCountry2"></app-country-dropdown>
+                </div>
+              </div>
+            </div>
+          </p-panel>
+
+          <p-panel *ngIf="false" header="G. Business Address" [toggleable]="true">
+            <!-- Business Address rows -->
+            <div class="row">
+              <!-- Business Address Street Name -->
+              <div class="col-12 col-md-6">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="bussAddrSuburb">Street Name</label>
+
+                  <div class="d-flex gap-2">
+                    <input
+                      type="text"
+                      formControlName="bussAddrPlot"
+                      class="form-control form-control-sm form-control-solid"
+                      placeholder="Street Name"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Business Address House Number -->
+              <div class="col-12 col-md-6">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="bussAddrSuburb">House Number</label>
+
+                  <div class="d-flex gap-2">
+                    <input
+                      type="text"
+                      formControlName="bussAddrSuburb"
+                      class="form-control form-control-sm form-control-solid"
+                      placeholder="House Number"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Bussiness Address Postal Code / City -->
+              <div class="col-12 col-md-6">
+                <div class="form-group mb-5">
+                  <label class="form-label required">Postal Code / City</label>
+                  <input
+                    type="text"
+                    formControlName="bussAddrTown"
+                    class="form-control form-control-sm form-control-solid"
+                  />
+                </div>
+              </div>
+              <!-- Bussiness Address Country -->
+              <div class="col-lg-6">
+                <div class="form-group mb-5">
+                  <label class="form-label required" for="bussAddrCountry">Country</label>
+                  <app-country-dropdown formControlName="bussAddrCountry"></app-country-dropdown>
+                </div>
+              </div>
+
+              <!-- Bussiness Trading As -->
+              <div class="form-group mb-5">
+                <label class="form-label" for="bussAddrTradingAs">Trading As</label>
+                <input
+                  type="text"
+                  formControlName="bussAddrTradingAs"
+                  class="form-control form-control-sm form-control-solid"
+                />
+              </div>
+            </div>
+          </p-panel>
+        </div>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+
+  <!-- Individual Application Action Buttons -->
+  <div class="row mt-5">
+    <div class="col-lg-12">
+      <div class="d-flex flex-column flex-row-fluid">
+        <div class="d-flex flex-row justify-content-between">
+          <div class="previous-button">
+            <button
+              appClickable
+              *ngIf="loanApplicationType !== 'Individual'"
+              (click)="previousStep()"
+              type="button"
+              class="btn btn-light font-weight-bolder text-uppercase"
+            >
+              Previous
+            </button>
+          </div>
+
+          <div class="d-flex flex-row gap-5">
+            <div *ngIf="!isApplicationDisabled" class="save-button">
+              <button
+                appClickable
+                [disabled]="isApplicationDisabled || saveButtonDisabled"
+                (click)="saveApplication()"
+                class="btn btn-info fw-bold text-uppercase"
+              >
+                <span *ngIf="(loading$ | async) === false">Save</span>
+                <span *ngIf="(loading$ | async) === true" class="fa fa-spinner svg-spin"></span>
+              </button>
+            </div>
+
+            <!--   [ngStyle]="{
+                cursor: individualForm.invalid ? 'not-allowed' : 'pointer'
+              }"
+
+                [ngClass]="{
+                  'btn-primary': individualForm.valid,
+                  'btn-light-secondary': individualForm.invalid
+                }"
+               -->
+            <div
+              class="next-button"
+              [ngbTooltip]="
+                nextDisableForCreditCheck ? 'Adverse without Clearance Certificate Not Allowed' : ''
+              "
+            >
+              <button
+                [disabled]="nextDisableForCreditCheck"
+                appClickable
+                (click)="nextStep()"
+                type="button"
+                class="btn btn-primary font-weight-bolder text-uppercase"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<!-- OTP Verification Popup -->
+
+<app-popup #otpVerificationPopup>
+  <div class="d-flex flex-row flex-column-fluid">
+    <div class="d-flex flex-column flex-row-fluid">
+      <div class="d-flex flex-column justify-content-center align-items-center">
+        <div [formGroup]="otpForm" class="d-flex flex-column">
+          <div class="fw-bold text-center fs-2 ls-2 my-2">Enter OTP</div>
+
+          <app-otp-input
+            class="form-group"
+            [numberOfInputs]="4"
+            [formControlName]="'codeDigit'"
+          ></app-otp-input>
+
+          <div class="d-flex justify-content-end">
+            <a
+              href="javascript:void(0)"
+              (click)="reGenerateOtp()"
+              class="fs-6 fw-bold text-hover-danger text-primary p-3"
+            >
+              Resend OTP
+            </a>
+          </div>
+          <div class="separator separator-2 separator-dashed fs-3 mb-2"></div>
+
+          <div class="d-flex flex-row justify-content-center">
+            <button
+              type="button"
+              class="btn btn-primary btn-lg"
+              (click)="verifyContact(otpVerificationType, otpVerificationIndex)"
+            >
+              Verify
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-popup>

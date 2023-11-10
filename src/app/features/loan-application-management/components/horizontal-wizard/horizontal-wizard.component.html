@@ -1,0 +1,151 @@
+<div class="card">
+  <div class="card-header border-bottom-0 px-lg-10 px-4">
+    <div class="card-title">
+      <h3>Loan Application</h3>
+    </div>
+
+    <div class="card-toolbar d-flex flex-row flex-wrap gap-5">
+      <!-- Application Status -->
+      <ng-container *ngIf="!loanApplicationSapAppStatus">
+        <ng-container
+          *ngIf="
+            loanApplicationStatus === 'SUBMITTED' ||
+            loanApplicationStatus === 'ACCEPTED' ||
+            loanApplicationStatus === 'REJECTED' ||
+            loanApplicationStatus === 'REQUEST_FOR_CHANGE' ||
+            loanApplicationStatus === 'APPLICATION_NOT_ACCEPTED'
+          "
+        >
+          <div class="d-flex flex-center gap-5 text-center text-uppercase">
+            <span class="fs-5 me-3">Application Status:</span>
+
+            <ng-container *ngIf="loanApplicationStatus === 'SUBMITTED'">
+              <span class="badge badge-sm badge-info fs-5">Under Review</span>
+            </ng-container>
+
+            <ng-container *ngIf="loanApplicationStatus === 'ACCEPTED'">
+              <span class="badge badge-sm badge-success fs-5">Accepted</span>
+            </ng-container>
+
+            <ng-container
+              *ngIf="
+                loanApplicationStatus === 'REJECTED' ||
+                loanApplicationStatus === 'APPLICATION_NOT_ACCEPTED'
+              "
+            >
+              <span class="badge badge-sm badge-dark fs-5">Rejected</span>
+            </ng-container>
+
+            <ng-container *ngIf="loanApplicationStatus === 'REQUEST_FOR_CHANGE'">
+              <span class="badge badge-sm badge-warning fs-5">
+                Action Required
+                <!-- Need to add action message -->
+              </span>
+            </ng-container>
+
+            <span
+              (click)="viewLoanApplicationComment()"
+              [ngbTooltip]="'View Comment'"
+              class="btn btn-icon btn-hover-color-info pluse pulse-primary d-flex flex-center"
+            >
+              <span
+                [inlineSVG]="'./assets/media/icons/duotune/general/gen007.svg'"
+                class="svg-icon svg-icon-info svg-icon-2x"
+              ></span>
+              <span class="pulse-ring"></span>
+            </span>
+          </div>
+        </ng-container>
+      </ng-container>
+
+      <!-- SAP Application Status -->
+      <ng-container *ngIf="loanApplicationSapAppStatus">
+        <div class="d-flex flex-center gap-5 text-center text-uppercase">
+          <span class="fs-5 me-3">APPLICATION STATUS:</span>
+          <span class="badge badge-sm badge-primary fs-5">
+            {{ loanApplicationSapAppStatus | titlecase }}
+          </span>
+
+          <span
+            (click)="viewLoanApplicationComment()"
+            [ngbTooltip]="'View Comment'"
+            class="btn btn-icon btn-hover-color-info pluse pulse-primary d-flex flex-center"
+          >
+            <span
+              [inlineSVG]="'./assets/media/icons/duotune/general/gen007.svg'"
+              class="svg-icon svg-icon-info svg-icon-2x"
+            ></span>
+            <span class="pulse-ring"></span>
+          </span>
+        </div>
+      </ng-container>
+
+      <span
+        *ngIf="false"
+        (click)="viewLoanApplicationComment()"
+        [ngbTooltip]="'View Comment'"
+        class="btn btn-icon btn-hover-color-info pluse pulse-primary d-flex flex-center"
+      >
+        <span
+          [inlineSVG]="'./assets/media/icons/duotune/general/gen007.svg'"
+          class="svg-icon svg-icon-info svg-icon-2x"
+        ></span>
+        <span class="pulse-ring"></span>
+      </span>
+
+      <button
+        (click)="viewAdditionalDetails()"
+        class="btn btn-icon btn-hover-color-primary"
+        [ngbTooltip]="'View Additional Details'"
+      >
+        <!-- <i class="fa fa-info"></i> -->
+        <span
+          [inlineSVG]="'./assets/media/icons/info-2.svg'"
+          class="svg-icon svg-icon-info svg-icon-1"
+        ></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="border border-bottom-1 border-left-0 border-top-0 border-right-0">
+    <app-wizard-steps
+      *ngIf="steps.length > 0"
+      [steps]="steps"
+      [currentStep]="(currentStep$ | async) || 1"
+      [clickableStepCount]="clickableStepCount"
+      (currentStepChange)="onStepChanges($event)"
+    ></app-wizard-steps>
+  </div>
+
+  <div class="card-body p-0">
+    <div class="wizard">
+      <div class="wizard-content">
+        <ng-content select="app-wizard-content"></ng-content>
+      </div>
+
+      <div *ngIf="false" class="wizard-actions w-100">
+        <div class="d-flex flex-stack w-75">
+          <button (click)="prevStep()" class="btn btn-sm btn-outline-secondary btn-outline">
+            Prev
+          </button>
+          <button (click)="nextStep()" class="btn btn-outline-primary btn-sm btn-outline">
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-popup #metaDataModel>
+  <app-loan-application-metadata-updated
+    [loanApplicationComment]="this.loanApplicationComment"
+    [loanApplicationId]="currentApplicationId"
+    [loanApplicationSector]="loanApplicationSector"
+    [loanApplicationProductType]="loanApplicationProductType"
+    [loanApplicationType]="loanType"
+    [loanApplicationStatus]="loanApplicationStatus"
+    [loanApplicationSapAppStatus]="loanApplicationSapAppStatus"
+    [toggleApplicationMetadata]="true"
+  ></app-loan-application-metadata-updated>
+</app-popup>

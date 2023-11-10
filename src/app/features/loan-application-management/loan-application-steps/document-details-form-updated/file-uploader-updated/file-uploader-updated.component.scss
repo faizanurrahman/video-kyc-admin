@@ -1,0 +1,327 @@
+:host {
+  --addDocsCountVar: 1;
+}
+
+.addDocsCount {
+  counter-increment: addDocsCountVar;
+}
+
+.addDocsCount::after {
+  content: counter(addDocsCountVar) ' ';
+}
+
+.dropzone {
+  min-height: auto;
+}
+
+.dropzone.dropzone-default {
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  border: 1px dashed #ebedf3;
+  border-radius: 0.42rem;
+}
+
+.dropzone.dropzone-default .dropzone-msg-title {
+  color: #3f4254;
+  margin: 0 0 5px 0;
+  padding: 0;
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+
+.dropzone.dropzone-default .dropzone-msg-desc {
+  color: #b5b5c3;
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.dropzone.dropzone-default .dz-preview .dz-image {
+  border-radius: 0.42rem;
+}
+
+.dropzone.dropzone-default .dz-error-message {
+  top: 145px;
+}
+
+.dropzone.dropzone-default .dz-remove {
+  color: #7e8299;
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-weight: 500;
+  -webkit-transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease,
+    -webkit-box-shadow 0.15s ease;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease,
+    -webkit-box-shadow 0.15s ease;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease,
+    box-shadow 0.15s ease;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease,
+    box-shadow 0.15s ease, -webkit-box-shadow 0.15s ease;
+}
+
+.dropzone.dropzone-default .dz-remove:hover {
+  -webkit-transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease,
+    -webkit-box-shadow 0.15s ease;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease,
+    -webkit-box-shadow 0.15s ease;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease,
+    box-shadow 0.15s ease;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease,
+    box-shadow 0.15s ease, -webkit-box-shadow 0.15s ease;
+  color: #8950fc;
+}
+
+.dropzone.dropzone-default.dropzone-primary {
+  border-color: #8950fc;
+}
+
+.dropzone.dropzone-default.dropzone-secondary {
+  border-color: #e4e6ef;
+}
+
+.dropzone.dropzone-default.dropzone-success {
+  border-color: #1bc5bd;
+}
+
+.dropzone.dropzone-default.dropzone-info {
+  border-color: #8950fc;
+}
+
+.dropzone.dropzone-default.dropzone-warning {
+  border-color: #ffa800;
+}
+
+.dropzone.dropzone-default.dropzone-danger {
+  border-color: #f64e60;
+}
+
+.dropzone.dropzone-default.dropzone-light {
+  border-color: #f3f6f9;
+}
+
+.dropzone.dropzone-default.dropzone-dark {
+  border-color: #181c32;
+}
+
+.dropzone.dropzone-default.dropzone-white {
+  border-color: #ffffff;
+}
+
+.dropzone.dropzone-multi {
+  // border: 0;
+  // padding: 0;
+  border: 1px dashed #cb6715;
+  padding: 1rem;
+  background: #fcf6f64d;
+  border-radius: 0.5rem;
+}
+
+.dropzone.dropzone-multi .dz-message {
+  display: none;
+}
+
+.dropzone.dropzone-multi .dropzone-panel {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.dropzone.dropzone-multi .dropzone-panel .dropzone-upload,
+.dropzone.dropzone-multi .dropzone-panel .dropzone-remove-all {
+  display: none;
+}
+
+.dropzone.dropzone-multi .dropzone-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-top: 0.75rem;
+  border-radius: 0.42rem;
+
+  padding: 0.5rem 1rem;
+  background-color: #ffffff;
+}
+
+.dropzone.dropzone-multi .dropzone-item .dropzone-file {
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.dropzone.dropzone-multi .dropzone-item .dropzone-file .dropzone-filename {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #7e8299;
+  text-overflow: ellipsis;
+  margin-right: 0.5rem;
+}
+
+.dropzone.dropzone-multi .dropzone-item .dropzone-file .dropzone-filename b {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #b5b5c3;
+}
+
+.dropzone.dropzone-multi .dropzone-item .dropzone-file .dropzone-error {
+  margin-top: 0.25rem;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #f64e60;
+  text-overflow: ellipsis;
+}
+
+.dropzone.dropzone-multi .dropzone-item .dropzone-progress {
+  width: 15%;
+}
+
+.dropzone.dropzone-multi .dropzone-item .dropzone-progress .progress {
+  background-color: #d5e3f1;
+  height: 5px;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dropzone.dropzone-multi .dropzone-item .dropzone-progress .progress {
+    -webkit-transition: none;
+    transition: none;
+  }
+}
+
+.dropzone.dropzone-multi .dropzone-item .dropzone-toolbar {
+  margin-left: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+}
+
+.dropzone.dropzone-multi .dropzone-item .dropzone-toolbar .dropzone-start,
+.dropzone.dropzone-multi .dropzone-item .dropzone-toolbar .dropzone-cancel,
+.dropzone.dropzone-multi .dropzone-item .dropzone-toolbar .dropzone-delete {
+  height: 25px;
+  width: 25px;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  cursor: pointer;
+  -webkit-transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease,
+    -webkit-box-shadow 0.15s ease;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease,
+    -webkit-box-shadow 0.15s ease;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease,
+    box-shadow 0.15s ease;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease,
+    box-shadow 0.15s ease, -webkit-box-shadow 0.15s ease;
+}
+
+.dropzone.dropzone-multi .dropzone-item .dropzone-toolbar .dropzone-start i,
+.dropzone.dropzone-multi .dropzone-item .dropzone-toolbar .dropzone-cancel i,
+.dropzone.dropzone-multi .dropzone-item .dropzone-toolbar .dropzone-delete i {
+  -webkit-transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease,
+    -webkit-box-shadow 0.15s ease;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease,
+    -webkit-box-shadow 0.15s ease;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease,
+    box-shadow 0.15s ease;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease,
+    box-shadow 0.15s ease, -webkit-box-shadow 0.15s ease;
+  font-size: 0.8rem;
+  color: #7e8299;
+}
+
+.dropzone.dropzone-multi .dropzone-item .dropzone-toolbar .dropzone-start:hover,
+.dropzone.dropzone-multi .dropzone-item .dropzone-toolbar .dropzone-cancel:hover,
+.dropzone.dropzone-multi .dropzone-item .dropzone-toolbar .dropzone-delete:hover {
+  -webkit-transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease,
+    -webkit-box-shadow 0.15s ease;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease,
+    -webkit-box-shadow 0.15s ease;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease,
+    box-shadow 0.15s ease;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease,
+    box-shadow 0.15s ease, -webkit-box-shadow 0.15s ease;
+}
+
+.dropzone.dropzone-multi .dropzone-item .dropzone-toolbar .dropzone-start:hover i,
+.dropzone.dropzone-multi .dropzone-item .dropzone-toolbar .dropzone-cancel:hover i,
+.dropzone.dropzone-multi .dropzone-item .dropzone-toolbar .dropzone-delete:hover i {
+  color: #8950fc;
+}
+
+.dropzone.dropzone-multi .dropzone-item .dropzone-toolbar .dropzone-start {
+  -webkit-transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease,
+    -webkit-box-shadow 0.15s ease;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease,
+    -webkit-box-shadow 0.15s ease;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease,
+    box-shadow 0.15s ease;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease,
+    box-shadow 0.15s ease, -webkit-box-shadow 0.15s ease;
+}
+
+::ng-deep {
+
+  /* Center the Swal popup */
+  .swal2-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Style the Swal popup */
+  .swal2-popup {
+    background-color: #fff;
+    border-radius: 8px;
+    // padding: 20px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+    font-family: 'Poppins', sans-serif;
+  }
+
+  /* Style the title */
+  .swal2-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  /* Style the message */
+  .swal2-html-container {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+
+  /* Style the buttons */
+  .swal2-actions {
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Style the confirm button */
+  .swal2-confirm {
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    outline: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .swal2-confirm:hover {}
+
+  .swal2-image {
+    margin: 5px;
+    border-radius: 5px;
+  }
+}

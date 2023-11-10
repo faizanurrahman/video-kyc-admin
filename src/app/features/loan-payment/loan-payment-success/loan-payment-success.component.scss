@@ -1,0 +1,85 @@
+.success-header {
+  background-color: #ffffff;
+  color: #10a635;
+  padding: 20px;
+  text-align: center;
+  font-size: 30px;
+  border-radius: 15px;
+
+}
+
+/* Add styling for the success message */
+.success-message {
+  text-align: center;
+  font-size: 26px;
+  margin-top: 1px;
+  padding: 10px 20px;
+  background: green;
+  color: white;
+  font-weight: 400;
+  border-radius: 20px;
+}
+
+/* Add styling for the loan information */
+.loan-info {}
+
+/* Add styling for the success badge */
+.success-badge {
+  background-color: green;
+  color: white;
+  padding: 5px;
+  font-size: 12px;
+  border-radius: 5px;
+
+}
+
+/* Add styling for the navigation button */
+#dashboard-btn {
+  background-color: #4285f4;
+  color: white;
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 5px;
+  margin-top: 50px;
+  cursor: pointer;
+}
+
+
+
+.premium-container {
+  background-color: white;
+  border: 1px solid #e9ecef;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px auto;
+}
+
+.premium-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.transaction-box {
+  background-color: #f8f9fa;
+  border: 2px solid #dee2e6;
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.transaction-box span {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.success-badge {
+  background-color: #28a745;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+}

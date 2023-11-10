@@ -1,0 +1,543 @@
+<form [formGroup]="loanApplicationDetailsForm" (ngSubmit)="onSubmit()">
+  <input
+    type="hidden"
+    formControlName="id"
+    class="form-control form-control-sm form-control-solid"
+  />
+
+  <input
+    type="hidden"
+    formControlName="applicationId"
+    class="form-control form-control-sm form-control-solid"
+  />
+  <input
+    type="hidden"
+    formControlName="sessionId"
+    class="form-control form-control-sm form-control-solid"
+  />
+
+  <!-- --- HIDDEN -->
+  <div *ngIf="false" class="row">
+    <!-- Loan Amount -->
+    <div class="col-md-6">
+      <div class="form-group mb-5">
+        <label class="form-label required" for="">Application Amount</label>
+        <div
+          class="position-relative input-group input-group-sm input-group-solid d-flex flex-wrap gap-2"
+        >
+          <div class="input-group-prepend">
+            <span class="input-group-text">P</span>
+          </div>
+          <input
+            appDigitOnly
+            type="text"
+            formControlName="applicationAmount"
+            class="form-control form-control-sm form-control-solid"
+          />
+        </div>
+        <!-- <input type="text" formControlName="applicationAmount"
+                  class="form-control form-control-sm form-control-solid" /> -->
+
+        <!-- Error Handling -->
+        <div
+          *ngIf="applicationAmount.dirty && applicationAmount.invalid"
+          class="invalid-feedback d-block"
+        >
+          <div *ngIf="applicationAmount.errors?.required">Application Amount is required</div>
+
+          <div *ngIf="applicationAmount.errors?.pattern">Application Amount must be a number</div>
+          <div *ngIf="applicationAmount.errors?.max">
+            Maximum Allowed Amount is: P
+            {{ formatNumber(applicationAmount.errors?.max.max.toString()) }}
+
+            <metronic-popover *ngIf="false" popoverClasses="w-lg-400px">
+              <div class="cursor-pointer" popover-trigger>
+                <i class="bi bi-info-circle text-danger"></i>
+              </div>
+
+              <div class="d-flex flex-column p-5" popover-content>
+                <h4 class="text-center text-dark">
+                  <span>Current Loan Limit Breakdown</span>
+                </h4>
+                <div *ngIf="false" class="table-responsive">
+                  <table class="table gs-2 gy-2">
+                    <thead>
+                      <tr>
+                        <th class="text-muted fw-bold text-start">Contract Number</th>
+                        <th class="text-muted fw-bold text-end">Balance</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <ng-container *ngIf="allLoans.length > 0">
+                        <tr *ngFor="let item of allLoans">
+                          <td class="text-start">{{ item.accountNo }}</td>
+                          <td class="text-end">P {{ formatNumber(item.balance) }}</td>
+                        </tr>
+                      </ng-container>
+                      <ng-container *ngIf="allLoans.length === 0">
+                        <tr>
+                          <td colspan="2" class="text-center">No Loans Found</td>
+                        </tr>
+                      </ng-container>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="d-flex justify-content-end">
+                  <div class="mw-300px">
+                    <div class="d-flex flex-stack mb-2">
+                      <div class="fw-semibold pe-10 text-gray-600 fs-7">
+                        Maximum Allowed Amount:
+                      </div>
+
+                      <div class="text-end fw-bold fs-6 text-gray-800">
+                        P {{ formatNumber(maxAllowedAmount.toString()) }}
+                      </div>
+                      <!--end::Label-->
+                    </div>
+                    <div
+                      *ngIf="false"
+                      class="d-flex flex-stack mb-3 border-bottom border-bottom-dashed border-bottom-1 border-gray-600"
+                    >
+                      <div class="fw-semibold pe-10 text-gray-600 fs-7">Previous Amounts:</div>
+
+                      <div class="text-end fw-bold fs-6 text-gray-800">
+                        - P
+                        {{ allLoans.length > 0 ? formatNumber(calculateAllLoanSum()) : '0.00' }}
+                      </div>
+                    </div>
+
+                    <!--end::Item-->
+
+                    <!--begin::Item-->
+                    <div class="d-flex flex-stack">
+                      <!--begin::Code-->
+                      <div class="fw-semibold pe-10 text-gray-600 fs-7">Current Loan Limit:</div>
+                      <!--end::Code-->
+
+                      <!--begin::Label-->
+                      <div class="text-end fw-bold fs-6 text-gray-800">
+                        <ng-container *ngIf="nowMaxAllowedAmount < 0">-</ng-container>
+                        P {{ formatNumber(abs(nowMaxAllowedAmount).toString()) }}
+                      </div>
+                      <!--end::Label-->
+                    </div>
+                    <!--end::Item-->
+                  </div>
+
+                  <!-- <div class="fw-normal fs-6">
+                    You are eligible to apply for a loan of up to P {{ this.maxAllowedAmount }}
+                  </div> -->
+                  <!--end::Section-->
+                </div>
+              </div>
+            </metronic-popover>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product -->
+    <div class="col-md-6">
+      <div class="form-group mb-5">
+        <label class="form-label required" for="product">Project Description</label>
+        <input
+          type="text"
+          formControlName="product"
+          class="form-control form-control-sm form-control-solid"
+        />
+        <div *ngIf="product.dirty && product.invalid" class="invalid-feedback d-block">
+          <div *ngIf="product.errors?.required">Product is required</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- --- HIDDEN -->
+  <div *ngIf="false" class="row">
+    <!-- Preffered Service Name -->
+    <div class="col-md-12">
+      <div class="form-group mb-5">
+        <label class="form-label required" for="branchId">Nearest Branch</label>
+
+        <select formControlName="branchId" class="form-select form-select-sm form-select-solid">
+          <option value="" disabled>Select Branch</option>
+          <option *ngFor="let branch of nearestBranches; let i = index" [value]="branch.key">
+            {{ branch.value }}
+          </option>
+        </select>
+
+        <div class="fv-help-block form-text fs-6" style="color: #ff0000">
+          <span class="fw-bold">Note</span>
+          : Please Select a branch nearest to your project.
+        </div>
+        <!-- Error Handling -->
+      </div>
+    </div>
+  </div>
+
+  <div class="" [formArrayName]="'individualApplicationDetails'">
+    <p-tabView
+      *ngIf="individualApplicationDetails.controls"
+      [(activeIndex)]="activeIndex"
+      [scrollable]="true"
+    >
+      <p-tabPanel
+        *ngFor="let individual of individualApplicationDetails.controls!; let i = index"
+        [header]="'Individual ' + (i + 1)"
+      >
+        <div [formGroupName]="i">
+          <input type="hidden" formControlName="id" />
+          <input type="hidden" formControlName="individualId" />
+
+          <div class="row">
+            <!-- Loan Amount -->
+            <div class="col-md-6">
+              <div class="form-group mb-5">
+                <label class="form-label required" for="">Savings</label>
+                <div
+                  class="position-relative input-group input-group-sm input-group-solid d-flex flex-wrap gap-2"
+                >
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">P</span>
+                  </div>
+                  <input
+                    appDigitOnly
+                    type="text"
+                    formControlName="memberSaving"
+                    class="form-control form-control-sm form-control-solid"
+                  />
+                </div>
+                <!-- <input type="text" formControlName="applicationAmount"
+                  class="form-control form-control-sm form-control-solid" /> -->
+
+                <!-- Error Handling -->
+                <div
+                  *ngIf="applicationAmount.dirty && applicationAmount.invalid"
+                  class="invalid-feedback d-block"
+                >
+                  <div *ngIf="applicationAmount.errors?.required">
+                    Application Amount is required
+                  </div>
+
+                  <div *ngIf="applicationAmount.errors?.pattern">
+                    Application Amount must be a number
+                  </div>
+                  <div *ngIf="applicationAmount.errors?.max">
+                    Maximum Allowed Amount is: P
+                    {{ formatNumber(applicationAmount.errors?.max.max.toString()) }}
+
+                    <metronic-popover *ngIf="false" popoverClasses="w-lg-400px">
+                      <div class="cursor-pointer" popover-trigger>
+                        <i class="bi bi-info-circle text-danger"></i>
+                      </div>
+
+                      <div class="d-flex flex-column p-5" popover-content>
+                        <h4 class="text-center text-dark">
+                          <span>Current Loan Limit Breakdown</span>
+                        </h4>
+                        <div *ngIf="false" class="table-responsive">
+                          <table class="table gs-2 gy-2">
+                            <thead>
+                              <tr>
+                                <th class="text-muted fw-bold text-start">Contract Number</th>
+                                <th class="text-muted fw-bold text-end">Balance</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <ng-container *ngIf="allLoans.length > 0">
+                                <tr *ngFor="let item of allLoans">
+                                  <td class="text-start">{{ item.accountNo }}</td>
+                                  <td class="text-end">P {{ formatNumber(item.balance) }}</td>
+                                </tr>
+                              </ng-container>
+                              <ng-container *ngIf="allLoans.length === 0">
+                                <tr>
+                                  <td colspan="2" class="text-center">No Loans Found</td>
+                                </tr>
+                              </ng-container>
+                            </tbody>
+                          </table>
+                        </div>
+
+                        <div class="d-flex justify-content-end">
+                          <div class="mw-300px">
+                            <div class="d-flex flex-stack mb-2">
+                              <div class="fw-semibold pe-10 text-gray-600 fs-7">
+                                Maximum Allowed Amount:
+                              </div>
+
+                              <div class="text-end fw-bold fs-6 text-gray-800">
+                                P {{ formatNumber(maxAllowedAmount.toString()) }}
+                              </div>
+                              <!--end::Label-->
+                            </div>
+                            <div
+                              *ngIf="false"
+                              class="d-flex flex-stack mb-3 border-bottom border-bottom-dashed border-bottom-1 border-gray-600"
+                            >
+                              <div class="fw-semibold pe-10 text-gray-600 fs-7">
+                                Previous Amounts:
+                              </div>
+
+                              <div class="text-end fw-bold fs-6 text-gray-800">
+                                - P
+                                {{
+                                  allLoans.length > 0 ? formatNumber(calculateAllLoanSum()) : '0.00'
+                                }}
+                              </div>
+                            </div>
+
+                            <!--end::Item-->
+
+                            <!--begin::Item-->
+                            <div class="d-flex flex-stack">
+                              <!--begin::Code-->
+                              <div class="fw-semibold pe-10 text-gray-600 fs-7">
+                                Current Loan Limit:
+                              </div>
+                              <!--end::Code-->
+
+                              <!--begin::Label-->
+                              <div class="text-end fw-bold fs-6 text-gray-800">
+                                <ng-container *ngIf="nowMaxAllowedAmount < 0">-</ng-container>
+                                P {{ formatNumber(abs(nowMaxAllowedAmount).toString()) }}
+                              </div>
+                              <!--end::Label-->
+                            </div>
+                            <!--end::Item-->
+                          </div>
+
+                          <!-- <div class="fw-normal fs-6">
+                    You are eligible to apply for a loan of up to P {{ this.maxAllowedAmount }}
+                  </div> -->
+                          <!--end::Section-->
+                        </div>
+                      </div>
+                    </metronic-popover>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Loan Amount -->
+            <div class="col-md-6">
+              <div class="form-group mb-5">
+                <label class="form-label required" for="">Application Amount</label>
+                <div
+                  class="position-relative input-group input-group-sm input-group-solid d-flex flex-wrap gap-2"
+                >
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">P</span>
+                  </div>
+                  <input
+                    appDigitOnly
+                    type="text"
+                    formControlName="applicationAmount"
+                    class="form-control form-control-sm form-control-solid"
+                  />
+                </div>
+                <!-- <input type="text" formControlName="applicationAmount"
+                  class="form-control form-control-sm form-control-solid" /> -->
+
+                <!-- Error Handling -->
+                <div
+                  *ngIf="applicationAmount.dirty && applicationAmount.invalid"
+                  class="invalid-feedback d-block"
+                >
+                  <div *ngIf="applicationAmount.errors?.required">
+                    Application Amount is required
+                  </div>
+
+                  <div *ngIf="applicationAmount.errors?.pattern">
+                    Application Amount must be a number
+                  </div>
+                  <div *ngIf="applicationAmount.errors?.max">
+                    Maximum Allowed Amount is: P
+                    {{ formatNumber(applicationAmount.errors?.max.max.toString()) }}
+
+                    <metronic-popover *ngIf="false" popoverClasses="w-lg-400px">
+                      <div class="cursor-pointer" popover-trigger>
+                        <i class="bi bi-info-circle text-danger"></i>
+                      </div>
+
+                      <div class="d-flex flex-column p-5" popover-content>
+                        <h4 class="text-center text-dark">
+                          <span>Current Loan Limit Breakdown</span>
+                        </h4>
+                        <div *ngIf="false" class="table-responsive">
+                          <table class="table gs-2 gy-2">
+                            <thead>
+                              <tr>
+                                <th class="text-muted fw-bold text-start">Contract Number</th>
+                                <th class="text-muted fw-bold text-end">Balance</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <ng-container *ngIf="allLoans.length > 0">
+                                <tr *ngFor="let item of allLoans">
+                                  <td class="text-start">{{ item.accountNo }}</td>
+                                  <td class="text-end">P {{ formatNumber(item.balance) }}</td>
+                                </tr>
+                              </ng-container>
+                              <ng-container *ngIf="allLoans.length === 0">
+                                <tr>
+                                  <td colspan="2" class="text-center">No Loans Found</td>
+                                </tr>
+                              </ng-container>
+                            </tbody>
+                          </table>
+                        </div>
+
+                        <div class="d-flex justify-content-end">
+                          <div class="mw-300px">
+                            <div class="d-flex flex-stack mb-2">
+                              <div class="fw-semibold pe-10 text-gray-600 fs-7">
+                                Maximum Allowed Amount:
+                              </div>
+
+                              <div class="text-end fw-bold fs-6 text-gray-800">
+                                P {{ formatNumber(maxAllowedAmount.toString()) }}
+                              </div>
+                              <!--end::Label-->
+                            </div>
+                            <div
+                              *ngIf="false"
+                              class="d-flex flex-stack mb-3 border-bottom border-bottom-dashed border-bottom-1 border-gray-600"
+                            >
+                              <div class="fw-semibold pe-10 text-gray-600 fs-7">
+                                Previous Amounts:
+                              </div>
+
+                              <div class="text-end fw-bold fs-6 text-gray-800">
+                                - P
+                                {{
+                                  allLoans.length > 0 ? formatNumber(calculateAllLoanSum()) : '0.00'
+                                }}
+                              </div>
+                            </div>
+
+                            <!--end::Item-->
+
+                            <!--begin::Item-->
+                            <div class="d-flex flex-stack">
+                              <!--begin::Code-->
+                              <div class="fw-semibold pe-10 text-gray-600 fs-7">
+                                Current Loan Limit:
+                              </div>
+                              <!--end::Code-->
+
+                              <!--begin::Label-->
+                              <div class="text-end fw-bold fs-6 text-gray-800">
+                                <ng-container *ngIf="nowMaxAllowedAmount < 0">-</ng-container>
+                                P {{ formatNumber(abs(nowMaxAllowedAmount).toString()) }}
+                              </div>
+                              <!--end::Label-->
+                            </div>
+                            <!--end::Item-->
+                          </div>
+
+                          <!-- <div class="fw-normal fs-6">
+                    You are eligible to apply for a loan of up to P {{ this.maxAllowedAmount }}
+                  </div> -->
+                          <!--end::Section-->
+                        </div>
+                      </div>
+                    </metronic-popover>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Product -->
+            <div class="col-md-6">
+              <div class="form-group mb-5">
+                <label class="form-label required" for="product">Project Description</label>
+                <input
+                  type="text"
+                  formControlName="product"
+                  class="form-control form-control-sm form-control-solid"
+                />
+                <div *ngIf="product.dirty && product.invalid" class="invalid-feedback d-block">
+                  <div *ngIf="product.errors?.required">Product is required</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <!-- Preffered Service Name -->
+            <div class="col-md-12">
+              <div class="form-group mb-5">
+                <label class="form-label required" for="branchId">Nearest Branch</label>
+
+                <select
+                  formControlName="branchId"
+                  class="form-select form-select-sm form-select-solid"
+                >
+                  <option value="" disabled>Select Branch</option>
+                  <option
+                    *ngFor="let branch of nearestBranches; let i = index"
+                    [value]="branch.key"
+                  >
+                    {{ branch.value }}
+                  </option>
+                </select>
+
+                <div class="fv-help-block form-text fs-6" style="color: #ff0000">
+                  <span class="fw-bold">Note</span>
+                  : Please Select a branch nearest to your project.
+                </div>
+                <!-- Error Handling -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+
+  <!-- Form Action -->
+  <div class="row mt-5">
+    <div class="col-lg-12">
+      <div class="d-flex flex-column flex-row-fluid">
+        <div class="d-flex flex-row justify-content-between">
+          <div class="previous-button">
+            <button
+              appClickable
+              (click)="previousStep()"
+              type="button"
+              class="btn btn-light font-weight-bolder text-uppercase"
+            >
+              Previous
+            </button>
+          </div>
+
+          <div class="d-flex flex-row gap-5">
+            <div *ngIf="!isApplicationDisabled" class="save-button">
+              <button
+                appClickable
+                [disabled]="isApplicationDisabled"
+                (click)="saveApplication()"
+                class="btn btn-info fw-bold text-uppercase"
+              >
+                <span *ngIf="(loading$ | async) === false">Save</span>
+                <span *ngIf="(loading$ | async) === true" class="fa fa-spinner svg-spin"></span>
+              </button>
+            </div>
+
+            <div class="next-button">
+              <button
+                appClickable
+                (click)="nextStep()"
+                type="button"
+                class="btn btn-primary font-weight-bolder text-uppercase"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

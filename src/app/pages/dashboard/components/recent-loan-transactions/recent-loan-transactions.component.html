@@ -1,0 +1,260 @@
+<!-- begin::Header -->
+<div class="card-header border-0">
+  <h3 class="card-title align-items-start flex-column">
+    <span class="fw-bold fs-3 text-danger">Loan Transactions</span>
+  </h3>
+
+  <div class="card-toolbar">
+    <ul class="nav nav-tabs nav-line-tabs nav-stretch fs-7 border-0">
+      <li class="nav-item">
+        <a
+          class="nav-link text-active-color-primary"
+          data-bs-toggle="tab"
+          href="javascript:void(0)"
+          [routerLink]="['/feature/loan-statements', { loanNumber: currentAccountNo }]"
+        >
+          See All
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          (click)="openPopupOpenItems()"
+          class="nav-link"
+          data-bs-toggle="tab"
+          href="javascript:void(0)"
+        >
+          Open Items
+        </a>
+      </li>
+    </ul>
+
+    <button
+      *ngIf="false"
+      class="btn btn-sm btn-active-color-primary btn-outline fw-bold px-4 me-1"
+      [routerLink]="['/feature/loan-statements', { loanNumber: currentAccountNo }]"
+    >
+      See All
+    </button>
+
+    <button
+      *ngIf="false"
+      (click)="openPopupOpenItems()"
+      class="btn btn-sm btn-active-color-primary btn-outline fw-bold px-4"
+    >
+      Open Items
+    </button>
+  </div>
+</div>
+
+<!-- end::Header -->
+<!-- begin::Body -->
+<div
+  class="card-body bg-body position-relative min-h-225px rounded rounded-4 h-100 w-100 pb-4 pt-0"
+  style="height: 300px !important; overflow-y: auto"
+>
+  <!-- begin::Table container -->
+  <div class="table-responsive h-100 w-100">
+    <!-- Table Loading Message Data Not Available -->
+    <div
+      *ngIf="(loader.loading$ | async) === false && loanStatements.length === 0"
+      class="table-loading-message h-100 w-100 d-flex flex-column flex-center"
+    >
+      <div class="no-record fw-normal text-dark-50 fs-5">No record Found!!</div>
+      <!-- <a (click)="refereshLoanStatement()" href="javascript:void(0)">
+        Referesh
+      </a> -->
+    </div>
+    <!-- Table Loading Message -->
+    <div
+      *ngIf="(loader.loading$ | async) === true"
+      class="table-loading-message h-100 w-100 d-flex flex-column flex-center bg-transparent"
+      style="backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px)"
+    >
+      <!-- <span
+        [inlineSVG]="'/assets/media/icons/loader.svg'"
+        class="svg-icon svg-icon-3x svg-spin"
+      ></span> -->
+      <!-- <app-loader></app-loader> -->
+      <div class="fw-normal text-dark-50 fs-5">
+        <!-- Please wait while we load the data... -->
+        Loading...
+      </div>
+    </div>
+    <!-- begin::Table -->
+    <table
+      auto-animate
+      [options]="{ duration: 300 }"
+      class="table table-hover table-row-bordered table-row-gray-200 align-middle gs-2 gy-3"
+    >
+      <!-- begin::Table head -->
+      <thead>
+        <tr class="border-0">
+          <th class="p-0 w-80px"></th>
+          <th class="p-0 w-100px"></th>
+          <th class="p-0"></th>
+        </tr>
+      </thead>
+      <!-- end::Table head -->
+      <!-- begin::Table body -->
+      <tbody>
+        <tr *ngFor="let item of loanStatements">
+          <td>
+            <app-mini-date
+              [day]="item.loanDate!"
+              [month]="item.loanMonth!"
+              [year]="item.loanYear!"
+            ></app-mini-date>
+          </td>
+
+          <td>
+            <a href="#" class="text-gray-800 fw-normal text-hover-primary mb-1 fs-6">
+              {{ item.docDesc }}
+            </a>
+            <div class="d-flex align-items-center justify-content-start">
+              <span class="text-muted fw-normal fs-8 me-2">Ref:</span>
+              <span class="text-gray-500 fw-normal fs-7">{{ item.docRef }}</span>
+            </div>
+            <!-- <span class="text-muted fw-bold d-block">{{
+                  item.loanNumber
+                }}</span> -->
+          </td>
+
+          <td class="text-center fs-6 text-gray-800 fw-normal">
+            <!-- <div class="d-block">{{ item.loanInterest }}</div> -->
+            <div class="d-flex flex-column flex-row-fluid fs-8">
+              <div
+                *ngIf="item.docDebit === '0.0' || item.docDebit === '0'"
+                class="mb-1 badge-light-danger bg-transparent"
+              >
+                <i class="fa fa-minus me-1 text-danger"></i>
+                P
+                {{ getDecimalValue(item.docCredit) }}
+              </div>
+
+              <div
+                *ngIf="item.docCredit === '0.0' || item.docCredit === '0'"
+                class="mb-1 badge-light-success bg-transparent"
+              >
+                <i class="fa fa-plus me-1 text-success"></i>
+                P
+                {{ getDecimalValue(item.docDebit) }}
+              </div>
+
+              <!-- <div *ngIf="item.docDebit === '0.0'" class="mb-1 badge badge-light-success bg-light">
+                <i class="fa fa-plus me-1 text-success"></i>
+                P
+                {{ item.docCredit }}
+              </div>
+
+              <div *ngIf="item.docCredit === '0.0'" class="text-nowrap">
+                <span class="mb-1 badge badge-light-danger bg-light">
+                  <i class="fa fa-minus me-1 text-danger"></i>
+                  P {{ item.docDebit }}
+                </span>
+              </div> -->
+
+              <div class="d-block">P {{ item.docBalance }}</div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+      <!-- end::Table body -->
+    </table>
+  </div>
+  <!-- end::Table -->
+</div>
+<!-- end::Body -->
+
+<app-popup #openItemPopup>
+  <!-- begin::Table container -->
+  <div class="table-responsive h-100 w-100">
+    <!-- Table Loading Message Data Not Available -->
+    <div
+      *ngIf="(loader.loading$ | async) === false && loanStatements.length === 0"
+      class="table-loading-message h-100 w-100 d-flex flex-column flex-center"
+    >
+      <div class="no-record fw-normal text-dark-50 fs-5">No record Found!!</div>
+      <!-- <a (click)="refereshLoanStatement()" href="javascript:void(0)">
+        Referesh
+      </a> -->
+    </div>
+    <!-- Table Loading Message -->
+    <div
+      *ngIf="(loader.loading$ | async) === true"
+      class="table-loading-message h-100 w-100 d-flex flex-column flex-center bg-transparent"
+      style="backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px)"
+    >
+      <!-- <span
+        [inlineSVG]="'/assets/media/icons/loader.svg'"
+        class="svg-icon svg-icon-3x svg-spin"
+      ></span> -->
+      <app-loader></app-loader>
+      <div class="text-muted fs-6 fw-bold mt-3">
+        <!-- Please wait while we load the data... -->
+        Loading...
+      </div>
+    </div>
+    <!-- begin::Table -->
+    <table class="table table-row-bordered table-row-gray-200 align-middle gs-2 gy-3">
+      <!-- begin::Table head -->
+      <thead>
+        <tr class="border-0">
+          <th class="p-0 w-80px"></th>
+          <th class="p-0"></th>
+          <th class="p-0"></th>
+        </tr>
+      </thead>
+      <!-- end::Table head -->
+      <!-- begin::Table body -->
+      <tbody>
+        <tr *ngFor="let item of openItemStatements">
+          <td>
+            <app-mini-date
+              [day]="item.loanDate!"
+              [month]="item.loanMonth!"
+              [year]="item.loanYear!"
+            ></app-mini-date>
+          </td>
+
+          <td>
+            <a href="#" class="text-gray-800 fw-normal text-hover-primary mb-1 fs-6">
+              {{ item.docDesc }}
+            </a>
+            <div class="d-flex align-items-center justify-content-start">
+              <span class="text-muted fw-normal fs-8 me-2">Ref:</span>
+              <span class="text-gray-500 fw-normal fs-7">{{ item.docRef }}</span>
+            </div>
+            <!-- <span class="text-muted fw-bold d-block">{{
+                  item.loanNumber
+                }}</span> -->
+          </td>
+
+          <td class="text-center fs-8 text-gray-800 fw-normal">
+            <!-- <div class="d-block">{{ item.loanInterest }}</div> -->
+            <div class="d-flex flex-column flex-row-fluid">
+              <div
+                *ngIf="item.docDebit === '0.0'"
+                class="mb-1 badge badge-light-denger bg-transparent"
+              >
+                <i class="fa fa-minus me-1 text-danger"></i>
+                P
+                {{ getDecimalValue(item.docCredit) }}
+              </div>
+
+              <div *ngIf="item.docCredit === '0.0'" class="text-nowrap">
+                <span class="mb-1 badge badge-light-success bg-transparent">
+                  <i class="fa fa-plus me-1 text-success"></i>
+                  P {{ getDecimalValue(item.docDebit) }}
+                </span>
+              </div>
+
+              <div class="d-block">P {{ getDecimalValue(item.docBalance) }}</div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+      <!-- end::Table body -->
+    </table>
+  </div>
+  <!-- end::Table -->
+</app-popup>

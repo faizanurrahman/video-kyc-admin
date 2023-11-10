@@ -1,0 +1,41 @@
+<ng-template #modal>
+
+  <div class="modal-header" *ngIf="popupConfig.data.showHeader === undefined || popupConfig.data.showHeader">
+    <!--begin::Modal title-->
+    <h2>{{ popupConfig.data.title }}</h2>
+    <!--end::Modal title-->
+
+
+    <!--begin::Close-->
+    <div class="btn btn-sm btn-icon btn-active-color-primary me-n2 position-relative z-index-1" (click)="dismiss()"
+      *ngIf="popupConfig.data.hideDismissButton === undefined || !popupConfig.data.hideDismissButton()">
+      <span class="svg-icon svg-icon-1" [inlineSVG]="'./assets/media/icons/duotune/arrows/arr061.svg'"></span>
+      <!--end::Svg Icon-->
+    </div>
+    <!--end::Close-->
+  </div>
+  <div class="d-flex justify-content-end pb-0"
+    *ngIf=" popupConfig.data.showHeader !== undefined && !popupConfig.data.showHeader">
+    <div *ngIf="popupConfig.data.hideDismissButton === undefined || !popupConfig.data.hideDismissButton()"
+      class="btn btn-sm btn-icon btn-active-color-primary  position-relative z-index-1" (click)="dismiss()">
+      <span class="svg-icon svg-icon-1" [inlineSVG]="'./assets/media/icons/duotune/arrows/arr061.svg'"></span>
+    </div>
+  </div>
+  <div class="modal-body" [ngClass]="{
+        'mb-2': !popupConfig.data.showFooter
+  }">
+    <ng-content></ng-content>
+  </div>
+  <div class="modal-footer" *ngIf="popupConfig.data.showFooter === undefined || popupConfig.data.showFooter">
+    <button type="button" class="btn btn-outline-secondary" (click)="dismiss()"
+      *ngIf="popupConfig.data.hideDismissButton === undefined || !popupConfig.data.hideDismissButton()"
+      [disabled]="popupConfig.data.disableDismissButton !== undefined && popupConfig.data.disableDismissButton()">
+      {{ popupConfig.data.dismissButtonLabel || 'Cancel' }}
+    </button>
+    <button type="button" class="btn btn-outline-primary" (click)="close()"
+      *ngIf="popupConfig.data.hideCloseButton === undefined || !popupConfig.data.hideCloseButton()"
+      [disabled]="popupConfig.data.disableCloseButton !== undefined && popupConfig.data.disableCloseButton()">
+      {{ popupConfig.data.closeButtonLabel || 'OK' }}
+    </button>
+  </div>
+</ng-template>

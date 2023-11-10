@@ -1,0 +1,180 @@
+<div class="card-header border-0 flex-nowrap">
+  <h3 class="card-title align-items-start flex-column">
+    <span class="fw-bold fs-3 text-danger">Loan Applications</span>
+  </h3>
+</div>
+
+<div class="card-body position-relative py-0">
+  <div class="table-responsive">
+    <div
+      *ngIf="(loading$ | async) === true"
+      class="table-loading-message h-100 w-100 d-flex flex-column flex-center"
+    >
+      <div class="no-record fw-normal text-dark-50 fs-5">Loading...</div>
+    </div>
+
+    <div
+      *ngIf="(loading$ | async) === false && allLoans.length === 0"
+      class="table-loading-message h-100 w-100 d-flex flex-column flex-center"
+    >
+      <div class="no-record fw-normal text-dark-50 fs-5">No record Found!!</div>
+      <a (click)="getAllLoanApplication()" href="javascript:void(0)">Refresh</a>
+    </div>
+
+    <table
+      *ngIf="(loading$ | async) === false && allLoans.length > 0"
+      class="table table-hover table-info align-middle table-rounded gs-lg-6 gs-md-4 gs-2 gy-lg-3 gy-2"
+    >
+      <thead class="border-bottom-1">
+        <tr class="border-0">
+          <th class=""></th>
+          <th class=""></th>
+          <th class=""></th>
+          <th class=""></th>
+        </tr>
+      </thead>
+
+      <tbody class="fw-normal">
+        <tr *ngFor="let item of allLoans | sortArray : 'applicationId'">
+          <td>
+            <ng-container
+              *ngIf="!item.sapAppStatus && item.status === 'REQUEST_FOR_CHANGE'; else defaultIcon"
+            >
+              <span
+                (click)="viewLoanApplication(item)"
+                class="btn btn-icon btn-hover-color-info pluse pulse-primary d-flex flex-center"
+              >
+                <span
+                  [inlineSVG]="'./assets/media/icons/duotune/general/gen007.svg'"
+                  class="svg-icon svg-icon-info svg-icon-2x"
+                ></span>
+                <span class="pulse-ring"></span>
+              </span>
+            </ng-container>
+
+            <ng-template #defaultIcon>
+              <span
+                appClickableSvg
+                [inlineSVG]="'/assets/media/icons/duotune/abstract/abs027.svg'"
+                class="svg-icon svg-base svg-icon-2hx svg-icon-secondary cursor-pointer"
+                (click)="viewLoanApplication(item)"
+              ></span>
+              <!-- <i
+                class="ki-duotone ki-soft-2 fs-2 cursor-pointer"
+                (click)="viewLoanApplication(item)"
+              >
+                <span class="path1"></span>
+                <span class="path2"></span>
+              </i> -->
+            </ng-template>
+          </td>
+
+          <td>
+            <div class="d-flex flex-column">
+              <a
+                (click)="viewLoanApplication(item)"
+                href="javascript:void(0)"
+                class="text-gray-800 text-hover-primary mb-1 fs-7 text-nowrap"
+              >
+                {{ item.applicationId }}
+              </a>
+              <span class="text-gray-500 fs-8">{{ item.loanApplicationType | titlecase }}</span>
+            </div>
+          </td>
+
+          <td>
+            <div class="d-flex flex-column">
+              <span *ngIf="!item.sapAppStatus" class="text-gray-400 fs-8 text-end">
+                <ng-container *ngIf="item.status === 'SUBMITTED'">
+                  <div class="badge badge-light-primary">{{ 'Under Review' }}</div>
+                </ng-container>
+
+                <ng-container *ngIf="item.status === 'PENDING'">
+                  <div class="badge badge-light-info">{{ 'Pending' }}</div>
+                </ng-container>
+
+                <ng-container *ngIf="item.status === 'ACCEPTED'">
+                  <div class="badge badge-light-success">{{ 'Accepted' }}</div>
+                </ng-container>
+
+                <ng-container
+                  *ngIf="item.status === 'REJECTED' || item.status === 'APPLICATION_NOT_ACCEPTED'"
+                >
+                  <div class="badge badge-light-danger">{{ 'Rejected' }}</div>
+                </ng-container>
+
+                <ng-container *ngIf="item.status === 'REQUEST_FOR_CHANGE'">
+                  <div class="badge badge-light-warning fw-bold">{{ 'Action Required' }}</div>
+                </ng-container>
+              </span>
+              <span *ngIf="item.sapAppStatus" class="text-gray-400 fs-8 text-end">
+                <div class="badge badge-light-primary">{{ item.sapAppStatus }}</div>
+              </span>
+              <span class="text-gray-800 fs-8 text-end">{{ item.updatedOn }}</span>
+            </div>
+          </td>
+
+          <td>
+            <span class="text-primary" (click)="openDeleteApplicationModel(item)">
+              <!-- <span
+                appClickableSvg
+                class="svg-icon svg-icon-muted text-hover-danger svg-icon-1"
+                [inlineSVG]="'./assets/media/icons/trash.svg'"
+              ></span> -->
+              <i class="ki-duotone ki-trash fs-1 text-hover-danger cursor-pointer" appClickableSVG>
+                <span class="path1"></span>
+                <span class="path2"></span>
+                <span class="path3"></span>
+                <span class="path4"></span>
+                <span class="path5"></span>
+              </i>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<app-popup #deleteLoanApplicationPopup>
+  <div class=""></div>
+
+  <div [formGroup]="deleteLoanApplicationForm" class="d-flex flex-column flex-center">
+    <h4 class="mb-5">Select Reason to delete loan application</h4>
+    <select formControlName="mainReason" class="form-select form-select-lg mb-5">
+      <option value="" disabled>Select Reason</option>
+      <option value="willReApply">Will re-apply</option>
+      <option value="imNotIntrested">I'm not interested anymore</option>
+      <option value="other">Other</option>
+    </select>
+
+    <h4 class="feedback-title mb-5">Anything else Want to share (OPTIONAL)</h4>
+
+    <div class="position-relative w-100">
+      <textarea
+        formControlName="otherReason"
+        class="feedback-input form-control form-control-lg"
+        rows="8"
+        placeholder="Enter your feedback here"
+      ></textarea>
+
+      <div
+        class="position-absolute badge badge-outline badge-sm left-0 bottom-0"
+        [class.badge-muted]="currentCharCount <= feedbackCharLimit"
+        [class.badge-danger]="currentCharCount > feedbackCharLimit"
+      >
+        <span>{{ currentCharCount }}</span>
+        <span>/</span>
+        <span>{{ feedbackCharLimit }}</span>
+      </div>
+    </div>
+
+    <button
+      (click)="deleteApplicationFormSubmitted()"
+      class="btn btn-danger btn-lg align-self-end mt-5"
+      [disabled]="currentCharCount > feedbackCharLimit"
+    >
+      Delete
+    </button>
+  </div>
+</app-popup>

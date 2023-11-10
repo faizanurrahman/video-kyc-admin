@@ -1,0 +1,58 @@
+<div class="profile d-flex flex-row flex-row-fluid align-items-center px-4 pt-6 pb-4">
+  <div class="me-5">
+    <span class="fs-2 overflow-hidden">
+      <!-- <img src="./assets/media/avatars/300-15.jpg" class="w-100" alt="" /> -->
+      <app-avatar-photo [name]="username"></app-avatar-photo>
+    </span>
+  </div>
+
+  <div class="d-flex flex-column flex-row-fluid">
+    <div class="fs-6 text-wrap fw-bold">
+      {{ username }}
+    </div>
+    <div class="" *ngIf="bpNumber">
+      <!-- <span class="badge badge-success badge-circle w-10px h-10px me-1"></span> -->
+      <span class="fs-7">BP No: {{ bpNumber || 'N/A' }}</span>
+    </div>
+
+    <div class="d-flex gap-5 align-items-center">
+      <a (click)="logout()" class="ms-n1 cursor-pointer text-primary text-hover-primary">
+        <span
+          [inlineSVG]="'./assets/media/icons/duotune/arrows/arr076.svg'"
+          class="svg-icon svg-icon-primary svg-icon-hover-primary svg-icon-2 me-2"
+        ></span>
+        <!-- <i class="ki-duotone ki-entrance-left fs-2">
+          <span class="path1"></span>
+          <span class="path2"></span>
+        </i> -->
+        <span class="fw-bold">Logout</span>
+      </a>
+
+      <div
+        class="cursor-pointer symbol btn btn-icon btn-color-gray-500 btn-active-color-primary symbol-30px symbol-md-40px"
+        data-kt-menu-trigger="click"
+        data-kt-menu-attach="parent"
+        data-kt-menu-placement="right"
+        data-kt-menu-flip="bottom"
+      >
+        <span
+          class="ms-4 svg-icon svg-icon-2"
+          [inlineSVG]="'/assets/media/icons/duotune/general/gen052.svg'"
+        ></span>
+        <!-- <i class="ki-duotone ki-dots-square fs-2">
+          <span class="path1"></span>
+          <span class="path2"></span>
+          <span class="path3"></span>
+          <span class="path4"></span>
+        </i> -->
+        <!-- <i class="ki-duotone ki-dots-horizontal fs-2">
+          <span class="path1"></span>
+          <span class="path2"></span>
+          <span class="path3"></span>
+        </i> -->
+      </div>
+
+      <!-- <app-user-inner class="ms-5"></app-user-inner> -->
+    </div>
+  </div>
+</div>

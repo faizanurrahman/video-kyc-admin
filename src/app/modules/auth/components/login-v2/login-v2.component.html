@@ -1,0 +1,201 @@
+<div class="login-page--wrapper flex-row-fluid" [attr.hideBackgroundImage]="showVirtualKeyboard">
+  <div class="brand-logo">
+    <img
+      alt="CEDA BRAND LOGO"
+      class="h-70px"
+      src="./assets/media/logos/ceda-logo-transparent.png"
+    />
+  </div>
+
+  <div class="login-page--main">
+    <div class="login-header--wrapper">
+      <div class="login-header">
+        <h3 class="login-title fs-3hx fw-bolder ls-3 text-dark-50 opacity-95">Sign In to</h3>
+        <h3 class="login-title fs-2hx fw-bold text-gray-800 mt-2">CEDA Online Services</h3>
+      </div>
+
+      <div class="login-paragraph d-flex flex-column" [attr.hideParagraph]="showVirtualKeyboard">
+        <span class="login-paragraph-text text-gray-700 mb-3 fs-5">
+          Get your
+          <span class="fw-bold fs-4 text-primary">Business Loan</span>
+          in easy steps
+        </span>
+
+        <span class="login-paragraph-text text-gray-700 fw-normal fs-5">
+          Create new account or sign-in to get started tody!
+        </span>
+      </div>
+
+      <app-virtual-keyboard
+        (keyboardPressKey)="onVirtualKeyboardKeyClicked($event)"
+        (moveFocusToNextInput)="
+          currentlyFocusedInput === 'username'
+            ? (currentlyFocusedInput = 'password')
+            : (currentlyFocusedInput = 'username')
+        "
+        [keyboardTransition]="'all 1s ease-in-out'"
+        [showVirtualKeyboard]="showVirtualKeyboard"
+        [value]="setVirtualKeyboardValue()"
+        class="virtual-keyboard mt-4 ms-md-n5"
+      ></app-virtual-keyboard>
+    </div>
+
+    <div class="login-form-wrapper">
+      <div class="login-form--container" [attr.keyboardOpen]="showVirtualKeyboard">
+        <div class="text-center mt-5">
+          <span class="fs-2x fw-bold text-dark-50 opacity-90 ls-3">Sign In</span>
+        </div>
+
+        <app-alert
+          *ngIf="hasError"
+          [title]="'Authentication Failed'"
+          [message]="errorMessage"
+          [icon]="'custom'"
+          class="mt-5 mx-7"
+          [type]="'danger'"
+          [dismissible]="false"
+        >
+          <div alert-icon>
+            <span
+              class="svg-icon svg-icon-2hx svg-icon-danger me-4"
+              [inlineSVG]="'./assets/media/icons/alert-login.svg'"
+            ></span>
+          </div>
+        </app-alert>
+
+        <div *ngIf="!hasError" class="align-self-stretch mt-5 d-flex flex-column flex-center">
+          <span class="fw-normal fs-6 text-gray-700">Please enter your login id and password</span>
+          <span class="fw-normal fs-6 text-gray-700 mt-2">
+            Don't have account?
+            <a
+              class="register-link text-primary fw-bold"
+              href="javascript:void(0)"
+              [routerLink]="['/auth/registration']"
+            >
+              Register
+            </a>
+          </span>
+        </div>
+
+        <!-- Login Form Begin -->
+
+        <form
+          auto-animate
+          (ngSubmit)="loginFormSubmitted()"
+          [formGroup]="loginForm"
+          class="login-form d-flex flex-column px-7 pt-5 pb-4"
+        >
+          <!-- Username -->
+          <div class="form-group mb-4 position-relative">
+            <input
+              (focus)="onLoginFormInputFocus('username', $event)"
+              autocomplete="new-password"
+              class="form-control"
+              formControlName="username"
+              placeholder="Login ID"
+              type="text"
+            />
+
+            <div
+              *ngIf="fc.username.invalid && (fc.username.dirty || fc.username.touched)"
+              class="fv-plugins-message-container invalid-feedback"
+            >
+              <div *ngIf="fc.username.errors?.minlength">
+                login id must be at least 4 characters
+              </div>
+
+              <div *ngIf="fc.username.errors?.maxlength">
+                login id must be at most 50 characters
+              </div>
+
+              <div *ngIf="fc.username.errors?.pattern">login id must be a valid</div>
+            </div>
+
+            <div
+              *ngIf="fc.username.valid && (fc.username.dirty || fc.username.touched)"
+              class="fv-plugins-message-container valid-feedback"
+            ></div>
+          </div>
+
+          <!-- Password -->
+          <div class="form-group mb-4 d-flex flex-column">
+            <app-password-input
+              (focus)="onLoginFormInputFocus('password', $event)"
+              formControlName="password"
+              placeholder="Password"
+            ></app-password-input>
+
+            <div
+              *ngIf="fc.password.invalid && (fc.password.dirty || fc.password.touched)"
+              class="fv-plugins-message-container invalid-feedback"
+            >
+              <div *ngIf="fc.password.errors?.maxlength">
+                password must be at most 50 characters
+              </div>
+
+              <div *ngIf="fc.password.errors?.password">
+                {{ fc.password.errors?.password }}
+              </div>
+            </div>
+            <span class="forgot-password align-self-end mt-1 me-2">
+              <a
+                [routerLink]="['/auth/forgot-password']"
+                class="fw-bold text-hover-danger fs-6"
+                style="color: #9f2421"
+                href="javascript:void(0)"
+              >
+                Forgot Password ?
+              </a>
+            </span>
+          </div>
+
+          <button
+            appClickable
+            [disabled]="!loginForm.valid"
+            class="flex-grow-1 btn btn-primary btn-lg"
+            type="submit"
+          >
+            <span *ngIf="isLoading === false" class="">Sign In</span>
+            <span *ngIf="isLoading === true" class="">
+              Please wait...
+              <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+            </span>
+          </button>
+
+          <!-- Or Register -->
+
+          <div *ngIf="false" class="flex-grow-1 d-flex flex-column btn-lg flex-center py-2 mt-2">
+            <div class="">or</div>
+            <div class="text-primary fw-bold cursor-pointer">Register</div>
+          </div>
+        </form>
+
+        <div (click)="toggleVirtualKeyboard()" class="flex-grow-1 py-5 btn-lg mt-2">
+          <!-- Virtual Keyboard -->
+          <span class="d-flex flex-center cursor-pointer" style="gap: 10px">
+            <label class="form-check">
+              <input
+                [checked]="showVirtualKeyboard"
+                class="form-check-input form-check-inline form-check-danger cursor-pointer"
+                id="virtualKeyboardCheckbox"
+                type="checkbox"
+                value=""
+              />
+              <span
+                [ngStyle]="{
+                  color: showVirtualKeyboard ? '#000' : 'gray'
+                }"
+                (click)="toggleVirtualKeyboard()"
+                class="form-check-label font-weight-bold fs-6 cursor-pointer"
+              >
+                Virtual Keyboard
+              </span>
+            </label>
+          </span>
+        </div>
+
+        <!-- Login Form End -->
+      </div>
+    </div>
+  </div>
+</div>

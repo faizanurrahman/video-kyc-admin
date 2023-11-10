@@ -1,0 +1,18 @@
+//
+// valueif
+//
+
+/*
+* ternary operator, $check is true, return $trueValue, else return $falseValue
+ */
+// Equvalant to if in sass
+
+@function valueif($check, $trueValue, $falseValue: null) {
+  @if $check {
+    @return $trueValue;
+  } @else if $falseValue != null {
+    @return $falseValue;
+  } @else {
+    @return null;
+  }
+}

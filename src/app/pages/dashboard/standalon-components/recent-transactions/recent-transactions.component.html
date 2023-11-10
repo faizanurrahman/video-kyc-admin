@@ -1,0 +1,474 @@
+<div class="card border border-3 border-primary border-opacity-50">
+  <div class="card-header">
+    <h2 class="card-title">Recent Transactions</h2>
+    <div class="card-subtitle">For the last 30 days</div>
+    <div class="card-toolbar"></div>
+  </div>
+
+  <div class="card-body">
+    <div class="row">
+      <div class="col-12">
+        <h2>Dropdown Menu</h2>
+
+        <div
+          class="menu menu-title-gray-70 menu-state-title-primary menu-arrow-gray-500 fw-bold"
+          data-kt-menu="true"
+          id="dropdownmenu"
+        >
+          <div class="menu-item here show py-2">
+            <div class="menu-link menu-center">
+              <div class="menu-title">Dashboard</div>
+            </div>
+          </div>
+
+          <div class="menu-item py-2">
+            <div class="menu-link menu-center">
+              <div class="menu-title">Settings</div>
+            </div>
+          </div>
+
+          <div
+            class="menu-item py-2"
+            data-kt-menu-trigger="hover"
+            data-kt-menu-placement="bottom-start"
+            data-kt-menu="true"
+          >
+            <div class="menu-link menu-center">
+              <span class="menu-title">Pages</span>
+              <span class="menu-arrow menu-show-arrow-primary"></span>
+            </div>
+            <div
+              class="menu-sub menu-sub-dropdown pointer-event h-100px w-225px px-1 py-4"
+            >
+              <!-- Profie -->
+              <div class="menu-item">
+                <div class="menu-link menu-center">
+                  <div class="menu-title">Profile</div>
+                </div>
+              </div>
+              <!-- Settings -->
+              <div class="menu-item">
+                <div class="menu-link menu-center">
+                  <div class="menu-title">Settings</div>
+                </div>
+              </div>
+              <!-- Order-->
+              <div
+                class="menu-item"
+                data-kt-menu="true"
+                data-kt-menu-trigger="hover"
+              >
+                <div class="menu-link menu-center">
+                  <div class="menu-title">Orders</div>
+                  <div class="menu-arrow"></div>
+                </div>
+                <div class="menu-sub menu-sub-dropdown w-225px px-1">
+                  <div class="menu-item">
+                    <div class="menu-link">Order 1</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div ngbDropdown>
+          <button
+            class="btn btn-outline-primary"
+            id="dropdownMenu1"
+            ngbDropdownToggle
+          >
+            Toggle dropdown
+          </button>
+          <div
+            class="dropdown-menu"
+            aria-labelledby="dropdownMenu1"
+            ngbDropdownMenu
+          >
+            <button class="dropdown-item">Action</button>
+            <button class="dropdown-item">Another action</button>
+            <button class="dropdown-item">Something else here</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-responsive" id="table-wrapper-head">
+      <table class="table align-middle gs-0 gy-5" id="table-scroll">
+        <thead>
+          <tr>
+            <th class="w-50px">H1</th>
+            <th class="min-w-200px">H2</th>
+            <th class="min-w-100px">H3</th>
+            <th class="min-w-40px">H4</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+
+    <div
+      class="table-responsive"
+      data-kt-scroll="true"
+      data-kt-scroll-height="250px"
+      data-kt-scroll-wrappers="#table-scroll"
+      id="table-wrapper-body"
+    >
+      <table class="table align-middle gs-5 gy-5" id="table-body-scroll">
+        <thead style="height: 0">
+          <tr>
+            <th class="p-0 w-50px"></th>
+            <th class="p-0 min-w-200px"></th>
+            <th class="p-0 min-w-100px"></th>
+            <th class="p-0 min-w-40px"></th>
+          </tr>
+        </thead>
+        <tbody class="">
+          <tr>
+            <th>
+              <div class="symbol symbol-50px me-2">
+                <span class="symbol-label"
+                  ><img
+                    alt=""
+                    class="h-50 align-self-center"
+                    src="./assets/media/svg/brand-logos/plurk.svg"
+                /></span>
+              </div>
+            </th>
+            <td>
+              <a
+                class="text-dark fw-bolder text-hover-primary mb-1 fs-6"
+                href="#"
+              >
+                Top Authors </a
+              ><span class="text-muted fw-bold d-block fs-7"
+                >Successful Fellas</span
+              >
+            </td>
+            <td>
+              <div class="d-flex flex-column w-100 me-2">
+                <div class="d-flex flex-stack mb-2">
+                  <span class="text-muted me-2 fs-7 fw-bold">70%</span>
+                </div>
+                <div class="progress h-6px w-100">
+                  <div
+                    class="progress-bar bg-primary"
+                    role="progressbar"
+                    style="width: 70%"
+                  ></div>
+                </div>
+              </div>
+            </td>
+            <td class="text-end">
+              <a
+                class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary"
+                href="#"
+                ><span
+                  class="svg-icon svg-icon-2"
+                  ng-reflect-inline-s-v-g="./assets/media/icons/duotune/a"
+                  ><svg
+                    fill="none"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect
+                      fill="currentColor"
+                      height="2"
+                      opacity="0.5"
+                      rx="1"
+                      transform="rotate(-180 18 13)"
+                      width="13"
+                      x="18"
+                      y="13"
+                    ></rect>
+                    <path
+                      d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z"
+                      fill="currentColor"
+                    ></path></svg
+                ></span>
+                <!--container--></a
+              >
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <div class="symbol symbol-50px me-2">
+                <span class="symbol-label"
+                  ><img
+                    alt=""
+                    class="h-50 align-self-center"
+                    src="./assets/media/svg/brand-logos/telegram.svg"
+                /></span>
+              </div>
+            </th>
+            <td>
+              <a
+                class="text-dark fw-bolder text-hover-primary mb-1 fs-6"
+                href="#"
+              >
+                Popular Authors </a
+              ><span class="text-muted fw-bold d-block fs-7"
+                >Most Successful</span
+              >
+            </td>
+            <td>
+              <div class="d-flex flex-column w-100 me-2">
+                <div class="d-flex flex-stack mb-2">
+                  <span class="text-muted me-2 fs-7 fw-bold">50%</span>
+                </div>
+                <div class="progress h-6px w-100">
+                  <div
+                    class="progress-bar bg-primary"
+                    role="progressbar"
+                    style="width: 50%"
+                  ></div>
+                </div>
+              </div>
+            </td>
+            <td class="text-end">
+              <a
+                class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary"
+                href="#"
+                ><span
+                  class="svg-icon svg-icon-2"
+                  ng-reflect-inline-s-v-g="./assets/media/icons/duotune/a"
+                  ><svg
+                    fill="none"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect
+                      fill="currentColor"
+                      height="2"
+                      opacity="0.5"
+                      rx="1"
+                      transform="rotate(-180 18 13)"
+                      width="13"
+                      x="18"
+                      y="13"
+                    ></rect>
+                    <path
+                      d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z"
+                      fill="currentColor"
+                    ></path></svg
+                ></span>
+                <!--container--></a
+              >
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <div class="symbol symbol-50px me-2">
+                <span class="symbol-label"
+                  ><img
+                    alt=""
+                    class="h-50 align-self-center"
+                    src="./assets/media/svg/brand-logos/vimeo.svg"
+                /></span>
+              </div>
+            </th>
+            <td>
+              <a
+                class="text-dark fw-bolder text-hover-primary mb-1 fs-6"
+                href="#"
+              >
+                New Users </a
+              ><span class="text-muted fw-bold d-block fs-7"
+                >Awesome Users</span
+              >
+            </td>
+            <td>
+              <div class="d-flex flex-column w-100 me-2">
+                <div class="d-flex flex-stack mb-2">
+                  <span class="text-muted me-2 fs-7 fw-bold">80%</span>
+                </div>
+                <div class="progress h-6px w-100">
+                  <div
+                    class="progress-bar bg-primary"
+                    role="progressbar"
+                    style="width: 80%"
+                  ></div>
+                </div>
+              </div>
+            </td>
+            <td class="text-end">
+              <a
+                class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary"
+                href="#"
+                ><span
+                  class="svg-icon svg-icon-2"
+                  ng-reflect-inline-s-v-g="./assets/media/icons/duotune/a"
+                  ><svg
+                    fill="none"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect
+                      fill="currentColor"
+                      height="2"
+                      opacity="0.5"
+                      rx="1"
+                      transform="rotate(-180 18 13)"
+                      width="13"
+                      x="18"
+                      y="13"
+                    ></rect>
+                    <path
+                      d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z"
+                      fill="currentColor"
+                    ></path></svg
+                ></span>
+                <!--container--></a
+              >
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <div class="symbol symbol-50px me-2">
+                <span class="symbol-label"
+                  ><img
+                    alt=""
+                    class="h-50 align-self-center"
+                    src="./assets/media/svg/brand-logos/bebo.svg"
+                /></span>
+              </div>
+            </th>
+            <td>
+              <a
+                class="text-dark fw-bolder text-hover-primary mb-1 fs-6"
+                href="#"
+              >
+                Active Customers </a
+              ><span class="text-muted fw-bold d-block fs-7"
+                >Best Customers</span
+              >
+            </td>
+            <td>
+              <div class="d-flex flex-column w-100 me-2">
+                <div class="d-flex flex-stack mb-2">
+                  <span class="text-muted me-2 fs-7 fw-bold">90%</span>
+                </div>
+                <div class="progress h-6px w-100">
+                  <div
+                    class="progress-bar bg-primary"
+                    role="progressbar"
+                    style="width: 90%"
+                  ></div>
+                </div>
+              </div>
+            </td>
+            <td class="text-end">
+              <a
+                class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary"
+                href="#"
+                ><span
+                  class="svg-icon svg-icon-2"
+                  ng-reflect-inline-s-v-g="./assets/media/icons/duotune/a"
+                  ><svg
+                    fill="none"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect
+                      fill="currentColor"
+                      height="2"
+                      opacity="0.5"
+                      rx="1"
+                      transform="rotate(-180 18 13)"
+                      width="13"
+                      x="18"
+                      y="13"
+                    ></rect>
+                    <path
+                      d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z"
+                      fill="currentColor"
+                    ></path></svg
+                ></span>
+                <!--container--></a
+              >
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <div class="symbol symbol-50px me-2">
+                <span class="symbol-label"
+                  ><img
+                    alt=""
+                    class="h-50 align-self-center"
+                    src="./assets/media/svg/brand-logos/kickstarter.svg"
+                /></span>
+              </div>
+            </th>
+            <td>
+              <a
+                class="text-dark fw-bolder text-hover-primary mb-1 fs-6"
+                href="#"
+              >
+                Bestseller Theme </a
+              ><span class="text-muted fw-bold d-block fs-7"
+                >Amazing Templates</span
+              >
+            </td>
+            <td>
+              <div class="d-flex flex-column w-100 me-2">
+                <div class="d-flex flex-stack mb-2">
+                  <span class="text-muted me-2 fs-7 fw-bold">70%</span>
+                </div>
+                <div class="progress h-6px w-100">
+                  <div
+                    class="progress-bar bg-primary"
+                    role="progressbar"
+                    style="width: 70%"
+                  ></div>
+                </div>
+              </div>
+            </td>
+            <td class="text-end">
+              <a
+                class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary"
+                href="#"
+                ><span
+                  class="svg-icon svg-icon-2"
+                  ng-reflect-inline-s-v-g="./assets/media/icons/duotune/a"
+                  ><svg
+                    fill="none"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect
+                      fill="currentColor"
+                      height="2"
+                      opacity="0.5"
+                      rx="1"
+                      transform="rotate(-180 18 13)"
+                      width="13"
+                      x="18"
+                      y="13"
+                    ></rect>
+                    <path
+                      d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z"
+                      fill="currentColor"
+                    ></path></svg
+                ></span>
+                <!--container--></a
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

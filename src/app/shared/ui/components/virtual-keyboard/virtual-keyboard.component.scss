@@ -1,0 +1,46 @@
+.virtual-keyboard-component {
+  .hg-theme-default {
+    background-color: #fff !important;
+    padding: 10px;
+    // width: 550px;
+
+  }
+
+  .hg-theme-default .hg-button {
+    background-color: #ffe5d9 !important;
+    color: #852b00 !important;
+    // box-shadow: 0px 0px 5px 0px #cfc396 !important;
+    font-size: 0.8rem !important;
+    height: 30px !important;
+    border-radius: 10px !important;
+  }
+
+  .hg-theme-default .hg-button:hover {
+    background-color: #ffcc99 !important;
+    color: #2e1001 !important;
+  }
+
+  .hg-theme-default .hg-button.hg-activeButton {
+    background-color: #937e68 !important;
+    color: rgb(224, 223, 223) !important;
+  }
+
+  @media all and (max-width: 910px) {
+
+    .hg-theme-default {
+      // width: 400px;
+      box-shadow: 0 2px 5px 0 rgba(224, 36, 36, 0.1) !important;
+      // width: clamp(3, 400px, 500px) !important;
+      // min-width: 300px !important;
+      // max-width: 400px !important;
+    }
+
+  }
+
+  @media all and (max-width: 370px) {
+    .hg-theme-default {
+      width: 350px !important;
+      box-shadow: 0 2px 5px 0 rgba(224, 36, 36, 0.1) !important;
+    }
+  }
+}

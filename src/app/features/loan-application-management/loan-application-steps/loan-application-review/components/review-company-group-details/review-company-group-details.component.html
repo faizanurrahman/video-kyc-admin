@@ -1,0 +1,110 @@
+<div class="row gx-10">
+  <div class="col-md-6">
+    <review-read-only-input
+      [label]="'Name Of Organization'"
+      [value]="companyDetails.nameOfOrganization"
+    ></review-read-only-input>
+  </div>
+  <div class="col-md-6">
+    <review-read-only-input
+      [label]="'Registration Number'"
+      [value]="companyDetails.registrationNumber"
+    ></review-read-only-input>
+  </div>
+
+  <div class="col-md-6">
+    <review-read-only-input
+      [label]="'Correspondence Address'"
+      [value]="companyDetails.preferredCorrespondanceAddr"
+    ></review-read-only-input>
+  </div>
+
+  <div class="col-md-12">
+    <div class="text-center p-2">
+      <span class="fs-4 fw-bold">Postal Address</span>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <review-read-only-input
+      [label]="'Postal Address'"
+      [value]="companyDetails.postalAddrPoBox"
+    ></review-read-only-input>
+  </div>
+
+  <div class="col-md-6">
+    <review-read-only-input
+      [label]="'Town'"
+      [value]="companyDetails.postalAddrTown"
+    ></review-read-only-input>
+  </div>
+
+  <div class="col-md-12">
+    <div class="text-center p-2">
+      <span class="fs-4 fw-bold">Business Address</span>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <review-read-only-input
+      [label]="'Street Name / House Number'"
+      [value]="companyDetails.bussAddrPlot"
+    ></review-read-only-input>
+  </div>
+
+  <div class="col-md-6">
+    <review-read-only-input
+      [label]="'City'"
+      [value]="companyDetails.bussAddrDistrict"
+    ></review-read-only-input>
+  </div>
+
+  <!-- todo: need to fix country in company details -->
+  <div class="col-md-6">
+    <review-read-only-input
+      [label]="'Country'"
+      [value]="companyDetails.bussAddrCountry"
+    ></review-read-only-input>
+  </div>
+
+  <div class="col-md-6">
+    <review-read-only-input
+      [label]="'Trading As'"
+      [value]="companyDetails.bussAddrTradingAs"
+    ></review-read-only-input>
+  </div>
+
+  <div class="col-md-12">
+    <div class="text-center p-2">
+      <span class="fs-4 fw-bold">Primary Contact</span>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <review-read-only-input
+      [label]="'Number Of Contact'"
+      [value]="companyDetails.numberOfContacts"
+    ></review-read-only-input>
+  </div>
+
+  <div class="col-md-6">
+    <review-read-only-input
+      [label]="'Mobile Number'"
+      [value]="companyDetails.primaryContactMobNumber"
+    ></review-read-only-input>
+  </div>
+
+  <div class="col-md-6">
+    <review-read-only-input
+      [label]="'Teliphone'"
+      [value]="companyDetails.primaryContactOtherContactNumber"
+    ></review-read-only-input>
+  </div>
+
+  <div class="col-md-6">
+    <review-read-only-input
+      [label]="'Email Address'"
+      [value]="companyDetails.primaryContactEmailAddress"
+    ></review-read-only-input>
+  </div>
+</div>

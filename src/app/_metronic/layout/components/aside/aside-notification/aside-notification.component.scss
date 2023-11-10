@@ -1,0 +1,13 @@
+.star {
+  cursor: pointer;
+
+  &:hover {
+    fill: var(--kt-primary);
+
+  }
+
+}
+
+// .star-container .star:nth-child(var(--i)) {
+
+// }

@@ -1,0 +1,83 @@
+<div class="card card-stretch h-100">
+  <!--begin::Header-->
+  <div class="card-header pb-5 pt-5">
+    <h3 class="card-title align-items-start flex-column">
+      <h3 class=" ">Payment History</h3>
+    </h3>
+    <div class="card-toolbar"></div>
+  </div>
+  <!--end::Header-->
+
+  <!--begin::Body-->
+  <div class="card-body h-100">
+    <!--begin::Table-->
+    <div class="table-responsive h-100">
+      <div
+        *ngIf="(loader.loading$ | async) === false && (paymentHistory.length || 0) === 0"
+        class="d-flex flex-center flex-column h-100 w-100 position-absolute table-loading-message shadow-none"
+      ></div>
+
+      <div
+        *ngIf="(loader.loading$ | async) === false && (paymentHistory.length || 0) === 0"
+        class="d-flex flex-center flex-column h-100 w-100 position-absolute table-loading-message shadow-none"
+      >
+        <span>No Record Found</span>
+      </div>
+
+      <table
+        class="table table-hover table-header-bg-gray-300 table-header-rounded-3 gs-5 gs-lg-7 gy-3"
+      >
+        <thead>
+          <tr class="text-capitalize fw-bold">
+            <th class="">Date of Transaction</th>
+            <th class="">Contract Number</th>
+            <th class=" ">Transaction Amount</th>
+            <th class="">Currency</th>
+            <th class="">Type</th>
+            <th class="">Reference ID</th>
+            <th class="">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of paymentHistory || []">
+            <td class="">
+              {{ item.transactionDate! | customDate | date : 'medium' }}
+            </td>
+            <td class="">
+              {{ item.contractNumber }}
+            </td>
+
+            <td class="">P {{ getDecimalValue(item.transactionAmount!) }}</td>
+
+            <td class="">
+              {{ item.transactionCurrency }}
+            </td>
+
+            <td class="">
+              {{ item.transactionType }}
+            </td>
+
+            <td class="">
+              {{ item.cedaTransactionRefId }}
+            </td>
+
+            <td class="">
+              <span
+                pTooltip="Download Payment Details"
+                tooltipPosition="left"
+                (click)="generatePremiumPaymentHistoryPDF(item)"
+                class="text-hover-primary cursor-pointer"
+              >
+                <!-- <i class="ki-duotone ki-file-down fs-2">
+                  <span class="path1"></span>
+                  <span class="path2"></span>
+                </i> -->
+                <i class="fa fa-download"></i>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

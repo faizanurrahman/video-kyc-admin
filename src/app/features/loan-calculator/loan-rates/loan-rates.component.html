@@ -1,0 +1,70 @@
+<div class="card card-custom p-0 position-relative">
+  <div class="card-header">
+    <div class="alert alert-warning text-dark border border-2 fs-6">
+      {{ loanRatesNotes }}
+    </div>
+  </div>
+
+  <div class="card-body p-0">
+    <div class="table-responsive table-loading h-100">
+      <!-- Table Loading Message  -->
+      <div *ngIf="false" class="table-loading-message">
+        <span class="d-inline-flex justify-content-center align-items-center">
+          <span class="spinner-border spinner-border-sm text-primary me-2"></span>
+          <span class="text-primary">Fetching Records, please wait...</span>
+        </span>
+      </div>
+
+      <!-- Table -->
+      <table
+        class="table table-header-bg-gray-300 table-header-rounded-3 table-hover table-row-dashed table-row-bordered table-bordered table-row-gray-500 align-middle gs-2 gy-2"
+      >
+        <thead class="position-sticky top-0">
+          <tr class="fw-bold fs-5">
+            <th class="text-start text-nowrap">S.No</th>
+            <th class="text-start text-nowrap">Scale</th>
+            <th class="text-start text-nowrap">Amount</th>
+            <th class="text-start text-nowrap">Special Sector Rates</th>
+            <th class="text-start text-nowrap">Other Sector Rates</th>
+            <th class="text-start text-nowrap">Repayment Period</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let item of loanRatesList; let i = index">
+            <td class="text-start text-nowrap">{{ i + 1 }}</td>
+            <td class="text-start text-nowrap">{{ item.scale }}</td>
+            <td class="text-start text-nowrap">{{ item.amount }}</td>
+            <td class="text-start">{{ item.specialSectorRates }}</td>
+            <td class="text-start">{{ item.otherSectorRates }}</td>
+            <td class="text-start">{{ item.repaymentPeriod || 'Not Available' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="container">
+  <div class="mt-4 table-responsive">
+    <p>{{ loanRatesNotes }}</p>
+    <table class="table table-hover table-bordered">
+      <thead>
+        <tr>
+          <th>Scale</th>
+          <th>Amount</th>
+          <th>Special Sector Rates</th>
+          <th>Other Sector Rates</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let rate of loanRatesList">
+          <td>{{ rate.scale }}</td>
+          <td>{{ rate.amount }}</td>
+          <td>{{ rate.specialSectorRates }}</td>
+          <td>{{ rate.otherSectorRates }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div> -->

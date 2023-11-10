@@ -1,0 +1,30 @@
+<ng-container *ngFor="let applicationDetails of loanServiceCentre; let i = index">
+  <div class="fs-4 fw-bold">Individual {{ i + 1 }}</div>
+
+  <div class="row gx-10">
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'Nearest Branch to Business'"
+        [value]="applicationDetails.branchId"
+      ></review-read-only-input>
+    </div>
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'Project Description'"
+        [value]="applicationDetails.product"
+      ></review-read-only-input>
+    </div>
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'Savings'"
+        [value]="applicationDetails.savings"
+      ></review-read-only-input>
+    </div>
+    <div class="col-md-6">
+      <review-read-only-input
+        [label]="'Application Amount'"
+        [value]="applicationDetails.applicationAmount"
+      ></review-read-only-input>
+    </div>
+  </div>
+</ng-container>

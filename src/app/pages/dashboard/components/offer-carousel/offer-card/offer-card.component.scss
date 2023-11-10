@@ -1,0 +1,137 @@
+:host {}
+
+.offer-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  height: 100%;
+
+  @media (max-width: 768px) {
+    // background-size: 300px 220px;
+  }
+
+  @media (max-width: 476px) {}
+}
+
+.banner-container {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  background-color: #f4f4f4;
+  // padding: 20px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 0;
+
+  background: url('/assets/media/ceda-images/IMG_3172-min.jpg');
+  background-size: 400px;
+  background-position: left center;
+
+
+
+
+  .left-image {
+    flex: 1.2;
+    height: 100%;
+    // width: 400px;
+    padding-right: 0px;
+    // position: absolute;
+
+    img {
+      max-width: 100%;
+      height: auto;
+      object-fit: cover;
+
+    }
+  }
+
+  .right-curve {
+
+    position: absolute;
+    right: 0;
+    top: 0;
+    // background: lightcoral;
+    width: 60%;
+    height: 100%;
+    background-image: url('/assets/media/icons/banner-curve-1.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .content {
+    flex: 1;
+    padding: 20px 35px;
+    z-index: 1;
+    text-align: right;
+    align-self: center;
+    max-width: 368px;
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: white;
+    }
+
+    p {
+      font-size: 16px;
+      margin-bottom: 20px;
+      color: whitesmoke;
+    }
+
+    .btn {
+      background-color: var(--kt-danger);
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+  }
+}
+
+
+/* Default styles for h1 and p elements */
+h1 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: white;
+}
+
+p {
+  font-size: 12px;
+  margin-bottom: 20px;
+  color: whitesmoke;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 18px;
+    /* Adjust font size for smaller screens */
+  }
+
+  p {
+    font-size: 10px;
+    /* Adjust font size for smaller screens */
+  }
+}
+
+/* Media query for even smaller screens */
+@media (max-width: 476px) {
+  h1 {
+    font-size: 18px;
+    /* Further adjust font size for smaller screens */
+  }
+
+  p {
+    font-size: 12px;
+    /* Further adjust font size for smaller screens */
+  }
+}

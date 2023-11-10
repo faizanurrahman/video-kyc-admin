@@ -1,0 +1,60 @@
+$input-bg: #ffe5d9;
+$input-color: #852b00;
+
+.captcha-wrapper {
+
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: stretch;
+  justify-content: flex-start;
+
+  // background-color: #{$input-bg};
+
+  // padding: 1.3rem;
+
+  // border-radius: 15px;
+
+
+}
+
+.captcha-header {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: #{$input-color}
+}
+
+.captch-image-wrapper {
+  margin-bottom: 1rem;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.captcha-action {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-around;
+
+  padding: 0.5rem 0.2rem;
+  border-radius: 5px;
+  background-color: #{darken($input-bg, 10%)};
+
+}
+
+.form-control {
+  &::placeholder {
+    color: #{$input-color}
+  }
+
+  color: #{$input-color};
+
+  &:focus {
+    background-color: #{lighten($input-bg, 10%)};
+  }
+}
+
+.captcha-image {
+  filter: blur(3);
+}

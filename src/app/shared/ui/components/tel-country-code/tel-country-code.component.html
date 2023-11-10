@@ -1,0 +1,49 @@
+<ng-select
+  #select
+  [loadingText]="'loading...'"
+  [dropdownPosition]="'auto'"
+  [notFoundText]="'No Data Found'"
+  [appendTo]="'body'"
+  [clearable]="false"
+  [searchable]="true"
+  [multiple]="false"
+  [placeholder]="'Country Code'"
+  [virtualScroll]="true"
+  [groupBy]="'subgroup'"
+  [bindLabel]="'name'"
+  [bindValue]="'phonecode'"
+  [items]="countryGroups"
+  [formControl]="formControl"
+  class=""
+>
+  <ng-template ng-label-tmp let-item="item">
+    <!-- <img
+      class="rounded-circle me-1"
+      src="./assets/media/flags/{{ item.flagIcon }}"
+      width="20px"
+      height="20px"
+    /> -->
+    {{ item.flag }}
+    {{ item.phonecode }}
+  </ng-template>
+
+  <ng-template ng-option-tmp let-item="item">
+    <!-- <img src="./assets/media/flags/{{ item.flagIcon }}" width="20px" height="20px" /> -->
+    {{ item.flag }}
+    ({{ '+' + item.phonecode }}) {{ item.name }}
+  </ng-template>
+
+  <ng-template ng-optgroup-tmp let-item="item">
+    {{ item.subgroup }}
+  </ng-template>
+
+  <ng-template ng-header-tmp>
+    <input
+      style="width: 100%; line-height: 24px; outline: none"
+      type="text"
+      class="form-control"
+      (input)="select?.filter($any($event.target).value)"
+      placeholder="Search..."
+    />
+  </ng-template>
+</ng-select>

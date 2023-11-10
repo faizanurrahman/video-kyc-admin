@@ -1,0 +1,40 @@
+.custom-switch-button {
+  --custom-switch-bg: #fdf7f7;
+  --custom-active-btn-bg: #ffe5d9;
+  --border-radius: 15px;
+  --fs: 14px;
+  --clr: #852b00;
+  --padding: 5px 10px;
+  background-color: var(--custom-switch-bg);
+  border-radius: var(--border-radius);
+  width: 100%;
+  text-align: center;
+  font-size: var(--fs);
+  letter-spacing: 1px;
+
+  color: var(--clr);
+  position: relative;
+
+  padding: var(--padding);
+
+
+
+  .custom-switch-button-checkbox {
+    display: none;
+  }
+
+  .custom-switch-label-wrapper {
+    display: flex;
+
+    .label {
+      padding: 9px;
+      border-radius: 10px;
+      font-weight: bold;
+      transition: all 0.2s linear;
+    }
+
+    .label.active {
+      background: var(--custom-active-btn-bg);
+    }
+  }
+}

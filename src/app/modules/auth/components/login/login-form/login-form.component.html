@@ -1,0 +1,90 @@
+<!-- Login Form Begin -->
+
+<form
+  (ngSubmit)="loginFormSubmitted()"
+  [formGroup]="loginForm"
+  autocomplete="off"
+  class="login-form d-flex flex-column px-7 pt-5 pb-4"
+>
+  <div class="form-group mb-4 position-relative">
+    <input
+      (focus)="onLoginFormInputFocus('username', $event)"
+      class="form-control validate"
+      autocomplete="off"
+      formControlName="username"
+      placeholder="Login ID or Mobile Number"
+      type="text"
+    />
+
+    <div
+      *ngIf="fc.username.invalid && (fc.username.dirty || fc.username.touched)"
+      class="fv-plugins-message-container invalid-feedback"
+    >
+      <div *ngIf="fc.username.errors?.required">login id is required</div>
+
+      <div *ngIf="fc.username.errors?.minlength">
+        login id must be at least 3 characters
+      </div>
+
+      <div *ngIf="fc.username.errors?.maxlength">
+        login id must be at most 50 characters
+      </div>
+
+      <div *ngIf="fc.username.errors?.pattern">
+        login id must be a valid email address
+      </div>
+    </div>
+
+    <div
+      *ngIf="fc.username.valid && (fc.username.dirty || fc.username.touched)"
+      class="fv-plugins-message-container valid-feedback"
+    ></div>
+  </div>
+
+  <div class="form-group mb-4 d-flex flex-column">
+    <input
+      (focus)="onLoginFormInputFocus('password', $event)"
+      class="form-control validate"
+      formControlName="password"
+      placeholder="Password"
+      type="password"
+      autocomplete="off"
+    />
+    <div
+      *ngIf="fc.password.invalid && (fc.password.dirty || fc.password.touched)"
+      class="fv-plugins-message-container invalid-feedback"
+    >
+      <div *ngIf="fc.password.errors?.required">password is required</div>
+      <div *ngIf="fc.password.errors?.minlength">
+        password must be at least 3 characters
+      </div>
+      <div *ngIf="fc.password.errors?.maxlength">
+        password must be at most 50 characters
+      </div>
+    </div>
+    <span class="forgot-password align-self-end mt-1 me-2">
+      <a
+        [routerLink]="['/auth/forgot-password']"
+        class="text-info fw-bold fs-6"
+        href="javascript:void(0)"
+        >Forgot Password ?</a
+      >
+    </span>
+  </div>
+
+  <div class="d-flex flex-column">
+    <button
+      [disabled]="!loginForm.valid"
+      class="flex-grow-1 btn btn-primary btn-lg"
+      type="submit"
+    >
+      <span *ngIf="isLoading === false" class="">Sign In</span>
+      <span *ngIf="isLoading === true" class="">
+        Please wait...
+        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+      </span>
+    </button>
+  </div>
+</form>
+
+<!-- Login Form End -->

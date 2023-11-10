@@ -1,0 +1,16 @@
+<div #eyeIcon class="cursor-pointer" (click)="toggleEyeClicked($event)">
+  <!-- Close Eye Icon -->
+  <span
+    style="color: #906700"
+    class="svg-icon svg-icon-2 text-hover-primary"
+    [inlineSVG]="'./assets/media/icons/eye-closed.svg'"
+    *ngIf="!isToggle"
+  ></span>
+
+  <!-- Open Eye Icon -->
+  <span
+    class="svg-icon svg-icon-2 text-primary"
+    [inlineSVG]="'./assets/media/icons/eye-open-2.svg'"
+    *ngIf="isToggle"
+  ></span>
+</div>

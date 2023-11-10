@@ -1,0 +1,80 @@
+<!-- begin::Header -->
+<div class="card-header border-0">
+  <h3 class="card-title align-items-start flex-column">
+    <span class="fw-bold fs-3 text-danger">Active Loan Application</span>
+    <span class="text-muted mt-1 fw-bold fs-7"></span>
+  </h3>
+  <div *ngIf="false" class="card-toolbar">
+    <button class="btn btn-sm btn-active-color-primary fw-bold px-4 me-1">See All</button>
+  </div>
+</div>
+
+<div
+  class="card-body position-relative min-h-250px py-0"
+  style="height: 300px !important; overflow-y: auto"
+>
+  <!-- begin::Table container -->
+  <div
+    *ngIf="true"
+    class="table-responsive h-100 w-100"
+    data-kt-scroll="true"
+    data-kt-scroll-height="250px"
+    data-kt-scroll-offset="100px"
+  >
+    <!-- -- Data not found message  -->
+
+    <div
+      *ngIf="activeLoanData && activeLoanData.length === 0"
+      class="table-loading-message d-flex flex-center flex-column w-100 h-100"
+    >
+      <span class="fw-normal text-dark-50 fs-5">No data found.</span>
+    </div>
+
+    <!-- begin::Table -->
+    <table
+      auto-animate
+      [options]="{ duration: 300 }"
+      class="table table-hover table-header-bg-gray-300 table-header-rounded-3 align-middle gs-4 gy-2 position-relative table-rounded"
+    >
+      <!-- begin::Table head -->
+      <thead class="border-bottom-1 position-sticky top-0 text-capitalize fw-bold">
+        <tr>
+          <th class="text-start text-nowrap w-60px">Application ID</th>
+
+          <th class="text-center text-nowrap w-50px">Status</th>
+        </tr>
+      </thead>
+
+      <tbody class="fw-normal">
+        <tr *ngFor="let item of activeLoanData; let i = index">
+          <td>
+            <span class="text-gray-700 fs-7 text-nowrap text-start">
+              {{ item.id }}
+            </span>
+          </td>
+
+          <td>
+            <span class="text-gray-700 fs-7 text-center">
+              {{ item.displayName }}
+            </span>
+          </td>
+
+          <!-- <td class="text-gray-500 fs-7 text-center">
+            {{ item.createdOn }}
+          </td>
+
+          <td class="text-gray-500 fs-7 text-center">
+            {{ item.status }}
+          </td> -->
+
+          <!-- <td class="text-gray-500 fs-7 text-end">
+            {{ item.paymentAmount }}
+          </td> -->
+        </tr>
+      </tbody>
+      <!-- end::Table body -->
+    </table>
+    <!-- end::Table-->
+  </div>
+</div>
+<!-- end::Body -->

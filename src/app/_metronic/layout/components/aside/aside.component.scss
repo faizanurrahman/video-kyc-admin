@@ -1,0 +1,26 @@
+::ng-deep {
+
+  // Base
+  .svg-icon.svg-icon-20x svg {
+    height: 13rem !important;
+    width: 20rem !important;
+  }
+}
+
+.aside-footer {
+  border-radius: 20px;
+  width: 100% !important;
+}
+
+.symbol {
+  box-shadow: 0 0 0.3rem 0.1rem rgba(132, 132, 129, 0.752);
+}
+
+
+// :host {
+//   overflow-y: auto;
+//   overflow-x: hidden;
+//   height: 100vh;
+//   ;
+
+// }

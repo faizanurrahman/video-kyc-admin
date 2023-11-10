@@ -1,0 +1,30 @@
+table>thead {
+  // background-color: rgb(229, 172, 145);
+  // border-radius: 10px;
+  // overflow: hidden;
+  // ;
+
+
+  // tr th:first-child {
+  //   border-radius: 10px 0px 0px 10px;
+  //   padding-left: 10px;
+  // }
+}
+
+.card .card-header {
+  min-height: auto !important;
+}
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+
+.theme-dark-blue .today {
+  background-color: #9f1d1d;
+}
+
+.form-group {
+  flex: 1 1 100%;
+}

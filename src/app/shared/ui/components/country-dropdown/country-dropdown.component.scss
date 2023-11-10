@@ -1,0 +1,13 @@
+::ng-deep {
+  .ng-select-container {
+    height: 40px !important;
+    background-color: #fdf4f4 !important;
+    border: none !important;
+    outline: none !important;
+
+    &:focus {
+      border: 1px solid #e0e0e0 !important;
+      outline: none !important;
+    }
+  }
+}

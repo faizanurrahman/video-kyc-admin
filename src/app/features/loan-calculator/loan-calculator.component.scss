@@ -1,0 +1,293 @@
+:host {
+  height: 100%;
+  widht: 100%;
+  display: block;
+}
+
+
+.loan-calculator-container {
+  --clr-primary: #e76122;
+  --clr-light: #e4dfec;
+  --clr-white: #fff;
+}
+
+.loan-calculator-container {
+  height: auto;
+  // width: 700px;
+  border-radius: 15px;
+  // padding: 20px;
+  // margin: 50px 0;
+  // background-image: linear-gradient(to bottom left, #ece6df, white, white);
+}
+
+.loan-calculator-container .loan-calculator--header {
+  width: 100%;
+  // background-color: var(--clr-light);
+  border-radius: 15px 15px 0 0;
+  padding: 20px 20px;
+  margin-bottom: 20px;
+
+  // flex
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    padding: 10px 10px;
+    margin-bottom: 10px;
+  }
+
+  & h1 {
+    font-size: 25px;
+    color: var(--clr-primary);
+  }
+}
+
+.sub-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 50px;
+  padding: 0 30px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 20px;
+    padding: 0 10px;
+  }
+}
+
+.view {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+}
+
+.breakup {
+  width: 40%;
+
+  display: flex;
+  justify-content: center;
+  min-height: 243px;
+  min-width: 243px;
+
+  @media (max-width: 768px) {
+    width: 100% !important;
+  }
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.detail {
+  border: 1px solid #e4dfec;
+  border-radius: 10px;
+  padding: 10px 30px;
+  margin-bottom: 5px;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  // border: 1px solid #e4dfec;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 0 5px 0 #142635;
+}
+
+.price-container {
+  display: flex;
+  justify-content: space-between;
+  // align-items: flex-start;
+}
+
+#price-container {
+  // color: #2a283e;
+  // margin-top: 50px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e4dfec;
+}
+
+.price-title {
+  // content: "Monthly Payable:";
+  font-size: 12px;
+  font-weight: 400;
+  display: block;
+  // color: #2a283e;
+  color: var(--clr-light);
+}
+
+#price {
+  color: var(--clr-white);
+  font-size: 25px;
+}
+
+.loan-details {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  padding-block: 20px 10px;
+
+  color: var(--clr-light);
+
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+  }
+
+  &>.chart-details>p:nth-child(2) {
+    color: var(--clr-white);
+  }
+}
+
+#lineChart {}
+
+.lineChart {
+  min-height: 356px;
+  min-width: 712px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 400px) {
+    display: none;
+  }
+}
+
+/*----- Styling the sliders ----*/
+// input[type='range'] {
+//   -webkit-appearance: none;
+//   margin: 10px 0px;
+//   width: 100%;
+// }
+
+// input[type='range']:focus {
+//   outline: none;
+// }
+
+// input[type='range']::-webkit-slider-runnable-track {
+//   width: 100%;
+//   height: 20px;
+//   cursor: pointer;
+//   background: var(--clr-primary);
+//   border-radius: 10px;
+// }
+
+// input[type='range']::-webkit-slider-thumb {
+//   box-shadow: 2px 2px 5px #b3b3b3, -1px -1px 3px grey;
+//   border: 5px solid #ffffff;
+//   height: 20px;
+//   width: 20px;
+//   border-radius: 50%;
+//   background: var(--clr-primary);
+//   cursor: pointer;
+//   // margin-top: -6px;
+//   -webkit-appearance: none;
+// }
+
+// input[type='range']:focus::-webkit-slider-runnable-track {
+//   background: #b3b3b3;
+// }
+
+// input[type='range']::-moz-range-track {
+//   width: 100%;
+//   height: 6px;
+//   cursor: pointer;
+//   background: var(--clr-primary);
+//   border-color: transparent;
+//   border-width: 16px 0;
+//   color: transparent;
+//   border-radius: 10px;
+// }
+
+// input[type='range']::-moz-range-thumb {
+//   box-shadow: 2px 2px 5px #b3b3b3, -1px -1px 3px grey;
+//   border: 5px solid #ffffff;
+//   height: 20px;
+//   width: 20px;
+//   border-radius: 50%;
+//   background: var(--clr-primary);
+//   cursor: pointer;
+//   // margin-top: -6px;
+// }
+
+// input[type='range']::-ms-track {
+//   width: 100%;
+//   height: 6px;
+//   cursor: pointer;
+//   background: var(--clr-primary);
+//   border-color: transparent;
+//   border-width: 16px 0;
+//   color: transparent;
+//   border-radius: 10px;
+// }
+
+// input[type='range']::-ms-fill-lower {
+//   background: var(--clr-primary);
+//   border-radius: 5px;
+// }
+
+// input[type='range']::-ms-fill-upper {
+//   background: var(--clr-primary);
+//   border-radius: 5px;
+// }
+
+// input[type='range']::-ms-thumb {
+//   box-shadow: 2px 2px 5px #b3b3b3, -1px -1px 3px grey;
+//   border: 5px solid #ffffff;
+//   height: 20px;
+//   width: 20px;
+//   border-radius: 50%;
+//   background: var(--clr-primary);
+//   cursor: pointer;
+//   // margin-top: -6px;
+// }
+
+// input[type='range']:focus::-ms-fill-lower {
+//   background: var(--clr-primary);
+// }
+
+// input[type='range']:focus::-ms-fill-upper {
+//   background: var(--clr-primary);
+// }
+
+/*-------------------------------------*/
+.disclaimer {
+
+  border: 1px solid #e4dfec;
+  border-radius: 10px;
+  padding: 10px 30px;
+  margin-bottom: 5px;
+  background: lighten(#eae2e6, 10%);
+
+  .disclaimer-header {
+    padding: 10px;
+    border-bottom: 1px solid #e4dfec;
+    // background: #fcf6f64d;
+
+  }
+
+  .dismissable-disclaimer {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    z-index: 1;
+  }
+
+  color: #454a61
+}

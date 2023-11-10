@@ -1,0 +1,219 @@
+@import "../../../../assets/sass/core/base/mixins/_breakpoints.scss";
+
+
+
+:host {
+  --primary-clr: #906700;
+  --secondary-clr: #7E4001;
+  --danger-clr: #621101;
+  --horizontal-line-1-position-from-top: 60px;
+  --horizontal-line-2-position-from-top: 55%;
+  --horizontal-line-3-position-from-bottom: 55px;
+  --lines-clr: rgba(255, 255, 255, 0.26);
+
+  --kaekapakae-clr: #cecfeb;
+
+  --virtual-keboard-positon-from-bottom: 100px;
+
+  --kt-form-check-input-border: 0.5px solid var(--primary-clr);
+  --kt-form-check-input-focus-border: var(--primary-clr);
+
+
+  --logo-left-margin: 60px;
+
+  --form-control-border-bottom: 1px solid var(--primary-clr);
+  --logo-bg: transparent;
+  --padding-left: clamp(100px, 10vw, 150px);
+  --kt-input-solid-bg: #ffe5d9;
+
+  // ============== Responsive Variables =========
+
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  overflow-y: auto;
+  display: flex;
+
+  .flex-root {
+    height: 100%;
+  }
+
+}
+
+
+
+// --- Curved Images
+
+.curved-image {
+  background: url('/assets/media/ceda-images/left-side-curve.png');
+  z-index: 100;
+  background-size: 600px 101vh;
+  background-repeat: no-repeat;
+  background-position: 0 -2px;
+  background-attachment: fixed;
+}
+
+// ----- Lines ------
+.horizontal-line {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  height: 2px;
+
+  border-bottom: 1px solid var(--lines-clr);
+
+  &.line1 {
+    top: var(--horizontal-line-1-position-from-top);
+  }
+
+  &.line2 {
+    top: var(--horizontal-line-2-position-from-top);
+  }
+
+  &.line3 {
+    bottom: var(--horizontal-line-3-position-from-bottom);
+  }
+
+}
+
+.authentication-content {
+  position: relative;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 80px;
+    border: 1px solid transparent;
+    border-left-color: var(--lines-clr);
+    transform: translateX(-50%);
+    z-index: 100;
+  }
+}
+
+
+
+::ng-deep {
+  .ng-dropdown-panel {
+    // background-color: #fff1ea;
+    --bg-clr: #ffe5d9;
+    width: 300px !important;
+
+
+  }
+
+  .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {}
+
+  .form-select[ng-select] {
+    background-image: none;
+    padding: 0;
+  }
+
+  .ng-select .ng-select-container {
+    --bg-clr: #ffe5d9;
+    background: var(--bg-clr);
+  }
+
+  .ng-select.ng-select-opened .ng-select-container {
+    background: darken(#ffe5d9, 10)
+  }
+}
+
+// -----============ UTILITIES Functions =============-----
+.header-clr {
+  color: var(--secondary-clr);
+}
+
+.text-custom-primary {
+  color: var(--primary-clr);
+}
+
+.text-custom-danger {
+  color: var(--danger-clr);
+}
+
+
+
+
+// --------- Form Utilities ----------
+.form-group {
+  margin-bottom: 15px;
+
+  input::placeholder {
+    color: var(--primary-clr);
+  }
+
+  ::placeholder {
+    color: var(--primary-clr);
+    font-weight: normal;
+  }
+
+  .form-control {
+    color: var(--danger-clr);
+    font-weight: normal;
+    ;
+  }
+}
+
+
+.login-form--wrapper {
+  filter: drop-shadow(0 0 5px #fff);
+
+  // Virtual Keyboard wrapper
+  &>div:nth-child(2) {
+    box-shadow: 0px 5px 5px 0 #d7d3ce;
+  }
+}
+
+
+
+
+
+.login-header--wrapper,
+.login-form--wrapper,
+.brand-icon--wrapper {
+  max-width: 405px;
+  min-width: 320px;
+  transition: 0.3s linear;
+}
+
+.brand-icon--wrapper,
+.left-content {
+  transition: 0.3s linear;
+}
+
+@media (min-width: 768px) {
+
+  .login-header--wrapper,
+  .login-form--wrapper,
+  .brand-icon--wrapper {
+
+    align-self: flex-start !important;
+  }
+
+  .left-content,
+  .brand-icon--wrapper {
+    padding-left: 20px !important;
+  }
+
+  .login-header--wrapper {
+    text-align: start !important;
+  }
+
+  .brand-icon--wrapper {
+    justify-content: flex-start !important;
+  }
+
+
+}
+
+@media (min-width: 992px) {
+
+  .left-content,
+  .brand-icon--wrapper {
+    padding-left: 60px !important;
+    width: 100%;
+    ;
+  }
+}

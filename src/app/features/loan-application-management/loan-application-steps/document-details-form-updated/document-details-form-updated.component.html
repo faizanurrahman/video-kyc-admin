@@ -1,0 +1,137 @@
+<div *ngIf="!instructionHidden" class="document-upload-instruction position-relative">
+  <!-- dismisable instruction -->
+
+  <div class="text-center mb-5 position-relative instruction-header">
+    <span class="fw-bold fs-2">Guideline for Uploading Documents</span>
+    <span ngbTooltip="dismiss" class="dismissable-instruction" (click)="instructionHidden = true">
+      <i class="fa fa-multiply text-hover-danger fs-5"></i>
+    </span>
+  </div>
+  <ul class="list-group-removed">
+    <li class="list-group-item-removed">
+      <strong>Accepted file types:</strong>
+      You can upload only
+      <span class="highlight">JPG</span>
+      ,
+      <span class="highlight">JPEG</span>
+      ,
+      <span class="highlight">PNG</span>
+      , and
+      <span class="highlight">PDF</span>
+      files. Please make sure that your documents are in one of these formats.
+    </li>
+    <li class="list-group-item-removed">
+      <strong>Maximum file size:</strong>
+      Each file you upload must not exceed
+      <span class="highlight">10MB</span>
+      in size. If a file is larger than this, it will not be uploaded.
+    </li>
+    <li class="list-group-item-removed">
+      <strong>Uploading files:</strong>
+      <!-- You can upload your files one by one, or
+      you can upload them all at once. If you have already uploaded some files
+      and want to upload the rest at once, the uploader will automatically
+      ignore the files that have already been uploaded. -->
+      <span>
+        Upload files to the
+        <span>relevant fields</span>
+        as stated on the checklist
+      </span>
+    </li>
+    <li class="list-group-item-removed">
+      <strong>Removing files:</strong>
+      You can easily remove a file by clicking on the delete button next to it. If you want to
+      remove all files at once, click on the "Remove All" button.
+    </li>
+    <!-- <li class="list-group-item-removed">
+      <strong>Replacing files:</strong> If you upload a file with the same name
+      as an existing file, a popup will appear asking you if you want to replace
+      the existing file or ignore the new file. If you choose to replace the
+      file, the existing file will be removed first, and then the new file will
+      be uploaded with the same ID. This way, you can easily update your
+      documents without having to create new IDs each time.
+    </li> -->
+  </ul>
+</div>
+
+<div #loanDocumentForm class="d-none"></div>
+
+<form [formGroup]="loanDocumentDetailsForm">
+  <div class="form-group row mb-5" *ngFor="let doc of requiredDocuments; let i = index">
+    <label
+      class="form-label fw-bold col-lg-2"
+      [for]="doc.controlName"
+      [ngClass]="{ required: doc.isMandatory }"
+    >
+      {{ doc.labelName }}
+    </label>
+    <div class="col-lg-10">
+      <app-file-uploader-v2
+        formControlName="{{ doc.controlName }}"
+        [additionalData]="getDocumentData(doc)"
+      ></app-file-uploader-v2>
+    </div>
+  </div>
+
+  <!-- Form Action -->
+  <div class="row mt-5">
+    <div class="col-lg-12">
+      <div class="d-flex flex-column flex-row-fluid">
+        <div class="d-flex flex-row justify-content-between">
+          <div class="previous-button d-flex gap-4">
+            <button
+              (click)="previousStep()"
+              type="button"
+              class="btn btn-light font-weight-bolder text-uppercase"
+            >
+              Previous
+            </button>
+
+            <button
+              appClickable
+              (click)="generateRequiredDocumentPdf()"
+              type="button"
+              class="btn btn-light font-weight-bolder text-info"
+            >
+              Export List of Required Documents
+            </button>
+          </div>
+
+          <div class="d-flex flex-row gap-5">
+            <div *ngIf="!isApplicationDisabled" class="save-button">
+              <button
+                appClickable
+                [disabled]="isApplicationDisabled"
+                (click)="saveApplication()"
+                class="btn btn-info fw-bold text-uppercase"
+              >
+                <span *ngIf="(loading$ | async) === false">Save</span>
+                <span *ngIf="(loading$ | async) === true" class="fa fa-spinner svg-spin"></span>
+              </button>
+            </div>
+            <!--
+  [ngStyle]="{
+                cursor: loanDocumentDetailsForm.invalid ? 'not-allowed' : 'pointer'
+              }"
+              [ngClass]="{
+                  'btn-primary': loanDocumentDetailsForm.valid,
+                  'btn-light-secondary': loanDocumentDetailsForm.invalid
+                }"
+             -->
+
+            <div class="next-button">
+              <button
+                appClickable
+                (click)="nextStep()"
+                type="button"
+                class="btn btn-primary font-weight-bolder text-uppercase"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

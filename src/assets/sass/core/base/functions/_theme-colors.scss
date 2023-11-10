@@ -1,0 +1,21 @@
+//
+// Bootstrap extended functions
+//
+
+@use 'sass:map';
+
+/**
+  The purpose of these functions in the provided SCSS code snippet is to retrieve specific color values from corresponding maps or lists defined elsewhere in the code. These functions allow you to easily access and use theme-related colors in your stylesheets without explicitly specifying the color values each time.
+*/
+
+@function theme-inverse-color($key: 'primary') {
+  @return map.get($theme-inverse-colors, $key);
+}
+
+@function theme-active-color($key: 'primary') {
+  @return map.get($theme-active-colors, $key);
+}
+
+@function theme-light-color($key: 'primary') {
+  @return map.get($theme-light-colors, $key);
+}

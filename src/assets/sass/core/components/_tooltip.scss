@@ -1,0 +1,57 @@
+//
+//  Tooltip
+//
+
+
+// Base
+.tooltip {
+    --#{$prefix}tooltip-color: var(--kt-tooltip-color);
+    --#{$prefix}tooltip-bg: var(--kt-tooltip-bg);
+    --#{$prefix}tooltip-opacity: var(--kt-tooltip-opacity);
+
+    .tooltip-inner {
+        box-shadow: var(--kt-tooltip-box-shadow);
+    }
+
+    &.tooltop-auto-width {
+        .tooltip-inner {
+            white-space: nowrap;
+            max-width: none;
+        }
+    }
+
+    // Inverse
+    &.tooltip-inverse {
+        @include tooltip-theme($bg-color: var(--kt-dark),
+            $color: var(--kt-dark-inverse),
+            $arrow-color: var(--kt-dark),
+        );
+    }
+
+    // Custom tooltip
+    &.my-tooltip {
+
+        @include tooltip-theme($bg-color: #bcb7a8,
+            $color: #2b0b0b,
+            $arrow-color: #bcb7a8,
+
+        );
+        // .tooltip-arrow {
+        //     border-top-color: #f3eee1;
+
+        // }
+        // .tooltip-inner {
+        //     max-width: auto;
+        //     padding: 0.5rem 1rem;
+        //     font-size: 1rem;
+        //     font-weight: 500;
+        //     color: #37268b;
+        //     letter-spacing: 0.5px;
+        //     line-height: 1.5;
+        //     transition: color 0.2s ease;
+        //     background-color: #a4a096;
+        //     border-radius: 0.5rem;
+        //     box-shadow: 0 0.5rem 1rem rgba(191, 150, 150, 0.483);
+        // }
+    }
+}

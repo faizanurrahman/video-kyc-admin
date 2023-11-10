@@ -1,0 +1,147 @@
+<!-- Pay Loan Details -->
+<div class="d-flex flex-center h-100 bg-body">
+  <div class="d-flex flex-column flex-center border border-1 rounded p-10 w-100 w-md-75">
+    <h1 class="fw-bold fs-1 text-dark-50 mb-10">Confirm Your Loan Details</h1>
+
+    <div class="form row g-5">
+      <div class="col-md-6">
+        <label class="col-form-label fw-bold text-dark fs-4">Contract Number</label>
+        <div class="form-control form-control-lg form-control-solid">
+          <span class="fs-2">{{ loanNumber }}</span>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <label class="col-form-label fw-bold text-dark fs-4">Contract Amount</label>
+        <div class="form-control form-control-lg form-control-solid">
+          <span class="fs-2">P</span>
+          <span class="ms-3 fs-2">{{ getDecimalValue(loanAmount) }}</span>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <label class="col-form-label fw-bold text-dark fs-4">Arrears</label>
+        <div class="form-control form-control-lg form-control-solid">
+          <span class="fs-2">P</span>
+          <span class="ms-3 fs-2">{{ getDecimalValue(arrears) }}</span>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="col-form-label fw-bold text-dark fs-4">Installment</div>
+        <div class="form-control form-control-lg form-control-solid">
+          <span class="fs-2">P</span>
+          <span class="ms-3 fs-2">{{ getDecimalValue(installment) }}</span>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="col-form-label fw-bold text-dark fs-4">Balance</div>
+        <div class="form-control form-control-lg form-control-solid">
+          <span class="fs-2">P</span>
+          <span class="ms-3 fs-2">{{ getDecimalValue(balance) }}</span>
+        </div>
+      </div>
+
+      <div class="col-12 justify-content-center text-center">
+        <h3 class="fw-bold fs-3 mb-2">How Much You Want To Pay ?</h3>
+
+        <div *ngIf="false" class="custom-switch-button rounded-4 border border-2 form-group">
+          <input
+            #customCheckBox
+            (change)="payFullOrCustom(customCheckBox.checked)"
+            class="custom-switch-button-checkbox"
+            type="checkbox"
+          />
+          <div (click)="customCheckBox.click()" class="custom-switch-label-wrapper">
+            <div
+              [ngClass]="{ active: customCheckBox.checked }"
+              class="flex-row-fluid label label-1"
+            >
+              Pay Full
+            </div>
+            <div
+              [ngClass]="{ active: !customCheckBox.checked }"
+              class="flex-row-fluid label label-2"
+            >
+              Pay Custom
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-form-label fw-bold text-dark fs-4">Payable Amount</label>
+
+          <div class="input-group input-group-lg input-group-solid">
+            <span class="input-group-text">P</span>
+            <input
+              type="text"
+              [formControl]="payableAmountControl"
+              class="form-control form-control-lg form-control-solid"
+              (keypress)="isNumericKeyPress($event)"
+              (change)="onPayableAmountChange($event)"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="form-group">
+        <div class="form-control form-control-solid">
+          {{ payableAmount }}
+        </div>
+      </div> -->
+
+      <div class="mt-10 d-flex flex-column flex-md-row align-items-center justify-content-between">
+        <div class="form-check form-check-solid form-check-lg mb-5 mb-md-0">
+          <input
+            #disclaimer1
+            type="checkbox"
+            class="form-check-input"
+            (change)="disclaimerChanged(disclaimer1.checked)"
+            style="border: 2px solid var(--kt-primary)"
+          />
+
+          <label class="form-check-label">
+            I agree to the
+            <a (click)="openPaymentDisclaimer()" class="text-primary cursor-pointer">
+              Terms & Conditions
+            </a>
+          </label>
+        </div>
+        <div class="d-flex gap-2">
+          <button
+            [disabled]="isConfirmBtnDisable"
+            appClickable
+            class="btn btn-primary btn-lg px-6 me-3"
+            (click)="confirmLoan()"
+          >
+            <span
+              *ngIf="(loader.loading$ | async) === true"
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            <span *ngIf="(loader.loading$ | async) === true" class="ms-2">Processing...</span>
+
+            <span *ngIf="(loader.loading$ | async) === false" classs="">Confirm</span>
+          </button>
+          <button [routerLink]="['/dashboard']" class="btn btn-light btn-lg px-6">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Hidden Form -->
+
+<form
+  #form
+  id="nonseamless"
+  method="post"
+  name="redirect"
+  action="https://secure.paygate.co.za/payweb3/process.trans"
+>
+  <input #inputPayRequestId type="hidden" id="PAY_REQUEST_ID" name="PAY_REQUEST_ID" />
+
+  <input #inputChecksum type="hidden" name="CHECKSUM" id="CHECKSUM" />
+</form>

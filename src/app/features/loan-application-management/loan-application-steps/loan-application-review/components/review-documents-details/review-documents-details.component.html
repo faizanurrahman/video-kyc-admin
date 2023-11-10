@@ -1,0 +1,23 @@
+<div class="row gx-10">
+  <div *ngFor="let key of getDocumentKeys()" class="col-md-6">
+    <label class="form-label">{{ getLoanDocumentName(key) }}</label>
+    <div class="px-3 form-control-plaintext form-control-sm form-control-solid-bg">
+      <!-- {{ getDocumentValue(key) || 'Not Applicable' }} -->
+
+      <div *ngIf="getDocumentValue(key) && getDocumentValue(key).length === 1">
+        <span>{{ getDocumentValue(key) }}</span>
+      </div>
+
+      <div
+        class="d-flex flex-column gap-3"
+        *ngIf="getDocumentValue(key) && getDocumentValue(key).length > 1"
+      >
+        <span *ngFor="let value of getDocumentValue(key)">{{ value }}</span>
+      </div>
+
+      <div *ngIf="getDocumentValue(key) && getDocumentValue(key).length === 0">
+        <span>Not Applicable</span>
+      </div>
+    </div>
+  </div>
+</div>

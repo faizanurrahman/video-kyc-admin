@@ -1,0 +1,147 @@
+@mixin filter($value) {
+  filter: blur($value);
+  -moz-filter: blur($value);
+  -webkit-filter: blur($value);
+  -o-filter: blur($value);
+}
+
+.card .card-header {
+  min-height: fit-content;
+}
+
+.loan-mini-card .no-loan-card {
+  border-radius: 15px;
+  background-image: url("/assets/media/patterns/mesh-gradient-1.png");
+  background-size: cover;
+
+  box-shadow: 0px -2px 5px 0px whitesmoke;
+  overflow: hidden;
+  position: relative;
+}
+
+.loan-mini-card.prev-card {
+  opacity: 0.7;
+
+  .no-loan-card {
+    @include filter(4px);
+  }
+}
+
+.loan-mini-card.show-card {
+  opacity: 1;
+
+  .no-loan-card {
+    @include filter(0px);
+  }
+}
+
+.loan-mini-card.next-card {
+  opacity: 0.8;
+
+  .no-loan-card {
+    @include filter(2px);
+  }
+}
+
+// .no-loan-card::before {
+//   content: "";
+//   position: absolute;
+//   width: 100%;
+//   height: 100%;
+//   background: inherit;
+//   z-index: -1;
+
+//   filter: blur(10px);
+//   -moz-filter: blur(10px);
+//   -webkit-filter: blur(10px);
+//   -o-filter: blur(10px);
+
+//   transition: all 2s linear;
+//   -moz-transition: all 2s linear;
+//   -webkit-transition: all 2s linear;
+//   -o-transition: all 2s linear;
+
+//   opacity: 0.2;
+// }
+
+.loans-card-wrapper {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  // height: max-content;
+  margin: 0 auto;
+}
+
+.loan-mini-card {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  // height: 160px;
+  height: 200px;
+  // border: 1px solid black;
+
+  transition: all 1.2s ease-in-out;
+}
+
+.show-card {
+  z-index: 3;
+  transition: all 1.2s ease-in-out;
+  // animation: show-card 1.2s ease-in-out forwards;
+}
+
+.next-card {
+  z-index: 2;
+  // transform: translate(-50%, -50%) rotate(15deg) scale(0.9);
+  bottom: 40px;
+  transform: scale(0.8);
+  animation: next-card 1.2s ease-in-out forwards;
+  // transition: all 1s ease-in-out;
+  // animation-delay: 0.8s;
+}
+
+.prev-card {
+  z-index: 1;
+  // transform: translate(-50%, -50%) rotate(-15deg) scale(0.8);
+  bottom: 80px;
+  transform: scale(0.6);
+  animation: prev-card 1.2s ease-in-out forwards;
+  // animation-delay: 0.4s;
+}
+
+@keyframes next-card {
+  100% {
+    bottom: 40px;
+    transform: scale(0.8);
+  }
+}
+
+@keyframes prev-card {
+  100% {
+    bottom: 80px;
+    transform: scale(0.6);
+  }
+}
+
+@keyframes show-card {
+  0% {
+    bottom: 0px;
+    // transition: all 1.2s ease-in-out;
+    // transform: scale(0.6);
+  }
+
+  50% {
+    bottom: 80px;
+    // transition: all 1.2s ease-in-out;
+  }
+
+  100% {
+    bottom: 0px;
+    // transition: all 1.2s ease-in-out;
+    // transform: scale(1);
+  }
+
+  // 100% {
+  //   bottom: 0px;
+  //   transform: scale(1);
+  // }
+}

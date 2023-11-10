@@ -1,0 +1,290 @@
+<div class="d-flex flex-column flex-root position-relative authentication-wrapper curved-image p-0">
+  <div
+    class="d-flex flex-column-fluid flex-column flex-root position-relative px-4"
+    style="
+      overflow-x: hidden;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: var(--danger-clr) aliceblue;
+    "
+  >
+    <div class="brand-icon--wrapper w-100 align-self-center d-flex justify-content-center mt-5">
+      <div #brandLogo id="brandLogo" class="brand-logo h-100px d-flex flex-center mt-5" style="">
+        <a href="javascript:void(0)">
+          <img
+            alt="Logo"
+            src="./assets/media/logos/ceda-logo-transparent.png"
+            class=""
+            style="height: 70px"
+          />
+        </a>
+      </div>
+    </div>
+    <!-- Main Content -->
+    <div class="d-flex flex-column flex-center flex-md-row flex-1 position-relative">
+      <!-- -Left Content -->
+      <div class="w-100 left-content d-flex flex-column justify-content-center text-danger rounded">
+        <div class="login-header--wrapper mb-5 align-self-center text-center">
+          <div class="header-clr fs-3x fw-bolder">Sign in to</div>
+          <div class="header-clr fs-2x fw-bold">CEDA Online Services</div>
+          <div class="text-gray-700 fs-5 fw-normal">
+            Get Your
+            <span class="text-custom-danger fw-bold">Business Loan</span>
+            in easy steps
+          </div>
+        </div>
+
+        <div class="login-form--wrapper align-self-center w-100" style="max-width: 330px">
+          <div
+            class="mt-1 bg-white px-8 py-6 d-flex flex-center flex-column justify-content-start rounded-4 rounded-bottom-0"
+          >
+            <div *ngIf="false" class="avatar">
+              <img src="/assets/media/icons/user icon.png" width="100px" height="100px" />
+              <!-- <span [inlineSVG]="'./assets/media/icons/user.svg'" class="svg-icon svg-icon-7qx"></span> -->
+            </div>
+
+            <form [formGroup]="loginForm" class="form w-100 px-5 mt-3" novalidate="novalidate">
+              <div class="form-group mb-5">
+                <div
+                  class="position-relative"
+                  style="border-bottom: var(--form-control-border-bottom)"
+                >
+                  <div class="position-absolute top-50 start-2px translate-middle-y">
+                    <span
+                      [inlineSVG]="'/assets/media/icons/at-rate.svg'"
+                      class="svg-icon svg-icon-2"
+                      style="color: var(--primary-clr)"
+                    ></span>
+                  </div>
+
+                  <input
+                    formControlName="loginId"
+                    type="text"
+                    [tabIndex]="0"
+                    autocomplete="new-password"
+                    class="form-control w-100 h-35px px-10 pe-4 bg-transparent border-0"
+                    placeholder="LOGIN ID"
+                    appVirtualKeyboardFocusedInput
+                  />
+                </div>
+              </div>
+
+              <div class="form-group mb-2">
+                <div
+                  class="position-relative"
+                  style="border-bottom: var(--form-control-border-bottom)"
+                >
+                  <div class="position-absolute top-50 start-2px translate-middle-y">
+                    <!-- <span
+                      [inlineSVG]="'/assets/media/icons/lock-outline.svg'"
+                      class="svg-icon svg-icon-2"
+                      style="color: #906700"
+                    ></span> -->
+                    <i style="color: #906700" class="ki-duotone ki-lock fs-2">
+                      <span class="path1"></span>
+                      <span class="path2"></span>
+                      <span class="path3"></span>
+                      <span class="path4"></span>
+                      <span class="path5"></span>
+                    </i>
+                  </div>
+
+                  <input
+                    #password
+                    formControlName="password"
+                    type="password"
+                    class="form-control h-35px px-10 pe-4 bg-transparent border-0"
+                    autocomplete="new-password"
+                    placeholder="PASSWORD"
+                    appVirtualKeyboardFocusedInput
+                  />
+
+                  <div class="position-absolute top-50 end-2px translate-middle-y">
+                    <app-toggle-eye
+                      (toggled)="password.type = password.type == 'password' ? 'text' : 'password'"
+                    ></app-toggle-eye>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="form-group w-100 d-flex gap-5 flex-stack mt-8"
+                [ngStyle]="{
+                  cursor: loginForm.invalid ? 'not-allowed' : 'pointer'
+                }"
+              >
+                <button
+                  [disabled]="loginForm.invalid"
+                  (click)="loginFromSubmitted()"
+                  appClickable
+                  class="btn btn-sm w-125px"
+                  [ngClass]="{
+                    'btn-primary': loginForm.valid,
+                    'btn-light-secondary': loginForm.invalid
+                  }"
+                >
+                  LOGIN
+                </button>
+                <a href="javascript:void(0)" [routerLink]="['/auth/forgot-password']">
+                  <span class="text-danger fw-bold">Forgot Password?</span>
+                </a>
+              </div>
+            </form>
+          </div>
+
+          <div
+            class="my-0 d-flex flex-center bg-white border border-top-1 border-left-0 border-bottom-0 border-right-0 border-dashed"
+            style="border-color: var(--primary-clr) !important"
+          >
+            <div (click)="toggleVirtualKeyboard()" class="flex-grow-1 py-4 btn-lg mt-2">
+              <!-- Virtual Keyboard -->
+              <span class="d-flex flex-center cursor-pointer" style="gap: 10px">
+                <label class="form-check">
+                  <input
+                    [checked]="showVirtualKeyboard"
+                    class="form-check-input form-check-inline form-check-danger cursor-pointer"
+                    id="virtualKeyboardCheckbox"
+                    type="checkbox"
+                    value=""
+                  />
+                  <span
+                    [ngStyle]="{
+                      color: showVirtualKeyboard ? 'var(--danger-clr)' : 'var(--primary-clr)'
+                    }"
+                    (click)="toggleVirtualKeyboard()"
+                    class="form-check-label font-weight-bold fs-6 cursor-pointer"
+                  >
+                    Virtual Keyboard
+                  </span>
+                </label>
+              </span>
+            </div>
+          </div>
+
+          <div
+            class="mt-2 w-100 px-10 d-flex flex-stack h-50px bg-white text-white gap-5 rounded rounded-4 rounded-top-0"
+          >
+            <a href="javascript:void(0)" [routerLink]="['/auth/registration']">
+              <span class="text-danger fw-bold">Register</span>
+            </a>
+
+            <a href="javascript:void(0)" [routerLink]="['/auth/forgot-login-id']">
+              <span class="text-danger fw-bold">Forgot Login Id?</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- - Right Content -->
+      <div
+        class="d-flex flex-column align-items-center align-items-lg-start w-100 h-100 justify-content-center flex-row-fluid"
+      >
+        <div
+          class="position-fixed d-none d-md-flex"
+          style="
+            top: calc(var(--horizontal-line-2-position-from-top));
+            left: 70%;
+            color: white;
+            backdrop-filter: blur(2px);
+          "
+        >
+          <div style="color: #fff" class="custom-font d-inline-block lh-0">
+            #Kaekapakae
+            <span
+              [inlineSVG]="'/assets/media/icons/duotune/arrows/arr072.svg'"
+              class="svg-icon svg-icon-2x d-inline-flex position-absolute"
+              style="color: #d5d5d5"
+            ></span>
+          </div>
+        </div>
+
+        <div
+          *ngIf="showVirtualKeyboard"
+          class="custom-virtual-keyboard d-flex justify-content-center align-items-start w-2px w-lg-auto"
+        >
+          <app-virtual-keyboard
+            (keyboardPressKey)="onVirtualKeyboardKeyClicked($event)"
+            (moveFocusToNextInput)="moveFocus()"
+            [keyboardTransition]="'all 1s ease-in-out'"
+            [showVirtualKeyboard]="virtualKeyboardService.isKeyboardVisible$ | async"
+            [value]="setVirtualKeyboardValue()"
+            class="mt-4 px-4 px-md-6"
+          ></app-virtual-keyboard>
+        </div>
+      </div>
+    </div>
+
+    <!--- Footer -->
+    <div
+      style="z-index: 1000"
+      class="authentication-footer d-flex flex-stack flex-row flex-wrap px-10 py-4"
+    >
+      <div class="d-flex flex-row gap-8 flex-center flex-wrap-reverse">
+        <a
+          href="https://www.facebook.com/cedaBW"
+          target="_blank"
+          class="nav-link text-hover-primary d-flex"
+        >
+          <!-- <i class="bi bi-facebook fs-4"></i> -->
+          <span inlineSVG="./assets/media/icons/facebook.svg" class="svg-icon svg-icon-3"></span>
+        </a>
+        <a
+          href="https://www.instagram.com/ceda_bw/"
+          target="_blank"
+          class="nav-link text-hover-primary d-flex"
+        >
+          <!-- <i class="bi bi-instagram fs-4"></i> -->
+          <span inlineSVG="./assets/media/icons/instagram.svg" class="svg-icon svg-icon-3"></span>
+        </a>
+        <a
+          href="https://twitter.com/CEDA_BW"
+          target="_blank"
+          class="nav-link text-hover-primary d-flex"
+        >
+          <!-- <i class="bi bi-twitter fs-4"></i>
+           -->
+          <span inlineSVG="./assets/media/icons/twitter-x.svg" class="svg-icon svg-icon-1"></span>
+        </a>
+
+        <!-- <div class="">
+          <img
+            src="https://www.positivessl.com/images/seals/positivessl_trust_seal_md_167x42.png"
+          />
+        </div> -->
+      </div>
+
+      <div class="d-flex gap-3">
+        <span style="" class="fs-5 fw-bold text-white">Powered By:</span>
+        <a href="https://www.manamtech.com/" target="_blank" class="fs-6 fw-bold text-white">
+          Manam Infotech Pvt. Ltd.
+        </a>
+      </div>
+
+      <!--begin::Carousel Indicators-->
+      <div *ngIf="false" class="carousel carousel-custom slide">
+        <ol
+          class="p-0 m-0 carousel-indicators carousel-indicators-dots carousel-indicators-active-primary"
+          style="--kt-carousel-custom-bullet-indicator-default-bg-color: #ff0000"
+        >
+          <li
+            data-bs-target="#kt_carousel_1_carousel"
+            data-bs-slide-to="0"
+            class="ms-1 active"
+          ></li>
+          <li data-bs-target="#kt_carousel_1_carousel" data-bs-slide-to="1" class="ms-1"></li>
+          <li data-bs-target="#kt_carousel_1_carousel" data-bs-slide-to="2" class="ms-1"></li>
+        </ol>
+      </div>
+
+      <!--end::Carousel Indicators-->
+    </div>
+  </div>
+</div>
+
+<!-- * Horizontal Lines -->
+<ng-container>
+  <div class="horizontal-line line1"></div>
+  <div class="horizontal-line line2"></div>
+  <div class="horizontal-line line3"></div>
+  <div class="vertical-line"></div>
+</ng-container>

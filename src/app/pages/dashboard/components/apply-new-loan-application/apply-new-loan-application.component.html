@@ -1,0 +1,54 @@
+<!-- Apply Now Top -->
+<div class="d-flex flex-row justify-content-start align-items-center mb-3">
+  <!-- Apply Now Icon -->
+  <span
+    class="svg-icon svg-icon-danger svg-icon-3hx me-4"
+    [inlineSVG]="'./assets/media/dashboard/apply-now-top-left-icon.svg'"
+  ></span>
+
+  <!-- Apply Now Text -->
+  <span class="fw-bold fs-1 text-danger">Apply Now</span>
+</div>
+
+<!-- Apply Now Bottom -->
+<div class="d-flex flex-row flex-stack mb-0">
+  <!-- Select Box  -->
+  <select
+    [formControl]="loanApplicationSectorFormControl"
+    class="form-select me-3"
+    aria-label="Select example"
+  >
+    <option value="null" disabled>Sector Type</option>
+    <ng-container *ngFor="let sector of sectorTypes">
+      <option value="{{ sector.type }}">{{ sector.name }}</option>
+    </ng-container>
+  </select>
+
+  <select
+    [formControl]="loanApplicationProductTypeControl"
+    class="form-select"
+    aria-label="Select example"
+  >
+    <option value="null" disabled>Product Type</option>
+    <ng-container *ngFor="let product of productTypes">
+      <option value="{{ product.type }}">{{ product.name }}</option>
+    </ng-container>
+  </select>
+
+  <!-- Apply Now Button -->
+  <div
+    class="cursor-pointer position-relative ms-4 ms-sm-6 ms-md-8 ms-lg-6"
+    [ngbTooltip]="!!loanApplicationSectorFormControl.value ? 'Apply Now' : 'Select Sector Type'"
+    (click)="togglePlayButton()"
+  >
+    <app-play-button-primary *ngIf="!loading" [classes]="'svg-icon-4x'"></app-play-button-primary>
+
+    <app-loader *ngIf="loading" [classes]="'svg-icon-4x'"></app-loader>
+  </div>
+</div>
+
+<!-- Info text -->
+<span style="color: #2d1f1f" class="fw-normal fs-6 mt-4 mb-1 text-wrap">
+  <!-- Apply for new loan, in just few clicks -->
+  All loans, except for agribusiness, manufacturing, and property, are categorized as services.
+</span>

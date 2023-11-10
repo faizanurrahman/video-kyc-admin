@@ -1,0 +1,57 @@
+<!-- Apply Now Top -->
+<div class="d-flex flex-row justify-content-start align-items-center mb-3">
+  <!-- Apply Now Icon -->
+  <span
+    class="svg-icon svg-icon-3hx svg-icon-danger me-4"
+    [inlineSVG]="'/assets/media/dashboard/resume-application-top-left-icon.svg'"
+  ></span>
+
+  <!-- Apply Now Text -->
+  <span class="fw-bold fs-1 text-danger">Resume Application</span>
+</div>
+
+<!-- Apply Now Bottom -->
+<div class="d-flex flex-row flex-stack mb-0">
+  <!-- Input Box-->
+  <div class="position-relative cursor-pointer w-100">
+    <!-- <input type="text" class="form-control " readonly placeholder="Business Loan" aria-label="Business Loan"
+      aria-describedby="basic-addon2" /> -->
+    <select
+      [(ngModel)]="selectedLoanApplicationId"
+      (change)="onSelectionChange($event)"
+      class="form-select"
+      aria-label="Default select example"
+    >
+      <option value="" selected disabled>Select Loan Application</option>
+      <option *ngFor="let item of availableLoanApplications" value="{{ item.applicationId }}">
+        <span class="fw-bold">{{ item.applicationId }} - {{ item.loanApplicationType }}</span>
+      </option>
+    </select>
+    <!-- <span
+      *ngIf="true"
+      class="position-absolute top-50 end-0 translate-middle-y me-8"
+    >
+      <img
+        src="./assets/media/icons/pencil.svg"
+        alt="pencil"
+        width="25"
+        height="25"
+      />
+    </span> -->
+  </div>
+
+  <!-- Apply Now Button -->
+  <span
+    class="cursor-pointer ms-4 ms-sm-6 ms-md-8 ms-lg-6"
+    (click)="selectedLoanApplicationId !== '' && togglePlayButton()"
+  >
+    <app-play-button-primary *ngIf="!loading" [classes]="'svg-icon-4x'"></app-play-button-primary>
+
+    <app-loader *ngIf="loading" [classes]="'svg-icon-4x'"></app-loader>
+  </span>
+</div>
+
+<!-- Info text -->
+<span style="color: #2d1f1f" class="fw-normal fs-6 mt-4 mb-1">
+  Continue your application from where you left off.
+</span>

@@ -1,0 +1,255 @@
+.dashboard-v2--wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  width: 100%;
+
+  .offer-carousel-wrapper {
+    position: absolute;
+    top: -200%;
+    display: flex;
+    width: 5px;
+  }
+}
+
+.first-column {
+  width: 340px;
+
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  .my-activity-wrapper {
+    display: none;
+  }
+}
+
+.second-column {
+  flex-shrink: 1;
+  flex-grow: 1;
+  width: 1%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 15px;
+
+  .my-transactions-wrapper {
+    display: none;
+  }
+
+  .offer-carousel-wrapper {
+    position: relative;
+    display: flex;
+    top: 0;
+    width: 100%;
+  }
+
+  .sub-flex.sub-flex-0 {
+    display: none;
+  }
+
+  .sub-flex {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+
+    gap: 15px;
+  }
+
+  .sub-flex-0 {
+    display: none;
+  }
+
+  .sub-flex-1 {
+    & > .apply-now-wrapper {
+      flex: 1 1 0;
+    }
+
+    & > .resume-application-wrapper {
+      flex: 1 1 0;
+    }
+  }
+
+  .sub-flex-2 {
+    & > .my-payments-wrapper {
+      flex: 1 1 50%;
+    }
+
+    & > .my-activity-wrapper {
+      flex: 1 1 50%;
+    }
+
+    & > .my-transactions-wrapper {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 1337px) {
+  .first-column {
+    .my-activity-wrapper {
+      display: flex;
+    }
+  }
+
+  .second-column {
+    .my-transactions-wrapper {
+      display: none;
+    }
+
+    .offer-carousel-wrapper {
+      position: relative;
+      display: flex;
+      top: 0;
+      width: 100%;
+    }
+
+    .sub-flex {
+      flex-direction: column;
+      flex-grow: 0;
+    }
+
+    .sub-flex-1,
+    .sub-flex-2 {
+      flex-direction: column-reverse;
+    }
+
+    .sub-flex-1 {
+      .apply-now-wrapper,
+      .resume-application-wrapper {
+        // padding: 24px;
+      }
+    }
+
+    .sub-flex-2 {
+      .my-activity-wrapper {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 788px) {
+  .dashboard-v2--wrapper {
+    flex-direction: column;
+
+    & .offer-carousel-wrapper {
+      position: relative;
+      display: flex;
+      width: calc(100vw - 30px);
+    }
+  }
+
+  .first-column {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+    // .my-loan-cards-wrapper {
+    //   display: none;
+    // }
+
+    .my-activity-wrapper {
+      display: flex;
+
+      & .card-body {
+        max-height: 210px !important;
+        overflow: scroll !important;
+      }
+    }
+
+    .my-transactions-wrapper {
+      display: none;
+    }
+
+    & > * {
+      flex: 1 1 0;
+    }
+  }
+
+  .second-column {
+    width: 100%;
+
+    .my-transactions-wrapper {
+      display: block;
+    }
+
+    .offer-carousel-wrapper {
+      position: absolute;
+      top: -200%;
+    }
+
+    .sub-flex.sub-flex-1 {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .sub-flex.sub-flex-2 {
+      display: flex;
+      flex-direction: column;
+
+      .my-activity-wrapper {
+        display: none;
+      }
+
+      .my-transactions-wrapper {
+        display: flex;
+        order: 1;
+      }
+    }
+  }
+}
+
+@media (max-width: 546px) {
+  .dashboard-v2--wrapper {
+    .offer-carousel-wrapper {
+      // min-width: 550px;
+    }
+
+    transition: all 0.5s ease-in-out;
+  }
+
+  .first-column {
+    flex-direction: column;
+    min-width: 300px;
+
+    transition: all 0.5s ease-in-out;
+
+    .my-loans-wrapper {
+      min-width: 300px;
+      background-color: rgb(255, 242, 230);
+      border-radius: 15px;
+
+      transition: all 0.5s ease-in-out;
+    }
+
+    .my-transactions-wrapper {
+      display: block;
+    }
+  }
+
+  .second-column {
+    transition: all 0.5s ease-in-out;
+
+    .my-transactions-wrapper {
+      display: none;
+    }
+
+    .offer-carousel-wrapper {
+      position: absolute;
+      top: -200%;
+    }
+
+    .sub-flex.sub-flex-1 {
+      flex-direction: column;
+      transition: all 0.5s ease-in-out;
+    }
+
+    .sub-flex.sub-flex-2 {
+      flex-direction: column;
+      transition: all 0.5s ease-in-out;
+    }
+  }
+}
