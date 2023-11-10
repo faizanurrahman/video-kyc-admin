@@ -1,0 +1,10 @@
+@import "src/assets/sass/_init.scss";
+
+
+.menu-title {
+  display: inline !important;
+
+  @include media-breakpoint-direction('up', 'lg') {
+    display: none !important;
+  }
+}

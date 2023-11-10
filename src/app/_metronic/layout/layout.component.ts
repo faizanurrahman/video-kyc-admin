@@ -1,7 +1,11 @@
-import { NgClass, NgIf } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AsyncPipe, NgClass, NgIf } from '@angular/common';
+import { AfterViewInit, Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { NGXLogger } from 'ngx-logger';
 import { HttpLoaderService } from '../../core/services/http-loader.service';
+import { IncomingCallService } from '../../features/video-calling/services/incoming-call.service';
+import { VideoCallWidgetComponent } from '../../features/video-calling/video-call-widget/video-call-widget.component';
+import { EngagesComponent } from '../partials/layout/engages/engages.component';
 import { AsideComponent } from './components/aside/aside.component';
 import { ContentComponent } from './components/content/content.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -25,6 +29,10 @@ import { LayoutService } from './core/layout.service';
     ContentComponent,
     FooterComponent,
     ScriptsInitComponent,
+    EngagesComponent,
+    RouterLink,
+    AsyncPipe,
+    VideoCallWidgetComponent,
   ],
 })
 export class LayoutComponent implements OnInit, AfterViewInit {
@@ -57,6 +65,8 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   @ViewChild('ktAside', { static: true }) ktAside: ElementRef;
   @ViewChild('ktHeaderMobile', { static: true }) ktHeaderMobile: ElementRef;
   @ViewChild('ktHeader', { static: true }) ktHeader: ElementRef;
+
+  public incomingCallService = inject(IncomingCallService);
 
   constructor(
     private initService: LayoutInitService,

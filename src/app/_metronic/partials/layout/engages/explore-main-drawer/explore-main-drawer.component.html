@@ -9,8 +9,8 @@
   data-kt-drawer-width="{default:'350px', 'lg': '475px'}"
   data-kt-drawer-direction="end"
   data-kt-drawer-toggle="#kt_engage_demos_toggle"
-  data-kt-drawer-close="#kt_engage_demos_close">
-
+  data-kt-drawer-close="#kt_engage_demos_close"
+>
   <!--begin::Card-->
   <div class="card shadow-none rounded-0 w-100">
     <!--begin::Header-->
@@ -18,7 +18,11 @@
       <h3 class="card-title fw-bolder text-gray-700">Explore</h3>
 
       <div class="card-toolbar">
-        <button type="button" class="btn btn-sm btn-icon btn-active-light-primary me-n5" id="kt_engage_demos_close">
+        <button
+          type="button"
+          class="btn btn-sm btn-icon btn-active-light-primary me-n5"
+          id="kt_engage_demos_close"
+        >
           <span
             [inlineSVG]="'./assets/media/icons/duotune/arrows/arr061.svg'"
             class="svg-icon svg-icon-2"
@@ -38,8 +42,8 @@
         data-kt-scroll-height="auto"
         data-kt-scroll-wrappers="#kt_explore_body"
         data-kt-scroll-dependencies="#kt_explore_header"
-        data-kt-scroll-offset="5px">
-
+        data-kt-scroll-offset="5px"
+      >
         <!--begin::Wrapper-->
         <div class="mb-0">
           <!--begin::Header-->
@@ -61,13 +65,14 @@
                 <div class="d-flex align-items-center mb-1">
                   <div class="fs-6 fw-bold text-gray-800 fw-bold mb-0 me-1">Regular License</div>
 
-                  <i class="text-gray-400 fas fa-exclamation-circle ms-1 fs-7"
-                     data-bs-toggle="popover"
-                     data-bs-custom-class="popover-dark"
-                     data-bs-trigger="hover"
-                     data-bs-placement="top"
-                     data-bs-content="Use, by you or one client in a single end product which end users are not charged for.">
-                  </i>
+                  <i
+                    class="text-gray-400 fas fa-exclamation-circle ms-1 fs-7"
+                    data-bs-toggle="popover"
+                    data-bs-custom-class="popover-dark"
+                    data-bs-trigger="hover"
+                    data-bs-placement="top"
+                    data-bs-content="Use, by you or one client in a single end product which end users are not charged for."
+                  ></i>
                 </div>
                 <div class="fs-7 text-muted">For single end product used by you or one client</div>
               </div>
@@ -87,13 +92,14 @@
                 <div class="d-flex align-items-center mb-1">
                   <div class="fs-6 fw-bold text-gray-800 fw-bold mb-0 me-1">Extended License</div>
 
-                  <i class="text-gray-400 fas fa-exclamation-circle ms-1 fs-7"
-                     data-bs-toggle="popover"
-                     data-bs-custom-class="popover-dark"
-                     data-bs-trigger="hover"
-                     data-bs-placement="top"
-                     data-bs-content="Use, by you or one client, in a single end product which end users can be charged for.">
-                  </i>
+                  <i
+                    class="text-gray-400 fas fa-exclamation-circle ms-1 fs-7"
+                    data-bs-toggle="popover"
+                    data-bs-custom-class="popover-dark"
+                    data-bs-trigger="hover"
+                    data-bs-placement="top"
+                    data-bs-content="Use, by you or one client, in a single end product which end users can be charged for."
+                  ></i>
                 </div>
                 <div class="fs-7 text-muted">For single end product with paying users.</div>
               </div>
@@ -117,16 +123,20 @@
               </div>
 
               <div class="text-nowrap">
-                <a href="https://keenthemes.com/contact/" class="btn btn-sm btn-success" target="_blank">Contact Us</a>
+                <a
+                  href="https://keenthemes.com/contact/"
+                  class="btn btn-sm btn-success"
+                  target="_blank"
+                >
+                  Contact Us
+                </a>
               </div>
             </div>
           </div>
           <!--end::License-->
 
           <!--begin::Purchase-->
-          <a href="{{ appPurchaseUrl }}" class="btn btn-primary mb-15 w-100">
-            Buy Now
-          </a>
+          <a href="{{ appPurchaseUrl }}" class="btn btn-primary mb-15 w-100">Buy Now</a>
           <!--end::Purchase-->
 
           <!--begin::Demos-->
@@ -138,27 +148,35 @@
               <!--begin::Col-->
               <div class="col-6" *ngFor="let demo of appDemos | keyvalue">
                 <!--begin::Demo-->
-                <div class="overlay overflow-hidden position-relative border border-4 border-gray-200 rounded">
-                  <ng-container *ngIf="demo.value.published === true; else unpublished">
+                <div
+                  class="overlay overflow-hidden position-relative border border-4 border-gray-200 rounded"
+                >
+                  <ng-container *ngIf="true; else unpublished">
                     <div class="overlay-wrapper">
-                      <img src="{{ demo.value.thumbnail }}" alt="demo" class="w-100"/>
+                      <img src="{{ '' }}" alt="demo" class="w-100" />
                     </div>
 
                     <div class="overlay-layer bg-dark bg-opacity-10">
-                      <a href="https://preview.keenthemes.com/metronic8/angular/{{ demo.key }}" class="btn btn-sm btn-success shadow">{{ demo.value.title }}</a>
+                      <a
+                        href="https://preview.keenthemes.com/metronic8/angular/{{ demo.key }}"
+                        class="btn btn-sm btn-success shadow"
+                      >
+                        {{ 'Title' }}
+                      </a>
                     </div>
                   </ng-container>
 
                   <ng-template #unpublished>
                     <div class="overlay-wrapper">
-                      <img src="{{ demo.value.thumbnail }}" alt="demo" class="w-100 opacity-25"/>
+                      <img src="{{ '' }}" alt="demo" class="w-100 opacity-25" />
                     </div>
 
                     <div class="overlay-layer bg-dark bg-opacity-10">
-                      <div class="badge badge-white px-6 py-4 fw-bold fs-base shadow">Coming soon</div>
+                      <div class="badge badge-white px-6 py-4 fw-bold fs-base shadow">
+                        Coming soon
+                      </div>
                     </div>
                   </ng-template>
-
                 </div>
                 <!--end::Demo-->
               </div>
@@ -177,4 +195,3 @@
   <!--end::Card-->
 </div>
 <!--end::Exolore drawer-->
-

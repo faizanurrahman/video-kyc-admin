@@ -1,5 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {environment} from 'src/environments/environment';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { InlineSVGModule } from 'ng-inline-svg-2';
 
@@ -10,12 +9,10 @@ import { InlineSVGModule } from 'ng-inline-svg-2';
   imports: [InlineSVGModule, RouterLink],
 })
 export class HelpDrawerComponent implements OnInit {
-  appThemeName: string = environment.appThemeName;
-  appPurchaseUrl: string = environment.appPurchaseUrl;
+  appThemeName: string = 'Custome Theme';
+  appPurchaseUrl: string = '';
 
-  constructor() {
-  }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 }
